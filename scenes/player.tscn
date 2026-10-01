@@ -534,6 +534,8 @@ position = Vector2(23, -0.5)
 shape = SubResource("RectangleShape2D_6i2nw")
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=984965607]
+collision_layer = 0
+collision_mask = 4
 
 [node name="StateMachine" type="Node" parent="." unique_id=1735366348 node_paths=PackedStringArray("actor", "initial_state")]
 script = ExtResource("2_pqap4")
