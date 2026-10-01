@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://e3mjp80eiv4e"]
+
+[ext_resource type="PackedScene" uid="uid://ce7eb4e2ufp4f" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://c4akv5ilf6lkj" path="res://scenes/tile_map.tscn" id="2_yqjtg"]
+
+[node name="game" type="Node2D" unique_id=1132625164]
+
+[node name="player" parent="." unique_id=441232831 instance=ExtResource("1_uwrxv")]
+position = Vector2(38, -2)
+
+[node name="Camera2D" type="Camera2D" parent="player" unique_id=1988267511]
+
+[node name="TileMap" parent="." unique_id=65298574 instance=ExtResource("2_yqjtg")]
+layer_0/tile_data = PackedInt32Array(131071, 65537, 1, 65536, 65537, 1, 65537, 65537, 1, 65538, 65537, 1, 131075, 65537, 1, 131076, 65537, 1, 131077, 65537, 1, 196612, 65537, 1, 196613, 65537, 1, 131072, 65537, 1, 131073, 65537, 1, 131074, 65537, 1, 196614, 65537, 1, 196615, 65537, 1, 196616, 65537, 1, 196617, 65537, 1, 196618, 65537, 1, 196619, 65537, 1, 196620, 65537, 1, 196621, 65537, 1, 196622, 65537, 1, 262152, 65537, 1, 262153, 65537, 1, 262154, 65537, 1, 262155, 65537, 1, 262156, 65537, 1, 262157, 65537, 1, 262158, 65537, 1, 262159, 65537, 1, 262160, 65537, 1, 262161, 65537, 1, 262162, 65537, 1, 65555, 65537, 1, 131091, 65537, 1, 131090, 65537, 1, 131089, 65537, 1, 65556, 65537, 1, 65557, 65537, 1, 65558, 65537, 1, 65559, 65537, 1)
