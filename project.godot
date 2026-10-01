@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="trests 3"
+config/name="Gameeee"
 run/main_scene="uid://e3mjp80eiv4e"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"

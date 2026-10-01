@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://dby74y8lq45rq"]
+
+[ext_resource type="Script" uid="uid://hw300n68oq2i" path="res://scripts/enemy_scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="Texture2D" uid="uid://ccoxdfbgkvvfv" path="res://assets/Sprites/slime_green.png" id="2_4ra3w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uy6h"]
+atlas = ExtResource("2_4ra3w")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4w8v"]
+atlas = ExtResource("2_4ra3w")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwavj"]
+atlas = ExtResource("2_4ra3w")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nenq2"]
+atlas = ExtResource("2_4ra3w")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md484"]
+atlas = ExtResource("2_4ra3w")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6i2nw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uy6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4w8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwavj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nenq2")
+}],
+"loop": 1,
+"name": &"chasing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_md484")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6i2nw"]
+radius = 12.0415945
+
+[node name="enemy" type="CharacterBody2D" unique_id=577694641]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_md0e3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=465506141]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_6i2nw")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.77453065
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=104565360]
+position = Vector2(1, 17)
+shape = SubResource("CircleShape2D_6i2nw")

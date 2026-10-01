@@ -33,7 +33,7 @@ func change_state(state_name: StringName) -> void:
 	var next: State = states.get(state_name)
 	if next == null or next == current:
 		return
-#	print("Changing to: ", state_name)
+	print("Changing to: ", state_name)
 	var previous_name: StringName = current.name if current else &""
 	if current:
 		current.exit()

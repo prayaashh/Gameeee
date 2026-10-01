@@ -511,10 +511,11 @@ animations = [{
 radius = 7.0
 height = 38.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6i2nw"]
-size = Vector2(66, 39)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhi7u"]
+size = Vector2(91, 31)
 
 [node name="player" type="CharacterBody2D" unique_id=441232831]
+collision_mask = 2
 script = ExtResource("1_fhbv5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1054226490]
@@ -529,13 +530,13 @@ frame_progress = 0.7358167
 position = Vector2(19, -4)
 shape = SubResource("CapsuleShape2D_6i2nw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D" unique_id=1495052871]
-position = Vector2(23, -0.5)
-shape = SubResource("RectangleShape2D_6i2nw")
-
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=984965607]
 collision_layer = 0
 collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=392024344]
+position = Vector2(31.5, 0)
+shape = SubResource("RectangleShape2D_xhi7u")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1735366348 node_paths=PackedStringArray("actor", "initial_state")]
 script = ExtResource("2_pqap4")

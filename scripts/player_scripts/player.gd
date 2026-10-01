@@ -11,6 +11,7 @@ extends CharacterBody2D
 @export var dash_speed := 700.0
 @export var dash_time := 0.15
 @export var dash_cooldown := 0.4
+@export var attack_damage := 1
 @export var attack_time := 0.25
 
 var facing := 1
