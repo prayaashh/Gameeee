@@ -107,14 +107,11 @@ metadata/_custom_type_script = "uid://bunco4vcoitae"
 
 [node name="Chase" type="Node" parent="StateMachine" unique_id=1748939068]
 script = ExtResource("5_ipns3")
-give_up_time = null
 metadata/_custom_type_script = "uid://bunco4vcoitae"
 
 [node name="Attack" type="Node" parent="StateMachine" unique_id=1912594512]
 script = ExtResource("6_8qclf")
 windup_time = 0.0
-active_time = 0.0
-recovery_time = 0.0
 metadata/_custom_type_script = "uid://bunco4vcoitae"
 
 [node name="Stagger" type="Node" parent="StateMachine" unique_id=886712055]

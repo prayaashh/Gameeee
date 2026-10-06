@@ -11,5 +11,7 @@ func physics_update(delta: float) -> void:
 	enemy.apply_gravity(delta)
 	enemy.move_and_slide()
 
-	if enemy.can_see_player():
+	# chase_block_time keeps us from immediately re-engaging a player we just
+	# gave up on (e.g. standing on a ledge we can't reach)
+	if enemy.chase_block_time <= 0.0 and enemy.can_see_player():
 		machine.change_state(&"Chase")

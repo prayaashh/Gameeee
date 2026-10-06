@@ -7,13 +7,15 @@ extends CharacterBody2D
 @export var patrol_speed := 60.0
 @export var chase_speed := 120.0
 @export var sight_range := 250.0
-@export var attack_range := 50.0
-@export var attack_cooldown := 1.0
+@export var attack_range := 30.0       # horizontal reach, matches the hitbox (25px fwd + player half-width)
+@export var attack_height := 20.0      # max vertical gap the hitbox can still connect at
+@export var attack_cooldown := 0.4
 @export var attack_damage := 1
 
 var facing := 1
 var knockback_dir := 1.0
 var attack_cooldown_left := 0.0
+var chase_block_time := 0.0            # set when we give up, keeps patrol from re-engaging instantly
 var player: Node2D
 
 @onready var visuals: Node2D = $Visuals
@@ -29,6 +31,17 @@ var player: Node2D
 
 const WORLD_MASK := 2                     # the ground/wall layer
 
+# the slime sheet only ships `chasing` + `idle`, so missing anims fall back
+# to a placeholder instead of spamming "There is no animation with name X"
+const ANIM_FALLBACK := {
+	&"walk": &"chasing",
+	&"run": &"chasing",
+	&"windup": &"idle",
+	&"attack": &"chasing",
+	&"hurt": &"idle",
+	&"death": &"idle",
+}
+
 var last_seen_position := Vector2.ZERO
 
 func _ready() -> void:
@@ -37,6 +50,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	attack_cooldown_left = max(attack_cooldown_left - delta, 0.0)
+	chase_block_time = max(chase_block_time - delta, 0.0)
 
 # ---- helpers used by states ----
 func face(dir: float) -> void:
@@ -52,6 +66,11 @@ func apply_gravity(delta: float) -> void:
 		velocity.y += gravity * delta
 
 func play(anim: StringName) -> void:
+	if not sprite.sprite_frames.has_animation(anim):
+		var fallback: StringName = ANIM_FALLBACK.get(anim, &"")
+		if fallback == &"" or not sprite.sprite_frames.has_animation(fallback):
+			return
+		anim = fallback
 	if sprite.animation != anim:
 		sprite.play(anim)
 
@@ -59,6 +78,16 @@ func distance_to_player() -> float:
 	if player == null:
 		return INF
 	return global_position.distance_to(player.global_position)
+
+func horizontal_gap_to_player() -> float:
+	if player == null:
+		return INF
+	return absf(player.global_position.x - global_position.x)
+
+func vertical_gap_to_player() -> float:
+	if player == null:
+		return INF
+	return absf(player.global_position.y - global_position.y)
 
 func direction_to_player() -> float:
 	if player == null:
