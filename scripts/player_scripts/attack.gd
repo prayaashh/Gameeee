@@ -15,18 +15,18 @@ func physics_update(delta: float) -> void:
 	time_left -= delta
 	player.apply_gravity(delta)
 	player.move_and_slide()
-	print("monitoring: ", player.attack_hitbox.monitoring,
-	" | mask: ", player.attack_hitbox.collision_mask,
-	" | overlaps: ", player.attack_hitbox.get_overlapping_bodies().size())
+#	print("monitoring: ", player.attack_hitbox.monitoring,
+#	" | mask: ", player.attack_hitbox.collision_mask,
+#	" | overlaps: ", player.attack_hitbox.get_overlapping_bodies().size())
 	if time_left <= 0.0:
 		machine.change_state(&"Idle" if player.is_on_floor() else &"Fall")
 
 func exit() -> void:
 	player.attack_hitbox.monitoring = false
 	player.attack_hitbox.body_entered.disconnect(_on_hit)
-	print("monitoring: ", player.attack_hitbox.monitoring,
-	" | mask: ", player.attack_hitbox.collision_mask,
-	" | overlaps: ", player.attack_hitbox.get_overlapping_bodies().size())
+#	print("monitoring: ", player.attack_hitbox.monitoring,
+#	" | mask: ", player.attack_hitbox.collision_mask,
+#	" | overlaps: ", player.attack_hitbox.get_overlapping_bodies().size())
 
 func _on_hit(body: Node2D) -> void:
 	if body in already_hit:

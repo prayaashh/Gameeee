@@ -2,6 +2,12 @@
 
 [ext_resource type="Script" uid="uid://hw300n68oq2i" path="res://scripts/enemy_scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://ccoxdfbgkvvfv" path="res://assets/Sprites/slime_green.png" id="2_4ra3w"]
+[ext_resource type="Script" uid="uid://cxhjky2b1g681" path="res://scripts/state_machine.gd" id="3_4ra3w"]
+[ext_resource type="Script" uid="uid://ch6ksggw5lpqw" path="res://scripts/enemy_scripts/patrol.gd" id="4_md484"]
+[ext_resource type="Script" uid="uid://ciyb1hchyy6fl" path="res://scripts/enemy_scripts/chase.gd" id="5_ipns3"]
+[ext_resource type="Script" uid="uid://d1yyqlclgrniy" path="res://scripts/enemy_scripts/attack.gd" id="6_8qclf"]
+[ext_resource type="Script" uid="uid://cl3p21mu5idfd" path="res://scripts/enemy_scripts/stagger.gd" id="7_w8i8w"]
+[ext_resource type="Script" uid="uid://dvvgsfmng1f00" path="res://scripts/enemy_scripts/death.gd" id="8_otmr2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5uy6h"]
 atlas = ExtResource("2_4ra3w")
@@ -51,6 +57,9 @@ animations = [{
 "speed": 1.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6i2nw"]
+size = Vector2(40, 20)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_6i2nw"]
 radius = 12.0415945
 
@@ -59,13 +68,59 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_md0e3")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=465506141]
+[node name="Visuals" type="Node2D" parent="." unique_id=98746434]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals" unique_id=465506141]
+position = Vector2(-5.9604645e-08, -18)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_6i2nw")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.77453065
 
+[node name="WallCheck" type="RayCast2D" parent="Visuals" unique_id=951730697]
+target_position = Vector2(20, 0)
+collision_mask = 2
+
+[node name="LedgeCheck" type="RayCast2D" parent="Visuals" unique_id=714483587]
+position = Vector2(12, 5)
+target_position = Vector2(0, 40)
+collision_mask = 2
+
+[node name="AttackHitbox" type="Area2D" parent="Visuals" unique_id=1589690494]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/AttackHitbox" unique_id=1692896148]
+position = Vector2(5, 0)
+shape = SubResource("RectangleShape2D_6i2nw")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=104565360]
-position = Vector2(1, 17)
 shape = SubResource("CircleShape2D_6i2nw")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1079420953]
+script = ExtResource("3_4ra3w")
+metadata/_custom_type_script = "uid://cxhjky2b1g681"
+
+[node name="Patrol" type="Node" parent="StateMachine" unique_id=1177444456]
+script = ExtResource("4_md484")
+metadata/_custom_type_script = "uid://bunco4vcoitae"
+
+[node name="Chase" type="Node" parent="StateMachine" unique_id=1748939068]
+script = ExtResource("5_ipns3")
+give_up_time = null
+metadata/_custom_type_script = "uid://bunco4vcoitae"
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1912594512]
+script = ExtResource("6_8qclf")
+windup_time = 0.0
+active_time = 0.0
+recovery_time = 0.0
+metadata/_custom_type_script = "uid://bunco4vcoitae"
+
+[node name="Stagger" type="Node" parent="StateMachine" unique_id=886712055]
+script = ExtResource("7_w8i8w")
+metadata/_custom_type_script = "uid://bunco4vcoitae"
+
+[node name="Death" type="Node" parent="StateMachine" unique_id=1826594282]
+script = ExtResource("8_otmr2")
+metadata/_custom_type_script = "uid://bunco4vcoitae"

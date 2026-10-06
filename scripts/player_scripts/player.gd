@@ -19,12 +19,19 @@ var jump_buffer_left := 0.0
 var dash_cooldown_left := 0.0
 var air_dash_used := false
 
+@export var max_health := 5
+var health := 0
+var hurt_dir := 1.0
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_hitbox: Area2D = $AttackHitbox
 @onready var machine: StateMachine = $StateMachine
 
 func _ready() -> void:
 	attack_hitbox.monitoring = false
+	health = max_health
+	add_to_group("player")      # lets enemies find the player
+
 
 func _physics_process(delta: float) -> void:
 	jump_buffer_left = max(jump_buffer_left - delta, 0.0)
@@ -60,3 +67,11 @@ func wants_jump() -> bool:
 
 func can_dash() -> bool:
 	return dash_cooldown_left <= 0.0 and not air_dash_used
+
+func take_damage(amount: int, from_position: Vector2) -> void:
+	if machine.current.name == &"Hurt":
+		return                  # brief invulnerability while hurt
+	health -= amount
+	hurt_dir = signf(global_position.x - from_position.x)
+	print("Player health: ", health)
+	machine.change_state(&"Hurt")

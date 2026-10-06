@@ -1,0 +1,15 @@
+extends EnemyState
+
+@export var death_time := 0.6
+
+func enter(_previous: StringName) -> void:
+	enemy.play(&"death")
+	enemy.attack_hitbox.monitoring = false
+	enemy.collision_layer = 0          # player attacks can no longer hit it
+	enemy.velocity.x = 0.0
+	await get_tree().create_timer(death_time).timeout
+	enemy.queue_free()
+
+func physics_update(delta: float) -> void:
+	enemy.apply_gravity(delta)
+	enemy.move_and_slide()
