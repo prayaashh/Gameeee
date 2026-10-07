@@ -19,6 +19,15 @@ size = Vector2(160.5, 64.5)
 
 [node name="NPC" type="Node2D" unique_id=1255174449]
 script = ExtResource("1_nh2m4")
+dialogue = Array[String](["Hello, traveller.", "I am jofeoifheifheofheof", "fehfshfuherfoheofh", "nice to meet you"])
+question = "will you find my lantern"
+accept_lines = Array[String](["thank you", "i shall meet you again"])
+decline_lines = Array[String](["sad", ":(((((((((((((("])
+decline_again_lines = Array[String](["test decline_again_lines"])
+flag_name = "found_lantern"
+repeat_lines = Array[String](["have you found it yet"])
+complete_flag = "found_lantern_done"
+complete_lines = Array[String](["thank you traveller!"])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=253022725]
 position = Vector2(4, 2.0000076)
@@ -33,7 +42,14 @@ position = Vector2(3, -5)
 shape = SubResource("RectangleShape2D_rv78h")
 
 [node name="Prompt" type="Label" parent="." unique_id=764784531]
-offset_left = -20.0
-offset_top = -58.0
-offset_right = 27.0
-offset_bottom = 87.0
+z_index = 10
+offset_left = -16.0
+offset_top = -44.0
+offset_right = 24.0
+offset_bottom = -20.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
