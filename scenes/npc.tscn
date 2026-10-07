@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://buloxfco1r84r"]
+
+[ext_resource type="Script" uid="uid://jg8ip6bkyltr" path="res://scripts/npc_scripts/npc.gd" id="1_nh2m4"]
+[ext_resource type="Texture2D" uid="uid://c5j31brbb2xos" path="res://assets/Sprites/Plant5_00000.png" id="2_abqhh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_abqhh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_abqhh")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rv78h"]
+size = Vector2(160.5, 64.5)
+
+[node name="NPC" type="Node2D" unique_id=1255174449]
+script = ExtResource("1_nh2m4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=253022725]
+position = Vector2(4, 2.0000076)
+scale = Vector2(0.087890655, 0.06835934)
+sprite_frames = SubResource("SpriteFrames_abqhh")
+
+[node name="InteractZone" type="Area2D" parent="." unique_id=744824699]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone" unique_id=1739214973]
+position = Vector2(3, -5)
+shape = SubResource("RectangleShape2D_rv78h")
+
+[node name="Prompt" type="Label" parent="." unique_id=764784531]
+offset_left = -20.0
+offset_top = -58.0
+offset_right = 27.0
+offset_bottom = 87.0

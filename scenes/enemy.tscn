@@ -120,4 +120,5 @@ metadata/_custom_type_script = "uid://bunco4vcoitae"
 
 [node name="Death" type="Node" parent="StateMachine" unique_id=1826594282]
 script = ExtResource("8_otmr2")
+death_time = 0.0
 metadata/_custom_type_script = "uid://bunco4vcoitae"

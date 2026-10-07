@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cesdcdyru10js"]
+
+[ext_resource type="Script" uid="uid://5qgcgt3vrsgt" path="res://scripts/autoload/dialogue.gd" id="1_jwyou"]
+
+[node name="Dialogue" type="CanvasLayer" unique_id=1589216622]
+script = ExtResource("1_jwyou")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1694159951]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1103689447]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="Panel/VBoxContainer" unique_id=898113825]
+layout_mode = 2
+
+[node name="TextLabel" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=913278987]
+layout_mode = 2
+
+[node name="ChoiceBox" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=1432070654]
+layout_mode = 2

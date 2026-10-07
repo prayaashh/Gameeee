@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://cpuhvrnhto8kr" path="res://scripts/player_scripts/fall.gd" id="8_y4r1p"]
 [ext_resource type="Script" uid="uid://b1r6o3ywrefwl" path="res://scripts/player_scripts/attack.gd" id="9_3v2ag"]
 [ext_resource type="Script" uid="uid://c4ms4w1aar7ci" path="res://scripts/player_scripts/hurt.gd" id="12_3v2ag"]
+[ext_resource type="Script" uid="uid://bgsfu3cuomndi" path="res://scripts/player_scripts/talk.gd" id="13_jej6c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
 atlas = ExtResource("3_d2wvv")
@@ -513,7 +514,7 @@ radius = 7.0
 height = 38.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhi7u"]
-size = Vector2(43, 31)
+size = Vector2(51.5, 31)
 
 [node name="player" type="CharacterBody2D" unique_id=441232831]
 collision_mask = 2
@@ -535,7 +536,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=392024344]
-position = Vector2(15, 0)
+position = Vector2(19.25, 0)
 shape = SubResource("RectangleShape2D_xhi7u")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1735366348 node_paths=PackedStringArray("actor", "initial_state")]
@@ -569,4 +570,8 @@ metadata/_custom_type_script = "uid://85t1c260hdhe"
 
 [node name="Hurt" type="Node" parent="StateMachine" unique_id=1898077519]
 script = ExtResource("12_3v2ag")
+metadata/_custom_type_script = "uid://85t1c260hdhe"
+
+[node name="Talk" type="Node" parent="StateMachine" unique_id=1487387326]
+script = ExtResource("13_jej6c")
 metadata/_custom_type_script = "uid://85t1c260hdhe"

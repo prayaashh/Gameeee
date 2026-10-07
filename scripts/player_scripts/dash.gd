@@ -15,6 +15,8 @@ func enter(_previous: StringName) -> void:
 func physics_update(delta: float) -> void:
 	time_left -= delta
 	player.move_and_slide()
+	if Input.is_action_just_pressed("attack"):
+		machine.change_state(&"Attack")
 	if time_left <= 0.0:
 		machine.change_state(&"Idle" if player.is_on_floor() else &"Fall")
 
