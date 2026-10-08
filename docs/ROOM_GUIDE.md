@@ -1,14 +1,14 @@
 # Room guide — building your world
 
 Every room in the game is one scene. This is the recipe for making new ones,
-based on `scenes/room_template.tscn` (the starting point) and the two rooms
-that already work: `scenes/game.tscn` (room 1) and `scenes/room_02.tscn`.
+based on `scenes/rooms/room_template.tscn` (the starting point) and the two rooms
+that already work: `scenes/rooms/game.tscn` (room 1) and `scenes/rooms/room_02.tscn`.
 
 ---
 
 ## 1. Create the room
 
-1. In the FileSystem panel, right-click `scenes/room_template.tscn` → **Duplicate…**
+1. In the FileSystem panel, right-click `scenes/rooms/room_template.tscn` → **Duplicate…**
 2. Name it something like `room_03.tscn` and save it.
 3. Open it. The template already contains everything a room must have:
 
@@ -146,7 +146,7 @@ be spawned inside a wall).
 ## 7. NPCs and enemies
 
 - Instance `scenes/npc.tscn` under `NPCs/` — see the NPC section below.
-- Instance `scenes/enemy.tscn` under `Enemies/`.
+- Instance `scenes/enemies/enemy.tscn` under `Enemies/`.
 
 ---
 

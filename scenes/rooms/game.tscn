@@ -2,16 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://ce7eb4e2ufp4f" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://c4akv5ilf6lkj" path="res://scenes/tile_map.tscn" id="2_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://dby74y8lq45rq" path="res://scenes/enemy.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://dby74y8lq45rq" path="res://scenes/enemies/enemy.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://buloxfco1r84r" path="res://scenes/npc.tscn" id="4_lbhrr"]
-[ext_resource type="Script" path="res://scripts/room.gd" id="5_room"]
+[ext_resource type="Script" uid="uid://c2fdludqyfiw6" path="res://scripts/room.gd" id="5_room"]
 [ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="6_hud"]
-[ext_resource type="PackedScene" path="res://scenes/doorway.tscn" id="7_door"]
+[ext_resource type="PackedScene" uid="uid://dvdrq7hdiemxe" path="res://scenes/doorway.tscn" id="7_door"]
 [ext_resource type="PackedScene" path="res://scenes/checkpoint.tscn" id="8_bench"]
+[ext_resource type="PackedScene" uid="uid://8nen7e3bxj2j" path="res://scenes/enemies/snail_creep.tscn" id="9_eq3lt"]
 
 [node name="game" type="Node2D" unique_id=1132625164]
 script = ExtResource("5_room")
-camera_bounds = Rect2(-64, -360, 1568, 704)
 
 [node name="player" parent="." unique_id=441232831 instance=ExtResource("1_uwrxv")]
 position = Vector2(38, -2)
@@ -25,31 +25,34 @@ position = Vector2(1315, 22)
 [node name="NPC" parent="." unique_id=1255174449 instance=ExtResource("4_lbhrr")]
 position = Vector2(421, 80)
 
-[node name="Entrances" type="Node2D" parent="."]
+[node name="Entrances" type="Node2D" parent="." unique_id=2054827743]
 
-[node name="Spawn" type="Marker2D" parent="Entrances"]
+[node name="Spawn" type="Marker2D" parent="Entrances" unique_id=1911960639]
 position = Vector2(38, 13)
 
-[node name="East" type="Marker2D" parent="Entrances"]
+[node name="East" type="Marker2D" parent="Entrances" unique_id=1335816299]
 position = Vector2(1395, 13)
 
-[node name="Doorways" type="Node2D" parent="."]
+[node name="Doorways" type="Node2D" parent="." unique_id=1746802214]
 
-[node name="ToRoom2" parent="Doorways" instance=ExtResource("7_door")]
+[node name="ToRoom2" parent="Doorways" unique_id=1198711493 instance=ExtResource("7_door")]
 position = Vector2(1456, 0)
-target_scene = "res://scenes/room_02.tscn"
+target_scene = "res://scenes/rooms/room_02.tscn"
 target_entrance = "West"
 
-[node name="Checkpoints" type="Node2D" parent="."]
+[node name="Checkpoints" type="Node2D" parent="." unique_id=415221581]
 
-[node name="Bench1" parent="Checkpoints" instance=ExtResource("8_bench")]
+[node name="Bench1" parent="Checkpoints" unique_id=644590592 instance=ExtResource("8_bench")]
 position = Vector2(10, 32)
 
-[node name="DoorVisual" type="ColorRect" parent="."]
+[node name="DoorVisual" type="ColorRect" parent="." unique_id=210246466]
 offset_left = 1428.0
 offset_top = -128.0
 offset_right = 1484.0
 offset_bottom = 28.0
 color = Color(0.07, 0.06, 0.1, 1)
 
-[node name="HUD" parent="." instance=ExtResource("6_hud")]
+[node name="HUD" parent="." unique_id=1244873595 instance=ExtResource("6_hud")]
+
+[node name="snailCreep" parent="." unique_id=1163228285 instance=ExtResource("9_eq3lt")]
+position = Vector2(989, 17)

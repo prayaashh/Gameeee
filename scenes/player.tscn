@@ -519,6 +519,7 @@ size = Vector2(51.5, 31)
 [node name="player" type="CharacterBody2D" unique_id=441232831]
 collision_mask = 2
 script = ExtResource("1_fhbv5")
+max_health = 17
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1054226490]
 position = Vector2(-7, -29)
@@ -576,4 +577,4 @@ metadata/_custom_type_script = "uid://85t1c260hdhe"
 script = ExtResource("13_jej6c")
 metadata/_custom_type_script = "uid://85t1c260hdhe"
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=540649965]

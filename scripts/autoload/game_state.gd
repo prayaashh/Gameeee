@@ -12,7 +12,7 @@ signal credits_changed(new_total: int)
 
 const SAVE_PATH := "user://save.json"
 const SAVE_VERSION := 1
-const MAIN_SCENE := "res://scenes/game.tscn"
+const MAIN_SCENE := "res://scenes/rooms/game.tscn"
 const TRANSITION_TIME := 0.35   # seconds doorways/spawns stay locked after a scene change
 
 var flags := {}
