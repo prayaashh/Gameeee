@@ -575,3 +575,5 @@ metadata/_custom_type_script = "uid://85t1c260hdhe"
 [node name="Talk" type="Node" parent="StateMachine" unique_id=1487387326]
 script = ExtResource("13_jej6c")
 metadata/_custom_type_script = "uid://85t1c260hdhe"
+
+[node name="Camera2D" type="Camera2D" parent="."]

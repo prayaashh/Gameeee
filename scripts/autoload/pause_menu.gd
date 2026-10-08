@@ -24,7 +24,8 @@ func _on_resume_pressed() -> void:
 
 func _on_restart_pressed() -> void:
 	set_paused(false)
-	get_tree().reload_current_scene()
+	GameState.respawn()          # back to the last checkpoint (or the start)
 
 func _on_quit_pressed() -> void:
+	GameState.save_to_disk()     # quitting writes flags, credits and checkpoint
 	get_tree().quit()

@@ -1,0 +1,81 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" uid="uid://ce7eb4e2ufp4f" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/room.gd" id="2_room"]
+[ext_resource type="PackedScene" uid="uid://c4akv5ilf6lkj" path="res://scenes/tile_map.tscn" id="3_tiles"]
+[ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/doorway.tscn" id="5_door"]
+[ext_resource type="PackedScene" path="res://scenes/checkpoint.tscn" id="6_bench"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(1264, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(32, 200)
+
+[node name="Room02" type="Node2D"]
+script = ExtResource("2_room")
+camera_bounds = Rect2(-64, -360, 1392, 704)
+
+[node name="player" parent="." instance=ExtResource("1_player")]
+position = Vector2(100, 13)
+
+[node name="TileMap" parent="." instance=ExtResource("3_tiles")]
+
+[node name="Floor" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(600, 64)
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="Visual" type="ColorRect" parent="Floor"]
+offset_left = -32.0
+offset_top = 32.0
+offset_right = 1232.0
+offset_bottom = 96.0
+color = Color(0.36, 0.25, 0.16, 1)
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-48, -68)
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="Right" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1248, -68)
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="Entrances" type="Node2D" parent="."]
+
+[node name="Spawn" type="Marker2D" parent="Entrances"]
+position = Vector2(100, 13)
+
+[node name="West" type="Marker2D" parent="Entrances"]
+position = Vector2(100, 13)
+
+[node name="Doorways" type="Node2D" parent="."]
+
+[node name="ToRoom1" parent="Doorways" instance=ExtResource("5_door")]
+position = Vector2(40, 32)
+target_scene = "res://scenes/game.tscn"
+target_entrance = "East"
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Bench1" parent="Checkpoints" instance=ExtResource("6_bench")]
+position = Vector2(600, 32)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="DoorVisual" type="ColorRect" parent="."]
+offset_left = 12.0
+offset_top = -128.0
+offset_right = 68.0
+offset_bottom = 32.0
+color = Color(0.07, 0.06, 0.1, 1)
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]

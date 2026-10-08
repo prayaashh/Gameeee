@@ -86,3 +86,27 @@ Pick one:
 3. Press **E** → panel appears top-center, text wraps, choices appear; declining and re-talking
    re-asks the question.
 4. **Esc** during talk cancels the dialogue; **Esc** otherwise opens the pause menu.
+
+## 10. HUD (hearts + credits)
+
+The HUD is `scenes/hud.tscn` (instanced once per room, top-left corner):
+
+| Node | Placeholder today | Swap idea |
+|---|---|---|
+| `Row/HeartsFull` | `♥♥♥♥♥` — red `#ED2929`, size 24, black outline 4 | custom heart sprite/font |
+| `Row/HeartsEmpty` | `♡♡♡♡♡` — gray `#6B6B6B`, same size/outline | dim/empty variant |
+| `Row/Credits` | number in gold `#F9C940`, size 24 | your currency icon + counter |
+| `Row/Gap` | invisible spacer (8 px) — layout only, don't remove | — |
+
+Notes:
+
+- Hearts are **two stacked labels** (full under empty); `hud.gd` reveals them by
+  `visible_ratio`, so keep both labels and their order — style them freely.
+- The heart glyphs currently come from the engine's fallback font. If you swap in a
+  custom font, make sure it includes `U+2665` (♥) and `U+2661` (♡), or replace the
+  labels with textures and keep `hud.gd`'s node names.
+- **Do not change node names** (`HeartsFull`, `HeartsEmpty`, `Credits`) — `hud.gd`
+  finds them by path.
+- The HUD lives on CanvasLayer **layer 1** (above the world, below dialogue panel).
+- Safe zone: keep it in the top-left ~320 × 40 px box at the default 1152×648
+  (see section 7).
