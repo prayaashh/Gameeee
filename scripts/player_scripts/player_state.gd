@@ -11,4 +11,8 @@ func try_common_transitions() -> bool:
 	if Input.is_action_just_pressed("attack"):
 		machine.change_state(&"Attack")
 		return true
+	# Focus/heal: grounded only, needs missing health and enough mana.
+	if player.is_on_floor() and Input.is_action_just_pressed("heal") and player.can_heal():
+		machine.change_state(&"Heal")
+		return true
 	return false

@@ -14,17 +14,26 @@ extends CharacterBody2D
 @export var attack_damage := 1
 @export var attack_time := 0.25
 
+@export_group("Mana")
+@export var max_mana := 99
+@export var mana_per_hit := 11      # mana gained each time the sword connects
+@export var heal_cost := 33         # mana spent per heal
+@export var heal_time := 0.9        # seconds the focus channel must be held
+
 var facing := 1
 var jump_buffer_left := 0.0
 var dash_cooldown_left := 0.0
 var air_dash_used := false
 
+@export_group("Health")
 @export var max_health := 5
 var health := 0
+var mana := 0
 var hurt_dir := 1.0
 var dead := false
 
 signal health_changed(current: int, maximum: int)
+signal mana_changed(current: int, maximum: int)
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_hitbox: Area2D = $AttackHitbox
@@ -129,6 +138,34 @@ func heal_full() -> void:
 		return
 	health = max_health
 	health_changed.emit(health, max_health)
+	mana = max_mana
+	mana_changed.emit(mana, max_mana)
+
+## Restores a single heart. Used by the Heal state; see heal_full() for a bench.
+func heal(amount: int) -> void:
+	if dead or health >= max_health:
+		return
+	health = mini(health + amount, max_health)
+	health_changed.emit(health, max_health)
+
+# --- mana ---------------------------------------------------------------------
+
+## Called when the sword lands a hit. Filling up by attacking mirrors soul.
+func gain_mana(amount: int) -> void:
+	if dead or amount <= 0:
+		return
+	mana = mini(mana + amount, max_mana)
+	mana_changed.emit(mana, max_mana)
+
+func spend_mana(amount: int) -> bool:
+	if mana < amount:
+		return false
+	mana -= amount
+	mana_changed.emit(mana, max_mana)
+	return true
+
+func can_heal() -> bool:
+	return not dead and health < max_health and mana >= heal_cost
 
 func die() -> void:
 	if dead:

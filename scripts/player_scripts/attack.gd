@@ -34,3 +34,4 @@ func _on_hit(body: Node2D) -> void:
 	already_hit.append(body)
 	if body.has_method("take_damage"):
 		body.take_damage(player.attack_damage, player.global_position)
+		player.gain_mana(player.mana_per_hit)   # landing a hit builds mana, like soul

@@ -7,6 +7,7 @@ func enter(_previous: StringName) -> void:
 	enemy.attack_hitbox.monitoring = false
 	enemy.collision_layer = 0          # player attacks can no longer hit it
 	enemy.velocity.x = 0.0
+	enemy.handle_death()               # credits + drop + `died` signal + on_death() hook
 	await get_tree().create_timer(death_time).timeout
 	enemy.queue_free()
 

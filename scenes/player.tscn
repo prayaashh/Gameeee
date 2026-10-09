@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://b1r6o3ywrefwl" path="res://scripts/player_scripts/attack.gd" id="9_3v2ag"]
 [ext_resource type="Script" uid="uid://c4ms4w1aar7ci" path="res://scripts/player_scripts/hurt.gd" id="12_3v2ag"]
 [ext_resource type="Script" uid="uid://bgsfu3cuomndi" path="res://scripts/player_scripts/talk.gd" id="13_jej6c"]
+[ext_resource type="Script" path="res://scripts/player_scripts/heal.gd" id="14_heal"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
 atlas = ExtResource("3_d2wvv")
@@ -575,6 +576,10 @@ metadata/_custom_type_script = "uid://85t1c260hdhe"
 
 [node name="Talk" type="Node" parent="StateMachine" unique_id=1487387326]
 script = ExtResource("13_jej6c")
+metadata/_custom_type_script = "uid://85t1c260hdhe"
+
+[node name="Heal" type="Node" parent="StateMachine" unique_id=1937450216]
+script = ExtResource("14_heal")
 metadata/_custom_type_script = "uid://85t1c260hdhe"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=540649965]

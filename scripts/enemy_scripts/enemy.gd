@@ -1,6 +1,10 @@
 class_name Enemy
 extends CharacterBody2D
 
+## Emitted once when this enemy's health reaches 0, right before it disappears.
+## Connect it in the Inspector (or code) to run your own death logic.
+signal died(enemy: Node)
+
 @export var health := 3
 @export var gravity := 1500.0
 @export var friction := 1200.0
@@ -11,6 +15,18 @@ extends CharacterBody2D
 @export var attack_height := 20.0      # max vertical gap the hitbox can still connect at
 @export var attack_cooldown := 0.4
 @export var attack_damage := 1
+
+@export_group("Death rewards")
+## Credits paid straight to the player when this enemy dies (0 = none).
+@export var credits_on_death := 0
+## Item dropped where the enemy died. Defaults to a credit orb.
+@export var drop_scene: PackedScene = preload("res://scenes/pickups/credit_pickup.tscn")
+## Value written to each drop's `value` property (0 = leave the scene's own value).
+@export var drop_value := 5
+## How many items to drop.
+@export var drop_count := 1
+## Horizontal spread used to scatter several drops.
+@export var drop_scatter := 40.0
 
 var facing := 1
 var knockback_dir := 1.0
@@ -43,6 +59,7 @@ const ANIM_FALLBACK := {
 }
 
 var last_seen_position := Vector2.ZERO
+var _death_handled := false
 
 func _ready() -> void:
 	attack_hitbox.monitoring = false
@@ -142,3 +159,44 @@ func take_damage(amount: int, from_position: Vector2) -> void:
 		machine.current.enter(&"Stagger")
 	else:
 		machine.change_state(&"Stagger")
+
+# --- death --------------------------------------------------------------------
+
+## Runs once when this enemy dies. Pays credits, spawns the drop, fires the
+## `died` signal and finally calls the editable on_death() hook. The Death state
+## calls this for you; you normally never call it yourself.
+func handle_death() -> void:
+	if _death_handled:
+		return
+	_death_handled = true
+
+	if credits_on_death > 0:
+		GameState.add_credits(credits_on_death)
+
+	# take_damage is called from physics callbacks, and adding nodes there is not
+	# allowed, so Loot.spawn queues the drop for the next step. Position and
+	# parent are captured now in case this enemy is freed before then.
+	var at := global_position
+	var parent: Node = get_parent() if get_parent() else get_tree().current_scene
+	Loot.spawn(drop_scene, parent, at, drop_value, drop_count, drop_scatter)
+
+	died.emit(self)
+	on_death()
+
+## ------------------------------------------------------------------
+## ON-DEATH EVENT HOOK - this is the function you edit.
+##
+## Runs once, the moment this enemy's health reaches 0, before it disappears.
+## The `died` signal (top of this file) fires just before it, so you can also
+## connect to that in the Inspector instead of writing here.
+##
+## Examples:
+##   GameState.add_credits(10)
+##   GameState.set_flag("slime_cleared")
+##   get_tree().call_group("doors", "open")
+##
+## NOTE: you are still inside the enemy's death callback, so use
+##       call_deferred("...") if you spawn nodes or change physics state.
+## ------------------------------------------------------------------
+func on_death() -> void:
+	pass

@@ -1,0 +1,30 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/pickups/credit_pickup.gd" id="1_pickup"]
+
+[sub_resource type="Gradient" id="Gradient_orb"]
+offsets = PackedFloat32Array(0, 0.55, 1)
+colors = PackedColorArray(1, 0.98, 0.75, 1, 1, 0.82, 0.2, 1, 1, 0.6, 0.1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_orb"]
+gradient = SubResource("Gradient_orb")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_orb"]
+radius = 9.0
+
+[node name="CreditPickup" type="Area2D"]
+z_index = 5
+collision_layer = 0
+script = ExtResource("1_pickup")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.25, 1.25)
+texture = SubResource("GradientTexture2D_orb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_orb")

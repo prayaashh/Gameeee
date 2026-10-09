@@ -13,6 +13,10 @@ extends CharacterBody2D
 ##
 ## The AnimatedSprite2D needs three animations: move (loop), attack, die.
 
+## Emitted once when this enemy's health reaches 0, right before it disappears.
+## Connect it in the Inspector (or code) to run your own death logic.
+signal died(enemy: Node)
+
 enum State { PATROL, ATTACK, DEAD }
 
 @export var speed := 55.0
@@ -26,6 +30,18 @@ enum State { PATROL, ATTACK, DEAD }
 @export var knockback_time := 0.15
 @export var knockback_speed := 120.0
 
+@export_group("Death rewards")
+## Credits paid straight to the player when this enemy dies (0 = none).
+@export var credits_on_death := 0
+## Item dropped where the enemy died. Defaults to a credit orb.
+@export var drop_scene: PackedScene = preload("res://scenes/pickups/credit_pickup.tscn")
+## Value written to each drop's `value` property (0 = leave the scene's own value).
+@export var drop_value := 5
+## How many items to drop.
+@export var drop_count := 1
+## Horizontal spread used to scatter several drops.
+@export var drop_scatter := 40.0
+
 var state := State.PATROL
 var direction := -1.0                   # the art faces left, so patrol starts moving left
 var player: Node2D
@@ -37,6 +53,7 @@ var attack_duration := 1.0
 var attack_hit_done := false
 var knockback_left := 0.0
 var knockback_dir := 1.0
+var _death_handled := false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var wall_check: RayCast2D = $WallCheck
@@ -198,6 +215,48 @@ func _die() -> void:
 	set_deferred("collision_layer", 0)     # the sword can no longer hit it
 	wall_check.set_deferred("enabled", false)
 	floor_check.set_deferred("enabled", false)
+	handle_death()                         # credits + drop + `died` signal + on_death() hook
 	sprite.play(&"die")
 	await sprite.animation_finished
 	queue_free()
+
+# --- death --------------------------------------------------------------------
+
+## Runs once when this enemy dies. Pays credits, spawns the drop, fires the
+## `died` signal and finally calls the editable on_death() hook. _die() calls
+## this for you; you normally never call it yourself.
+func handle_death() -> void:
+	if _death_handled:
+		return
+	_death_handled = true
+
+	if credits_on_death > 0:
+		GameState.add_credits(credits_on_death)
+
+	# take_damage is called from a physics callback, and adding nodes there is not
+	# allowed, so Loot.spawn queues the drop for the next step. Position and
+	# parent are captured now in case this enemy is freed before then.
+	var at := global_position
+	var parent: Node = get_parent() if get_parent() else get_tree().current_scene
+	Loot.spawn(drop_scene, parent, at, drop_value, drop_count, drop_scatter)
+
+	died.emit(self)
+	on_death()
+
+## ------------------------------------------------------------------
+## ON-DEATH EVENT HOOK - this is the function you edit.
+##
+## Runs once, the moment this enemy's health reaches 0, before it disappears.
+## The `died` signal (top of this file) fires just before it, so you can also
+## connect to that in the Inspector instead of writing here.
+##
+## Examples:
+##   GameState.add_credits(10)
+##   GameState.set_flag("snail_cleared")
+##   get_tree().call_group("doors", "open")
+##
+## NOTE: you are still inside the enemy's death callback, so use
+##       call_deferred("...") if you spawn nodes or change physics state.
+## ------------------------------------------------------------------
+func on_death() -> void:
+	pass
