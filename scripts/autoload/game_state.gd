@@ -17,6 +17,9 @@ const TRANSITION_TIME := 0.35   # seconds doorways/spawns stay locked after a sc
 
 var flags := {}
 var credits := 0
+## Current mana (soul). Kept here because the player node is rebuilt on every
+## room change; like pending_spawn it lives in memory only (not saved to disk).
+var mana := 0
 var checkpoint := {}            # {id, scene, x, y} — {} means no checkpoint yet
 var death_spot := {}            # {scene, x, y, amount} — where credits were last lost
 

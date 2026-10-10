@@ -42,6 +42,7 @@ signal mana_changed(current: int, maximum: int)
 func _ready() -> void:
 	attack_hitbox.monitoring = false
 	health = max_health
+	mana = clampi(GameState.mana, 0, max_mana)   # mana survives room changes
 	add_to_group("player")      # lets enemies find the player
 	_resolve_spawn()
 
@@ -138,8 +139,7 @@ func heal_full() -> void:
 		return
 	health = max_health
 	health_changed.emit(health, max_health)
-	mana = max_mana
-	mana_changed.emit(mana, max_mana)
+	_set_mana(max_mana)
 
 ## Restores a single heart. Used by the Heal state; see heal_full() for a bench.
 func heal(amount: int) -> void:
@@ -154,15 +154,20 @@ func heal(amount: int) -> void:
 func gain_mana(amount: int) -> void:
 	if dead or amount <= 0:
 		return
-	mana = mini(mana + amount, max_mana)
-	mana_changed.emit(mana, max_mana)
+	_set_mana(mana + amount)
 
 func spend_mana(amount: int) -> bool:
 	if mana < amount:
 		return false
-	mana -= amount
-	mana_changed.emit(mana, max_mana)
+	_set_mana(mana - amount)
 	return true
+
+## Single place that writes mana, so the persistent copy in GameState, the
+## player's own value and the HUD signal always stay in sync.
+func _set_mana(value: int) -> void:
+	mana = clampi(value, 0, max_mana)
+	GameState.mana = mana
+	mana_changed.emit(mana, max_mana)
 
 func can_heal() -> bool:
 	return not dead and health < max_health and mana >= heal_cost

@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dvdrq7hdiemxe" path="res://scenes/doorway.tscn" id="7_door"]
 [ext_resource type="PackedScene" path="res://scenes/checkpoint.tscn" id="8_bench"]
 [ext_resource type="PackedScene" uid="uid://8nen7e3bxj2j" path="res://scenes/enemies/snail_creep.tscn" id="9_eq3lt"]
+[ext_resource type="PackedScene" path="res://scenes/pickups/credit_pickup.tscn" id="10_j7ukj"]
 
 [node name="game" type="Node2D" unique_id=1132625164]
 script = ExtResource("5_room")
@@ -56,3 +57,6 @@ color = Color(0.07, 0.06, 0.1, 1)
 
 [node name="snailCreep" parent="." unique_id=1163228285 instance=ExtResource("9_eq3lt")]
 position = Vector2(989, 17)
+
+[node name="CreditPickup" parent="." unique_id=1888180294 instance=ExtResource("10_j7ukj")]
+position = Vector2(1066, 9)

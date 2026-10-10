@@ -11,7 +11,7 @@ signal collected(value: int)
 @export var magnet_range := 80.0     # starts homing to the player inside this radius
 @export var magnet_speed := 650.0
 @export var pickup_delay := 0.25     # grace period before it can be picked up
-@export var lifetime := 15.0         # seconds until it fades away; 0 = forever
+@export var lifetime := 0.0         # seconds until it fades away; 0 = forever
 
 var _velocity := Vector2.ZERO
 var _age := 0.0
