@@ -58,13 +58,16 @@ func _resolve_spawn() -> void:
 	# A room opened on its own (e.g. F6 in the editor) should just run itself, so
 	# only the main scene performs this hop. The change must be deferred because
 	# we are inside _ready() (the tree is still adding children).
-	if target != room_path and room_path == GameState.MAIN_SCENE:
-		if ResourceLoader.exists(target):
+	if target != room_path:
+		if room_path == GameState.MAIN_SCENE and ResourceLoader.exists(target):
 			GameState.start_transition()
-			GameState.call_deferred("_change_scene", target)
-		else:
+			GameState.call_deferred("_change_scene", target)   # target room consumes the request
+			return
+		# The request belongs to a different room: ignore it so this room keeps its
+		# own spawn point instead of teleporting the player into another room's coords.
+		if room_path == GameState.MAIN_SCENE:
 			push_warning("Saved room is missing: " + target)
-			GameState.pending_spawn = {}
+		GameState.pending_spawn = {}
 		return
 	GameState.pending_spawn = {}                      # consume
 	GameState.start_transition()
@@ -126,7 +129,7 @@ func can_dash() -> bool:
 	return dash_cooldown_left <= 0.0 and not air_dash_used
 
 func take_damage(amount: int, from_position: Vector2) -> void:
-	if dead or machine.current.name == &"Hurt":
+	if dead or (machine.current != null and machine.current.name == &"Hurt"):
 		return                  # dead, or brief invulnerability while hurt
 	health = max(health - amount, 0)
 	hurt_dir = signf(global_position.x - from_position.x)
@@ -136,12 +139,13 @@ func take_damage(amount: int, from_position: Vector2) -> void:
 		health_changed.emit(health, max_health)
 		machine.change_state(&"Hurt")
 
+## Full heal used by benches. Hearts only: mana is never granted for free, it
+## only builds from landing sword hits (see gain_mana).
 func heal_full() -> void:
 	if dead:
 		return
 	health = max_health
 	health_changed.emit(health, max_health)
-	_set_mana(max_mana)
 
 ## Restores a single heart. Used by the Heal state; see heal_full() for a bench.
 func heal(amount: int) -> void:
@@ -191,6 +195,8 @@ func die() -> void:
 	var fade := create_tween()
 	fade.tween_property(self, "modulate:a", 0.0, 0.5)
 	await fade.finished
+	if not is_inside_tree():
+		return                                    # scene changed mid-fade; nothing to drop
 
 	GameState.lose_all_credits(global_position)   # drops are recorded, nothing is saved
 	GameState.respawn()                           # death writes no save file

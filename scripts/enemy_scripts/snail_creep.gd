@@ -218,6 +218,8 @@ func _die() -> void:
 	handle_death()                         # credits + drop + `died` signal + on_death() hook
 	sprite.play(&"die")
 	await sprite.animation_finished
+	if not is_inside_tree():
+		return
 	queue_free()
 
 # --- death --------------------------------------------------------------------

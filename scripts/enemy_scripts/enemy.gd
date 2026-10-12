@@ -68,6 +68,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	attack_cooldown_left = max(attack_cooldown_left - delta, 0.0)
 	chase_block_time = max(chase_block_time - delta, 0.0)
+	# re-resolve the player if it was missing at _ready (e.g. an Enemies-first
+	# room) or got rebuilt on a respawn, so the slime never chases a stale ref
+	if player == null or not is_instance_valid(player):
+		player = get_tree().get_first_node_in_group("player")
 
 # ---- helpers used by states ----
 func face(dir: float) -> void:
@@ -147,7 +151,7 @@ func at_edge_or_wall() -> bool:
 	return is_on_floor() and (wall_check.is_colliding() or not ledge_check.is_colliding())
 
 func take_damage(amount: int, from_position: Vector2) -> void:
-	if machine.current.name == &"Death":
+	if machine.current != null and machine.current.name == &"Death":
 		return
 	health -= amount
 	knockback_dir = signf(global_position.x - from_position.x)
@@ -155,7 +159,7 @@ func take_damage(amount: int, from_position: Vector2) -> void:
 	face(-knockback_dir)                    # NEW: turn toward the attacker
 	if health <= 0:
 		machine.change_state(&"Death")
-	elif machine.current.name == &"Stagger":
+	elif machine.current != null and machine.current.name == &"Stagger":
 		machine.current.enter(&"Stagger")
 	else:
 		machine.change_state(&"Stagger")

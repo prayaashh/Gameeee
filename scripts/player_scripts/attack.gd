@@ -20,6 +20,7 @@ func physics_update(delta: float) -> void:
 #	" | overlaps: ", player.attack_hitbox.get_overlapping_bodies().size())
 	if player.wants_jump():
 		machine.change_state(&"Jump")
+		return
 	if time_left <= 0.0:
 		machine.change_state(&"Idle" if player.is_on_floor() else &"Fall")
 

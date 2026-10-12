@@ -17,6 +17,10 @@ func _ready() -> void:
 	_bind_player.call_deferred()     # the player may finish _ready after us
 
 func _bind_player() -> void:
+	# On boot the save may point at another room: this HUD is torn down by the
+	# scene change before the deferred call runs, so get_tree() can be null.
+	if not is_inside_tree():
+		return
 	var players := get_tree().get_nodes_in_group("player")
 	if players.is_empty():
 		return

@@ -15,7 +15,6 @@ size = Vector2(32, 200)
 
 [node name="Room02" type="Node2D"]
 script = ExtResource("2_room")
-camera_bounds = Rect2(-64, -360, 1392, 704)
 
 [node name="player" parent="." instance=ExtResource("1_player")]
 position = Vector2(100, 13)

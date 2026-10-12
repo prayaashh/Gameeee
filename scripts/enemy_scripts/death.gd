@@ -9,6 +9,8 @@ func enter(_previous: StringName) -> void:
 	enemy.velocity.x = 0.0
 	enemy.handle_death()               # credits + drop + `died` signal + on_death() hook
 	await get_tree().create_timer(death_time).timeout
+	if not is_inside_tree():
+		return
 	enemy.queue_free()
 
 func physics_update(delta: float) -> void:

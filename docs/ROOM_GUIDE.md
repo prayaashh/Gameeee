@@ -111,19 +111,21 @@ you don't need to do anything for that.
 
 ---
 
-## 5. Camera bounds
+## 5. Camera
 
-The camera lives **inside `player.tscn`** (it follows the player
-automatically). Each room clamps it via the root's `camera_bounds`
-(Rectangle) in the Inspector:
+The camera lives **inside `player.tscn`** and follows the player automatically.
+By default it is **unbounded**, so it keeps the player centered even past the
+room's edges — you don't need to set anything for a new room.
 
-- Room 01: `Rect2(-64, -360, 1568, 704)`
-- Room 02: `Rect2(-64, -360, 1392, 704)`
+If you *do* want the camera clamped to the room's edges instead, set the room
+root's `camera_bounds` (Rectangle) in the Inspector to a non-empty area:
 
-`x/y` = top-left corner of the allowed camera area, `w/h` = its size.
-Set it to roughly your room's visible area (a little padding is fine).
-If you leave it at the template default, the camera just uses those values —
-adjust them to your room's width.
+- `x/y` = top-left corner of the allowed camera area, `w/h` = its size
+  (world pixels). The camera's view is kept inside that rectangle; when it
+  reaches an edge it stops.
+- Leave `camera_bounds` at zero size (the default) to keep the camera
+  following the player freely — recommended, and required if the room is
+  wider/taller than one screen and you want the player always centered.
 
 ---
 

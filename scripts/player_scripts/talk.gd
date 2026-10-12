@@ -12,6 +12,8 @@ func physics_update(delta: float) -> void:
 func _on_closed() -> void:
 	# short pause so the key press that closed the dialogue doesn't trigger a sword swing
 	await get_tree().create_timer(0.1).timeout
+	if not is_inside_tree():
+		return
 	machine.change_state(&"Idle")
 
 func exit() -> void:

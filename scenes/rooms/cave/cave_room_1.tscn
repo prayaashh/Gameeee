@@ -1,42 +1,111 @@
 [gd_scene format=3 uid="uid://c44omavotwfww"]
 
-[ext_resource type="PackedScene" path="res://scenes/rooms/room_template.tscn" id="1_attfo"]
+[ext_resource type="PackedScene" uid="uid://cj4hswq3hicja" path="res://scenes/rooms/room_template.tscn" id="1_attfo"]
 [ext_resource type="Texture2D" uid="uid://bf874qpo8dcx6" path="res://assets/backgrounds/cavebg(Layer 2) _0001.png" id="2_8kbsy"]
 [ext_resource type="Texture2D" uid="uid://cnbsq6v0ud785" path="res://assets/backgrounds/cavebg(Layer 3) _0001.png" id="3_m4vpo"]
 [ext_resource type="Texture2D" uid="uid://b8ibgnywwmm1v" path="res://assets/backgrounds/cavebg(Layer 4) _0001.png" id="4_7w5ou"]
 [ext_resource type="Texture2D" uid="uid://m8y51fvytswt" path="res://assets/backgrounds/cavebg(Layer 4 (copy)) _0001.png" id="5_58r6w"]
-[ext_resource type="PackedScene" uid="uid://c4akv5ilf6lkj" path="res://scenes/tile_map.tscn" id="6_8kbsy"]
+[ext_resource type="Texture2D" uid="uid://cp3oabrd13ix6" path="res://assets/tiles/TILE .png" id="6_58r6w"]
+[ext_resource type="Texture2D" uid="uid://d0v2d3cxmoo2n" path="res://assets/tiles/tiles.png" id="7_k7fkc"]
+[ext_resource type="Texture2D" uid="uid://bia5b0igd3ase" path="res://assets/tiles/underground castel tiles.png" id="8_q0p6a"]
+[ext_resource type="Texture2D" uid="uid://ddosyyv6vmlwc" path="res://assets/tiles/underground soil.png" id="9_cswbh"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_feovi"]
+texture = ExtResource("6_58r6w")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8uga1"]
+texture = ExtResource("7_k7fkc")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fyvhv"]
+texture = ExtResource("8_q0p6a")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ti1ai"]
+texture = ExtResource("9_cswbh")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hb01v"]
+tile_size = Vector2i(48, 48)
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 2
+sources/0 = SubResource("TileSetAtlasSource_feovi")
+sources/1 = SubResource("TileSetAtlasSource_8uga1")
+sources/2 = SubResource("TileSetAtlasSource_fyvhv")
+sources/3 = SubResource("TileSetAtlasSource_ti1ai")
 
 [node name="CaveRoom1" unique_id=1967681378 instance=ExtResource("1_attfo")]
 
-[node name="Background" type="Node2D" parent="." index="8" unique_id=390559768]
+[node name="Background" type="Node2D" parent="." index="7" unique_id=390559768]
 z_index = -20
-scale = Vector2(2, 2)
 metadata/_edit_lock_ = true
 
 [node name="B0" type="Parallax2D" parent="Background" index="0" unique_id=1892368379]
+scroll_scale = Vector2(0.2, 1)
+repeat_size = Vector2(2000, 636)
 repeat_times = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/B0" index="0" unique_id=120106129]
+scale = Vector2(2, 2)
 texture = ExtResource("2_8kbsy")
 
 [node name="B1" type="Parallax2D" parent="Background" index="1" unique_id=1932299270]
+scroll_scale = Vector2(0.25, 1)
+repeat_size = Vector2(2000, 636)
 repeat_times = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/B1" index="0" unique_id=1970980952]
+scale = Vector2(2, 2)
 texture = ExtResource("3_m4vpo")
 
 [node name="B2" type="Parallax2D" parent="Background" index="2" unique_id=1466982470]
+scroll_scale = Vector2(0.3, 1)
+repeat_size = Vector2(2000, 636)
 repeat_times = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/B2" index="0" unique_id=1072860844]
+scale = Vector2(2, 2)
 texture = ExtResource("4_7w5ou")
 
 [node name="B3" type="Parallax2D" parent="Background" index="3" unique_id=234670687]
+scroll_scale = Vector2(0.35, 1)
+repeat_size = Vector2(2000, 636)
 repeat_times = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/B3" index="0" unique_id=517763024]
+scale = Vector2(2, 2)
 texture = ExtResource("5_58r6w")
 
-[node name="TileMap2" parent="." index="9" unique_id=65298574 instance=ExtResource("6_8kbsy")]
-layer_0/tile_data = PackedInt32Array(196606, 65537, 1, 196607, 65537, 1, 131072, 65537, 1, 196608, 65537, 1, 196609, 65537, 1, 196610, 65537, 1, 262146, 65537, 1, 262147, 65537, 1, 262148, 65537, 1, 262149, 65537, 1, 262150, 65537, 1, 262151, 65537, 1, 262152, 65537, 1, 262153, 65537, 1, 262154, 65537, 1, 196618, 65537, 1, 196619, 65537, 1, 196620, 65537, 1, 196621, 65537, 1, 196622, 65537, 1, 262158, 65537, 1, 262159, 65537, 1, 196623, 65537, 1, 196624, 65537, 1, 196605, 65537, 1)
+[node name="TileMap" type="TileMap" parent="." index="8" unique_id=1417123147]
+tile_set = SubResource("TileSet_hb01v")
+rendering_quadrant_size = 2
+format = 2
+layer_0/tile_data = PackedInt32Array(131069, 1, 0, 196606, 1, 0, 196607, 1, 0, 131072, 1, 0, 131073, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 65542, 1, 0, 65543, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 65547, 1, 0, 131084, 1, 0, 131085, 1, 0, 131086, 1, 0, 196622, 1, 0, 196623, 1, 0, 196624, 1, 0, 196625, 1, 0, 196626, 1, 0, 196627, 1, 0, 262163, 1, 0, 262164, 1, 0, 262132, 1, 0, 262133, 1, 0, 262134, 1, 0, 262135, 1, 0, 262136, 1, 0, 262137, 1, 0, 262138, 1, 0, 196602, 1, 0, 196603, 1, 0, 196604, 1, 0, 262165, 1, 0, 262166, 1, 0, 262167, 1, 0, 262168, 1, 0, 262169, 1, 0, 262170, 1, 0, 262171, 1, 0, 196635, 1, 0, 196636, 1, 0, 131101, 1, 0, 65565, 1, 0, 65566, 1, 0, 65567, 1, 0, 65568, 1, 0, 65569, 1, 0, 65570, 1, 0, 65571, 1, 0, 65572, 1, 0, 131108, 1, 0, 131109, 1, 0, 131110, 1, 0, 131111, 1, 0, 196647, 1, 0, 196648, 1, 0, 262185, 1, 0, 262186, 1, 0, 262187, 1, 0, 196651, 1, 0, 196652, 1, 0, 131117, 1, 0, 131118, 1, 0, 131119, 1, 0, 131120, 1, 0, 131121, 1, 0, 131122, 1, 0, 131123, 1, 0, 131124, 1, 0, 131125, 1, 0, 131126, 1, 0, 131127, 1, 0)
