@@ -1,6 +1,6 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dsxbgs2tci56r"]
 
-[ext_resource type="Script" path="res://scripts/pickups/credit_pickup.gd" id="1_pickup"]
+[ext_resource type="Script" uid="uid://c6frbhxpfvrxw" path="res://scripts/pickups/credit_pickup.gd" id="1_pickup"]
 
 [sub_resource type="Gradient" id="Gradient_orb"]
 offsets = PackedFloat32Array(0, 0.55, 1)
@@ -17,14 +17,14 @@ fill_to = Vector2(1, 0.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_orb"]
 radius = 9.0
 
-[node name="CreditPickup" type="Area2D"]
+[node name="CreditPickup" type="Area2D" unique_id=549186822]
 z_index = 5
 collision_layer = 0
 script = ExtResource("1_pickup")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=792793248]
 scale = Vector2(1.25, 1.25)
 texture = SubResource("GradientTexture2D_orb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=292892709]
 shape = SubResource("CircleShape2D_orb")

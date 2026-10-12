@@ -52,19 +52,21 @@ func _resolve_spawn() -> void:
 	var pending: Dictionary = GameState.pending_spawn
 	if pending.is_empty():
 		return
-	GameState.pending_spawn = {}                      # consume
 	var target := str(pending.get("scene", ""))
 	var room_path := _room_scene_path()
-	if target != room_path:
-		# Saved room is a different one: switch scenes and let that room's player spawn.
-		GameState.pending_spawn = pending
+	# On boot the save may point at a room other than the main scene: follow it.
+	# A room opened on its own (e.g. F6 in the editor) should just run itself, so
+	# only the main scene performs this hop. The change must be deferred because
+	# we are inside _ready() (the tree is still adding children).
+	if target != room_path and room_path == GameState.MAIN_SCENE:
 		if ResourceLoader.exists(target):
 			GameState.start_transition()
-			get_tree().change_scene_to_file(target)
+			GameState.call_deferred("_change_scene", target)
 		else:
 			push_warning("Saved room is missing: " + target)
 			GameState.pending_spawn = {}
 		return
+	GameState.pending_spawn = {}                      # consume
 	GameState.start_transition()
 	if pending.has("entrance"):
 		_spawn_at_entrance(str(pending.get("entrance", "")))

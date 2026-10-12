@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://c44omavotwfww"]
+
+[ext_resource type="PackedScene" path="res://scenes/rooms/room_template.tscn" id="1_attfo"]
+[ext_resource type="Texture2D" uid="uid://bf874qpo8dcx6" path="res://assets/backgrounds/cavebg(Layer 2) _0001.png" id="2_8kbsy"]
+[ext_resource type="Texture2D" uid="uid://cnbsq6v0ud785" path="res://assets/backgrounds/cavebg(Layer 3) _0001.png" id="3_m4vpo"]
+[ext_resource type="Texture2D" uid="uid://b8ibgnywwmm1v" path="res://assets/backgrounds/cavebg(Layer 4) _0001.png" id="4_7w5ou"]
+[ext_resource type="Texture2D" uid="uid://m8y51fvytswt" path="res://assets/backgrounds/cavebg(Layer 4 (copy)) _0001.png" id="5_58r6w"]
+[ext_resource type="PackedScene" uid="uid://c4akv5ilf6lkj" path="res://scenes/tile_map.tscn" id="6_8kbsy"]
+
+[node name="CaveRoom1" unique_id=1967681378 instance=ExtResource("1_attfo")]
+
+[node name="Background" type="Node2D" parent="." index="8" unique_id=390559768]
+z_index = -20
+scale = Vector2(2, 2)
+metadata/_edit_lock_ = true
+
+[node name="B0" type="Parallax2D" parent="Background" index="0" unique_id=1892368379]
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/B0" index="0" unique_id=120106129]
+texture = ExtResource("2_8kbsy")
+
+[node name="B1" type="Parallax2D" parent="Background" index="1" unique_id=1932299270]
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/B1" index="0" unique_id=1970980952]
+texture = ExtResource("3_m4vpo")
+
+[node name="B2" type="Parallax2D" parent="Background" index="2" unique_id=1466982470]
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/B2" index="0" unique_id=1072860844]
+texture = ExtResource("4_7w5ou")
+
+[node name="B3" type="Parallax2D" parent="Background" index="3" unique_id=234670687]
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/B3" index="0" unique_id=517763024]
+texture = ExtResource("5_58r6w")
+
+[node name="TileMap2" parent="." index="9" unique_id=65298574 instance=ExtResource("6_8kbsy")]
+layer_0/tile_data = PackedInt32Array(196606, 65537, 1, 196607, 65537, 1, 131072, 65537, 1, 196608, 65537, 1, 196609, 65537, 1, 196610, 65537, 1, 262146, 65537, 1, 262147, 65537, 1, 262148, 65537, 1, 262149, 65537, 1, 262150, 65537, 1, 262151, 65537, 1, 262152, 65537, 1, 262153, 65537, 1, 262154, 65537, 1, 196618, 65537, 1, 196619, 65537, 1, 196620, 65537, 1, 196621, 65537, 1, 196622, 65537, 1, 262158, 65537, 1, 262159, 65537, 1, 196623, 65537, 1, 196624, 65537, 1, 196605, 65537, 1)
