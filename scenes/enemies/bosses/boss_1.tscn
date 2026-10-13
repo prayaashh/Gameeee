@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bg132mmr3v7cg"]
+
+[node name="Boss1" type="CharacterBody2D" unique_id=1627008866]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2090588813]
+position = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2115941817]
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=250810453]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=2077487461]
+
+[node name="AttackHItbox" type="Area2D" parent="." unique_id=1459431957]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHItbox" unique_id=1406526816]
