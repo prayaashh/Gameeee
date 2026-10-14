@@ -14,7 +14,7 @@ that already work: `scenes/rooms/game.tscn` (room 1) and `scenes/rooms/room_02.t
 
 | Node        | What it is | Required? |
 |-------------|------------|-----------|
-| `Room` (root) | has `room.gd` attached — sets camera bounds, warns if `player` is missing | yes — don't remove the script |
+| `Room` (root) | has `room.gd` attached — configures the room camera, warns if `player` is missing | yes — don't remove the script |
 | `player`    | the one Player instance for this room | yes — every room has exactly one |
 | `TileMap`   | your level geometry | optional (you can build floors from StaticBody2D instead) |
 | `Entrances/Spawn` (Marker2D) | where the player appears when booting a save in this room | yes |
@@ -117,15 +117,24 @@ The camera lives **inside `player.tscn`** and follows the player automatically.
 By default it is **unbounded**, so it keeps the player centered even past the
 room's edges — you don't need to set anything for a new room.
 
-If you *do* want the camera clamped to the room's edges instead, set the room
-root's `camera_bounds` (Rectangle) in the Inspector to a non-empty area:
+If you *do* want to constrain the camera, the room root has these fields in
+the Inspector:
 
-- `x/y` = top-left corner of the allowed camera area, `w/h` = its size
-  (world pixels). The camera's view is kept inside that rectangle; when it
-  reaches an edge it stops.
-- Leave `camera_bounds` at zero size (the default) to keep the camera
-  following the player freely — recommended, and required if the room is
-  wider/taller than one screen and you want the player always centered.
+- **Camera Fit Height** — world-space height the camera should show. Set it to
+  a background's height (texture height x its parent's scale) so that
+  background fills the screen top to bottom. `0` leaves the zoom alone.
+- **Camera Limit Left / Top / Right / Bottom** — the four camera limits, in
+  world coordinates (the same values a `Camera2D` has). The camera's view is
+  kept inside them and stops at each edge. They default to the "no limit"
+  values, so only change the edges you want.
+
+Examples:
+
+- **Stop the camera moving up/down while jumping:** set **Top = 0** and
+  **Bottom = 640** (the background's top/bottom) with **Camera Fit Height =
+  640**. The camera's Y is pinned and it only scrolls sideways.
+- **Clamp the camera to the room's edges:** set all four limits.
+- **Free-following camera:** leave everything at its default.
 
 ---
 
