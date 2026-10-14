@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cy2tmnycn33bk"]
+
+[ext_resource type="PackedScene" uid="uid://cj4hswq3hicja" path="res://scenes/rooms/room_template.tscn" id="1_gkjcg"]
+[ext_resource type="Texture2D" uid="uid://b23o5nogar7t8" path="res://assets/backgrounds/overworld_castle1/castle1bg(Flattened) _0001.png" id="2_xf1n4"]
+[ext_resource type="Texture2D" uid="uid://lctt7yvlt8x0" path="res://assets/backgrounds/overworld_castle1/castle1bg(Layer 2) _0001.png" id="3_vtfd8"]
+[ext_resource type="PackedScene" uid="uid://c4akv5ilf6lkj" path="res://scenes/tile_map.tscn" id="4_fsn4f"]
+
+[node name="Castle1Room1" unique_id=1826765046 instance=ExtResource("1_gkjcg")]
+position = Vector2(3, 0)
+camera_bounds = Rect2(0, 320, 0, 320)
+
+[node name="Backgrounds" type="Node2D" parent="." index="7" unique_id=1573557639]
+z_index = -20
+position = Vector2(0, 320)
+scale = Vector2(2, 2)
+
+[node name="Parallax2D" type="Parallax2D" parent="Backgrounds" index="0" unique_id=706464006]
+scroll_scale = Vector2(0.8, 1)
+repeat_size = Vector2(1000, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Parallax2D" index="0" unique_id=1434243]
+texture = ExtResource("2_xf1n4")
+
+[node name="Parallax2D2" type="Parallax2D" parent="Backgrounds" index="1" unique_id=873794557]
+scroll_scale = Vector2(0.9, 1)
+repeat_size = Vector2(1000, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Parallax2D2" index="0" unique_id=1638123040]
+texture = ExtResource("3_vtfd8")
+
+[node name="TileMap" parent="." index="8" unique_id=65298574 instance=ExtResource("4_fsn4f")]
+layer_0/tile_data = PackedInt32Array(786370, 65537, 1, 786371, 65537, 1, 786372, 65537, 1, 786373, 65537, 1, 786374, 65537, 1, 786375, 65537, 1, 786376, 65537, 1, 786377, 65537, 1, 786378, 65537, 1, 786379, 65537, 1, 786380, 65537, 1, 786381, 65537, 1, 786382, 65537, 1, 786383, 65537, 1, 786384, 65537, 1, 786385, 65537, 1, 786386, 65537, 1, 786387, 65537, 1, 786388, 65537, 1, 786389, 65537, 1, 786390, 65537, 1, 786391, 65537, 1, 786392, 65537, 1, 786393, 65537, 1, 786394, 65537, 1, 786395, 65537, 1, 786396, 65537, 1, 786397, 65537, 1, 786398, 65537, 1, 786399, 65537, 1, 786400, 65537, 1, 786401, 65537, 1, 786402, 65537, 1, 786403, 65537, 1, 786404, 65537, 1, 786405, 65537, 1, 786406, 65537, 1, 786407, 65537, 1, 786408, 65537, 1, 786409, 65537, 1, 786410, 65537, 1, 786411, 65537, 1, 786412, 65537, 1, 786413, 65537, 1, 786414, 65537, 1, 786415, 65537, 1, 786416, 65537, 1, 786417, 65537, 1, 786418, 65537, 1, 786419, 65537, 1, 786420, 65537, 1, 786421, 65537, 1, 786422, 65537, 1, 786423, 65537, 1, 786424, 65537, 1, 786425, 65537, 1, 786426, 65537, 1, 786427, 65537, 1, 786428, 65537, 1, 786429, 65537, 1, 786430, 65537, 1, 786431, 65537, 1, 720896, 65537, 1, 720897, 65537, 1, 720898, 65537, 1, 720899, 65537, 1, 720900, 65537, 1, 720901, 65537, 1, 720902, 65537, 1, 720903, 65537, 1, 720904, 65537, 1, 720905, 65537, 1, 720906, 65537, 1, 720907, 65537, 1, 720908, 65537, 1, 720909, 65537, 1, 720910, 65537, 1, 720911, 65537, 1, 720912, 65537, 1, 720913, 65537, 1, 720914, 65537, 1, 720915, 65537, 1, 720916, 65537, 1, 720917, 65537, 1, 720918, 65537, 1, 720919, 65537, 1, 720920, 65537, 1, 720921, 65537, 1, 720922, 65537, 1, 720923, 65537, 1, 720924, 65537, 1, 720925, 65537, 1, 720926, 65537, 1, 720927, 65537, 1, 720928, 65537, 1, 720929, 65537, 1, 720930, 65537, 1, 720931, 65537, 1, 720932, 65537, 1, 720933, 65537, 1, 720934, 65537, 1, 720935, 65537, 1, 720936, 65537, 1, 720937, 65537, 1, 720938, 65537, 1, 720939, 65537, 1, 720940, 65537, 1, 720941, 65537, 1, 720942, 65537, 1, 720943, 65537, 1, 720944, 65537, 1, 720945, 65537, 1, 720946, 65537, 1, 720947, 65537, 1)

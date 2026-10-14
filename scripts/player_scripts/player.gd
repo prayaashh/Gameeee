@@ -77,6 +77,24 @@ func _resolve_spawn() -> void:
 		global_position = Vector2(
 			float(pending.get("x", global_position.x)),
 			float(pending.get("y", global_position.y)))
+		_verify_ground.call_deferred()   # a stale save could be over a gap
+
+## A checkpoint stores a raw position, so a room edit can leave it floating over a
+## pit. If nothing solid sits under the spawn, fall back to the room's Spawn
+## marker instead of dropping the player off the map.
+func _verify_ground() -> void:
+	if not is_inside_tree():
+		return
+	# Wait for the room's tile collision to register before probing.
+	await get_tree().physics_frame
+	if not is_inside_tree():
+		return
+	var from := global_position + Vector2(0, 4)
+	var query := PhysicsRayQueryParameters2D.create(from, from + Vector2(0, 600), 2, [get_rid()])
+	var hit := get_world_2d().direct_space_state.intersect_ray(query)
+	if hit.is_empty():
+		push_warning("Spawn has no ground below — using the room's 'Spawn' entrance.")
+		_spawn_at_entrance("Spawn")
 
 func _room_scene_path() -> String:
 	var room := owner if owner else get_tree().current_scene

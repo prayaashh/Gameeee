@@ -33,7 +33,7 @@ func _on_exit(body: Node2D) -> void:
 		prompt.hide()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if player == null or player.dead or Dialogue.active or not event.is_action_pressed("interact"):
+	if player == null or player.dead or Dialogue.active or not player.is_on_floor() or not event.is_action_pressed("interact"):
 		return
 	get_viewport().set_input_as_handled()
 	_rest()

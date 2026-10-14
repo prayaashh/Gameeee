@@ -364,11 +364,10 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6i2nw"]
-radius = 7.0
-height = 38.0
+height = 40.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhi7u"]
-size = Vector2(51.5, 31)
+size = Vector2(52, 51)
 
 [node name="player" type="CharacterBody2D" unique_id=441232831]
 collision_mask = 2
@@ -379,13 +378,13 @@ attack_time = 0.175
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1054226490]
 position = Vector2(14, -6)
-scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_fhbv5")
 animation = &"idle"
 autoplay = "idle"
 frame = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=192229013]
+position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_6i2nw")
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=984965607]
@@ -393,7 +392,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=392024344]
-position = Vector2(19.25, 0)
+position = Vector2(19, 0.5)
 shape = SubResource("RectangleShape2D_xhi7u")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1735366348 node_paths=PackedStringArray("actor", "initial_state")]
