@@ -6,7 +6,7 @@ var already_hit: Array = []   # so one swing hits each enemy only once
 func enter(_previous: StringName) -> void:
 	player.play(&"attack")
 	time_left = player.attack_time
-	player.velocity.x = 0.0
+	#player.velocity.x = 0.0
 	already_hit.clear()
 	player.attack_hitbox.body_entered.connect(_on_hit)
 	player.attack_hitbox.monitoring = true

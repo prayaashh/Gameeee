@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cy2tmnycn33bk"]
 
 [ext_resource type="PackedScene" uid="uid://cj4hswq3hicja" path="res://scenes/rooms/room_template.tscn" id="1_gkjcg"]
-[ext_resource type="Texture2D" uid="uid://b23o5nogar7t8" path="res://assets/backgrounds/overworld_castle1/castle1bg(Flattened) _0001.png" id="2_xf1n4"]
+[ext_resource type="PackedScene" uid="uid://dvdrq7hdiemxe" path="res://scenes/doorway.tscn" id="2_vtfd8"]
+[ext_resource type="Texture2D" uid="uid://ccn5lkohsm7kj" path="res://assets/backgrounds/overworld_castle1/castle1bg-Copy2(Flattened) _0001.png" id="2_xf1n4"]
 [ext_resource type="Texture2D" uid="uid://lctt7yvlt8x0" path="res://assets/backgrounds/overworld_castle1/castle1bg(Layer 2) _0001.png" id="3_vtfd8"]
 [ext_resource type="PackedScene" uid="uid://c4akv5ilf6lkj" path="res://scenes/tile_map.tscn" id="4_fsn4f"]
 
@@ -20,6 +21,16 @@ camera_fit_height = 640.0
 top_limit = 0
 bottom_limit = 640
 
+[node name="player" parent="." index="0" unique_id=45254567]
+position = Vector2(106, 455)
+
+[node name="Spawn" parent="Entrances" parent_id_path=PackedInt32Array(1834872771) index="0" unique_id=1573731701]
+position = Vector2(120, 500)
+
+[node name="Doorway" parent="Doorways" parent_id_path=PackedInt32Array(1438724118) index="0" unique_id=1680576452 instance=ExtResource("2_vtfd8")]
+position = Vector2(-1309, 486)
+target_scene = "uid://c44omavotwfww"
+
 [node name="Backgrounds" type="Node2D" parent="." index="7" unique_id=1573557639]
 position = Vector2(0, 320)
 scale = Vector2(2, 2)
@@ -33,35 +44,34 @@ repeat_times = 4
 [node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Parallax2D" index="0" unique_id=1434243]
 texture = ExtResource("2_xf1n4")
 
-[node name="Lighting" type="Node2D" parent="Backgrounds/Parallax2D" index="1" unique_id=808214965]
-position = Vector2(0, -160)
-scale = Vector2(0.5, 0.5)
+[node name="LightLayer" type="Parallax2D" parent="Backgrounds" index="1" unique_id=808214965]
+z_index = -20
+scroll_scale = Vector2(0.9, 1)
+repeat_size = Vector2(0, 0)
 
-[node name="PointLight2D" type="PointLight2D" parent="Backgrounds/Parallax2D/Lighting" index="0" unique_id=1109989335]
-position = Vector2(-318, 272)
-scale = Vector2(3, 3)
-color = Color(0.76862746, 0.5294118, 0.4117647, 1)
+[node name="PointLight2D" type="PointLight2D" parent="Backgrounds/LightLayer" index="0" unique_id=694215155]
+position = Vector2(132.2, -24.5)
+scale = Vector2(1.5, 1.5)
+color = Color(0.7521308, 0.41830385, 0.6005354, 1)
 energy = 1.06
-range_z_max = -20
 texture = SubResource("GradientTexture2D_xf1n4")
 
-[node name="PointLight2D2" type="PointLight2D" parent="Backgrounds/Parallax2D/Lighting" index="1" unique_id=1140964593]
-position = Vector2(-444, 269)
-scale = Vector2(3, 3)
-color = Color(0.76862746, 0.5294118, 0.4117647, 1)
+[node name="PointLight2D2" type="PointLight2D" parent="Backgrounds/LightLayer" index="1" unique_id=2042923426]
+position = Vector2(194.7, -26)
+scale = Vector2(1.5, 1.5)
+color = Color(0.7521308, 0.41830385, 0.6005354, 1)
 energy = 1.06
-range_z_max = -20
 texture = SubResource("GradientTexture2D_xf1n4")
 
-[node name="PointLight2D3" type="PointLight2D" parent="Backgrounds/Parallax2D/Lighting" index="2" unique_id=1626176595]
-position = Vector2(-576, 272)
-scale = Vector2(3, 3)
-color = Color(0.76862746, 0.5294118, 0.4117647, 1)
+[node name="PointLight2D3" type="PointLight2D" parent="Backgrounds/LightLayer" index="2" unique_id=377915202]
+position = Vector2(258.2, -24.5)
+scale = Vector2(1.5, 1.5)
+color = Color(0.7521308, 0.41830385, 0.6005354, 1)
 energy = 1.06
-range_z_max = -20
 texture = SubResource("GradientTexture2D_xf1n4")
 
-[node name="Parallax2D2" type="Parallax2D" parent="Backgrounds" index="1" unique_id=873794557]
+[node name="Parallax2D2" type="Parallax2D" parent="Backgrounds" index="2" unique_id=873794557]
+visible = false
 z_index = -10
 scroll_scale = Vector2(0.95, 1)
 repeat_size = Vector2(1000, 0)
@@ -72,3 +82,5 @@ texture = ExtResource("3_vtfd8")
 
 [node name="TileMap" parent="." index="8" unique_id=65298574 instance=ExtResource("4_fsn4f")]
 layer_0/tile_data = PackedInt32Array(1114065, 65537, 1, 1114066, 65537, 1, 1114067, 65537, 1, 1114068, 65537, 1, 1114069, 65537, 1, 1114070, 65537, 1, 1114071, 65537, 1, 1114072, 65537, 1, 1114073, 65537, 1, 1114074, 65537, 1, 1114075, 65537, 1, 1114076, 65537, 1, 1114077, 65537, 1, 1114078, 65537, 1, 1114079, 65537, 1, 1114080, 65537, 1, 1114081, 65537, 1, 1114082, 65537, 1, 1114083, 65537, 1, 1114084, 65537, 1, 1114085, 65537, 1, 1114086, 65537, 1, 1114087, 65537, 1, 1114088, 65537, 1, 1114089, 65537, 1, 1114090, 65537, 1, 1114091, 65537, 1, 1114092, 65537, 1, 1114093, 65537, 1, 1114094, 65537, 1, 1114095, 65537, 1, 1114096, 65537, 1, 1114097, 65537, 1, 1114098, 65537, 1, 1114099, 65537, 1, 1114100, 65537, 1, 1114101, 65537, 1, 1114102, 65537, 1, 1114103, 65537, 1, 1114104, 65537, 1, 1114105, 65537, 1, 1114106, 65537, 1, 1114107, 65537, 1, 1114108, 65537, 1, 1114109, 65537, 1, 1114110, 65537, 1, 1114111, 65537, 1, 1048576, 65537, 1, 1048577, 65537, 1, 1048578, 65537, 1, 1048579, 65537, 1, 1048580, 65537, 1, 1048581, 65537, 1, 1048582, 65537, 1, 1048583, 65537, 1, 1048584, 65537, 1, 1048585, 65537, 1, 1048586, 65537, 1, 1048587, 65537, 1, 1048588, 65537, 1, 1048589, 65537, 1, 1048590, 65537, 1, 1048591, 65537, 1, 1048592, 65537, 1, 1048593, 65537, 1, 1048594, 65537, 1, 1048595, 65537, 1, 1048596, 65537, 1, 1048597, 65537, 1, 1048598, 65537, 1, 1048599, 65537, 1, 1048600, 65537, 1, 1048601, 65537, 1, 1048602, 65537, 1, 1048603, 65537, 1, 1048604, 65537, 1, 1048605, 65537, 1, 1048606, 65537, 1, 1048607, 65537, 1, 1048608, 65537, 1, 1048609, 65537, 1, 1048610, 65537, 1, 1048611, 65537, 1, 1048612, 65537, 1, 1048613, 65537, 1)
+
+

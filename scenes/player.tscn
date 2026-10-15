@@ -372,8 +372,9 @@ size = Vector2(52, 51)
 [node name="player" type="CharacterBody2D" unique_id=441232831]
 collision_mask = 2
 script = ExtResource("1_fhbv5")
-speed = 300.0
+speed = 500.0
 dash_time = 0.3
+dash_cooldown = 1.0
 attack_time = 0.175
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1054226490]

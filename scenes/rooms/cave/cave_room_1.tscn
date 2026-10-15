@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cj4hswq3hicja" path="res://scenes/rooms/room_template.tscn" id="1_attfo"]
 [ext_resource type="Texture2D" uid="uid://bf874qpo8dcx6" path="res://assets/backgrounds/cavebg(Layer 2) _0001.png" id="2_8kbsy"]
+[ext_resource type="PackedScene" uid="uid://dvdrq7hdiemxe" path="res://scenes/doorway.tscn" id="2_k7fkc"]
 [ext_resource type="Texture2D" uid="uid://cnbsq6v0ud785" path="res://assets/backgrounds/cavebg(Layer 3) _0001.png" id="3_m4vpo"]
 [ext_resource type="Texture2D" uid="uid://b8ibgnywwmm1v" path="res://assets/backgrounds/cavebg(Layer 4) _0001.png" id="4_7w5ou"]
 [ext_resource type="Texture2D" uid="uid://m8y51fvytswt" path="res://assets/backgrounds/cavebg(Layer 4 (copy)) _0001.png" id="5_58r6w"]
@@ -64,6 +65,10 @@ sources/2 = SubResource("TileSetAtlasSource_fyvhv")
 sources/3 = SubResource("TileSetAtlasSource_ti1ai")
 
 [node name="CaveRoom1" unique_id=1967681378 instance=ExtResource("1_attfo")]
+
+[node name="Doorway" parent="Doorways" parent_id_path=PackedInt32Array(1438724118) index="0" unique_id=1680576452 instance=ExtResource("2_k7fkc")]
+position = Vector2(1222, 170)
+target_scene = "uid://cy2tmnycn33bk"
 
 [node name="Background" type="Node2D" parent="." index="7" unique_id=390559768]
 z_index = -20
