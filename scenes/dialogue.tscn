@@ -1,22 +1,24 @@
 [gd_scene format=3 uid="uid://cesdcdyru10js"]
 
 [ext_resource type="Script" uid="uid://5qgcgt3vrsgt" path="res://scripts/autoload/dialogue.gd" id="1_jwyou"]
+[ext_resource type="Texture2D" uid="uid://clrvtq8casfnq" path="res://assets/GUI/GUI_box_1.png" id="2_3n4vj"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dlg"]
-content_margin_left = 16.0
-content_margin_top = 12.0
-content_margin_right = 16.0
-content_margin_bottom = 12.0
-bg_color = Color(0.05, 0.06, 0.09, 0.85)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dlg"]
+content_margin_left = 56.0
+content_margin_top = 56.0
+content_margin_right = 56.0
+content_margin_bottom = 56.0
+texture = ExtResource("2_3n4vj")
+texture_margin_left = 132.0
+texture_margin_top = 132.0
+texture_margin_right = 132.0
+texture_margin_bottom = 132.0
 
 [node name="Dialogue" type="CanvasLayer" unique_id=1589216622]
 script = ExtResource("1_jwyou")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=1694159951]
+custom_minimum_size = Vector2(0, 140)
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -26,9 +28,8 @@ offset_top = -156.0
 offset_right = -16.0
 offset_bottom = -16.0
 grow_horizontal = 2
-grow_vertical = 1
-custom_minimum_size = Vector2(0, 140)
-theme_override_styles/panel = SubResource("StyleBoxFlat_dlg")
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_dlg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1103689447]
 layout_mode = 2
@@ -37,15 +38,11 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TextLabel" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=913278987]
-layout_mode = 2
 custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 20
-bbcode_enabled = false
-autowrap_mode = 3
-fit_content = false
 
 [node name="ChoiceBox" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=1432070654]
-layout_mode = 2
 custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 alignment = 1
