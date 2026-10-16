@@ -43,13 +43,13 @@ shape = SubResource("RectangleShape2D_rv78h")
 
 [node name="Prompt" type="Label" parent="." unique_id=764784531]
 z_index = 10
-offset_left = -16.0
-offset_top = -44.0
-offset_right = 24.0
-offset_bottom = -20.0
+offset_left = -160.0
+offset_top = -78.0
+offset_right = 160.0
+offset_bottom = -48.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 text = "E"
 horizontal_alignment = 1
 vertical_alignment = 1

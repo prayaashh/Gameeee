@@ -1,36 +1,35 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bcf0idj0eh6c1"]
 
-[ext_resource type="Script" path="res://scripts/checkpoint.gd" id="1_cp"]
+[ext_resource type="Script" uid="uid://cik5osvvmrlwx" path="res://scripts/checkpoint.gd" id="1_cp"]
 [ext_resource type="Texture2D" uid="uid://c5j31brbb2xos" path="res://assets/Sprites/Plant5_00000.png" id="2_plant"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_zone"]
 size = Vector2(110, 64)
 
-[node name="Checkpoint" type="Node2D"]
+[node name="Checkpoint" type="Node2D" unique_id=1387972412]
 script = ExtResource("1_cp")
-rest_line = "You rest a while. Your journey is saved."
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=148383943]
 position = Vector2(0, -22)
 scale = Vector2(0.14, 0.1)
 texture = ExtResource("2_plant")
 
-[node name="InteractZone" type="Area2D" parent="."]
+[node name="InteractZone" type="Area2D" parent="." unique_id=1100344554]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractZone" unique_id=266445901]
 position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_zone")
 
-[node name="Prompt" type="Label" parent="."]
+[node name="Prompt" type="Label" parent="." unique_id=288333677]
 z_index = 10
-offset_left = -16.0
-offset_top = -70.0
-offset_right = 24.0
-offset_bottom = -46.0
+offset_left = -160.0
+offset_top = -78.0
+offset_right = 160.0
+offset_bottom = -48.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 text = "E"
 horizontal_alignment = 1
 vertical_alignment = 1
