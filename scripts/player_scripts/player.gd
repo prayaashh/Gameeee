@@ -20,6 +20,13 @@ extends CharacterBody2D
 @export var heal_cost := 33         # mana spent per heal
 @export var heal_time := 0.9        # seconds the focus channel must be held
 
+## The character art is drawn ~16.5 px left of the centre of each 160x160 frame,
+## so a plain flip_h would mirror it about the frame centre and slide the
+## character ~33 px sideways, leaving it sitting off its collision shape.
+## Mirroring the sprite about the art's own centre instead keeps it aligned.
+## (Set to 0.0 if the sprite sheet is ever re-exported with the art centred.)
+const SPRITE_MIRROR_X := 16.5
+
 var facing := 1
 var jump_buffer_left := 0.0
 var dash_cooldown_left := 0.0
@@ -134,6 +141,9 @@ func face(dir: float) -> void:
 		return
 	facing = 1 if dir > 0 else -1
 	sprite.flip_h = facing < 0
+	# Keep the art's centre over the collision shape rather than the frame centre,
+	# otherwise the offset art jumps to the other side of the frame when flipped.
+	sprite.position.x = SPRITE_MIRROR_X * facing
 	attack_hitbox.scale.x = facing
 
 func play(anim: StringName) -> void:
