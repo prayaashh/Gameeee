@@ -3,13 +3,19 @@
 [ext_resource type="Script" uid="uid://c2fdludqyfiw6" path="res://scripts/room.gd" id="1_evemh"]
 [ext_resource type="PackedScene" uid="uid://ce7eb4e2ufp4f" path="res://scenes/player.tscn" id="2_0lsv1"]
 [ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="3_h1obj"]
-[ext_resource type="Texture2D" uid="uid://b1dwvgfev5y6i" path="res://assets/backgrounds/hellhole/HEllHOlE.png" id="4_oixbl"]
+[ext_resource type="Texture2D" uid="uid://c2iftq8lawlap" path="res://assets/backgrounds/hellhole/HEllHOlE_copy_flattened.png" id="4_oixbl"]
+[ext_resource type="Texture2D" uid="uid://sle5ayq7b878" path="res://assets/backgrounds/hellhole/HEllHOlE_foreground_copy_flattened.png" id="5_l7omf"]
 
 [node name="Room" type="Node2D" unique_id=1826765046]
 script = ExtResource("1_evemh")
+left_limit = -750
+top_limit = -1125
+right_limit = 750
+bottom_limit = 1125
 
 [node name="player" parent="." unique_id=45254567 instance=ExtResource("2_0lsv1")]
-position = Vector2(-300, -1000)
+z_index = -10
+position = Vector2(-744, -777)
 
 [node name="Entrances" type="Node2D" parent="." unique_id=1834872771]
 
@@ -33,9 +39,28 @@ scale = Vector2(1.5, 1.5)
 [node name="Sprite2D" type="Sprite2D" parent="Background" unique_id=1542654948]
 texture = ExtResource("4_oixbl")
 
+[node name="Foreground" type="Node2D" parent="." unique_id=1997520096]
+z_index = -5
+scale = Vector2(1.5, 1.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground" unique_id=1924324663]
+texture = ExtResource("5_l7omf")
+
 [node name="Ground" type="StaticBody2D" parent="." unique_id=694454752]
 collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground" unique_id=1915647438]
-polygon = PackedVector2Array(-642, -754, -536, -731, -464, -734, -421, -740, -396, -735, -304, -725, -161, -730, -278, -699, -258, -691, -160, -664, -198, -621, -748, -626, -800, -754, -753, -756)
+polygon = PackedVector2Array(-644, -743, -554, -733, -462, -734, -422, -736, -365, -732, -303, -726, -151, -732, -278, -699, -267, -674, -159, -662, -198, -621, -185, -457, -177, -385, -207, -352, -326, -169, -656, 22, -733, 25, -752, 11, -748, -626, -829, -940, -749, -748)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Ground" unique_id=1517491463]
+polygon = PackedVector2Array(149, -731, 339, -722, 409, -739, 523, -729, 750, -717, 793, -979, 750, -592, 743, -159, 632, -97, 480, -136, 284, -375, 182, -471, 183, -578, 218, -564, 150, -659, 226, -659, 253, -681, 224, -712)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Ground" unique_id=2056739720]
+polygon = PackedVector2Array(-749, 939, -663, 923, -542, 934, -435, 966, -316, 965, -100, 972, 148, 976, 330, 957, 581, 942, 700, 895, 749, 884, 750, 1120, -748, 1119)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Ground" unique_id=2048290350]
+polygon = PackedVector2Array(-707, 80, -600, 74, -540, 74, -511, 94, -458, 136, -410, 126, -337, 172, -255, 165, -209, 201, -227, 261, -290, 329, -363, 339, -544, 301, -642, 334, -751, 303, -751, 11)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Ground" unique_id=504895185]
+polygon = PackedVector2Array(156, 239, 403, -28, 569, -3, 665, -116, 747, -164, 742, 340, 412, 329, 345, 370, 256, 336)

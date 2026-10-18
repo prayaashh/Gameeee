@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1d63f8ojqbu1"
-path="res://.godot/imported/transparent box 4x4 tileset.png-e12d33e0c8ea7c1a21d846d19eb27b00.ctex"
+uid="uid://sle5ayq7b878"
+path="res://.godot/imported/HEllHOlE_foreground_copy_flattened.png-3e75ded58d0f060b9d77b9eacb3f35ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/hellhole/transparent box 4x4 tileset.png"
-dest_files=["res://.godot/imported/transparent box 4x4 tileset.png-e12d33e0c8ea7c1a21d846d19eb27b00.ctex"]
+source_file="res://assets/backgrounds/hellhole/HEllHOlE_foreground_copy_flattened.png"
+dest_files=["res://.godot/imported/HEllHOlE_foreground_copy_flattened.png-3e75ded58d0f060b9d77b9eacb3f35ca.ctex"]
 
 [params]
 

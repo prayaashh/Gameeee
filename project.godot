@@ -27,7 +27,7 @@ PauseMenu="*res://scenes/pause_menu.tscn"
 
 [display]
 
-window/size/mode=2
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

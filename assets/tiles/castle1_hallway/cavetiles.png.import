@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1dwvgfev5y6i"
-path="res://.godot/imported/HEllHOlE.png-0266f201de05b183426e8f9043920708.ctex"
+uid="uid://dr4akw6nokm46"
+path="res://.godot/imported/cavetiles.png-7cb654c271b725b9b4c9f16fef872c81.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/hellhole/HEllHOlE.png"
-dest_files=["res://.godot/imported/HEllHOlE.png-0266f201de05b183426e8f9043920708.ctex"]
+source_file="res://assets/tiles/castle1_hallway/cavetiles.png"
+dest_files=["res://.godot/imported/cavetiles.png-7cb654c271b725b9b4c9f16fef872c81.ctex"]
 
 [params]
 

@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://c2fdludqyfiw6" path="res://scripts/room.gd" id="5_room"]
 [ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="6_hud"]
 [ext_resource type="PackedScene" uid="uid://dvdrq7hdiemxe" path="res://scenes/doorway.tscn" id="7_door"]
-[ext_resource type="PackedScene" path="res://scenes/checkpoint.tscn" id="8_bench"]
-[ext_resource type="PackedScene" uid="uid://8nen7e3bxj2j" path="res://scenes/enemies/snail_creep.tscn" id="9_eq3lt"]
+[ext_resource type="PackedScene" uid="uid://bcf0idj0eh6c1" path="res://scenes/checkpoint.tscn" id="8_bench"]
+[ext_resource type="PackedScene" uid="uid://8nen7e3bxj2j" path="res://scenes/enemies/creeps/snail_creep.tscn" id="9_eq3lt"]
 [ext_resource type="PackedScene" uid="uid://dsxbgs2tci56r" path="res://scenes/pickups/credit_pickup.tscn" id="10_j7ukj"]
 
 [node name="game" type="Node2D" unique_id=1132625164]
