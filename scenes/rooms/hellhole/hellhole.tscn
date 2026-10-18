@@ -4,43 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://ce7eb4e2ufp4f" path="res://scenes/player.tscn" id="2_0lsv1"]
 [ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="3_h1obj"]
 [ext_resource type="Texture2D" uid="uid://b1dwvgfev5y6i" path="res://assets/backgrounds/hellhole/HEllHOlE.png" id="4_oixbl"]
-[ext_resource type="Texture2D" uid="uid://1d63f8ojqbu1" path="res://assets/backgrounds/hellhole/transparent box 4x4 tileset.png" id="5_l7omf"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0b65c"]
-texture = ExtResource("5_l7omf")
-texture_region_size = Vector2i(4, 4)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-0:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-3:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-2:1/0 = 0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
-1:1/0 = 0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
-1:2/0 = 0
-1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.11461687, -0.11461687, 2, -2, 2, 2, -2, 2)
-2:2/0 = 0
-2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2, -2, 0.3438511, 0.17192554, 2, 2, -2, 2)
-
-[sub_resource type="TileSet" id="TileSet_i6l4o"]
-tile_size = Vector2i(4, 4)
-physics_layer_0/collision_layer = 2
-physics_layer_0/collision_mask = 2
-sources/1 = SubResource("TileSetAtlasSource_0b65c")
 
 [node name="Room" type="Node2D" unique_id=1826765046]
 script = ExtResource("1_evemh")
 
 [node name="player" parent="." unique_id=45254567 instance=ExtResource("2_0lsv1")]
-position = Vector2(-180, -550)
+position = Vector2(-300, -1000)
 
 [node name="Entrances" type="Node2D" parent="." unique_id=1834872771]
 
@@ -59,11 +28,14 @@ position = Vector2(120, 13)
 
 [node name="Background" type="Node2D" parent="." unique_id=70797935]
 z_index = -20
+scale = Vector2(1.5, 1.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background" unique_id=1542654948]
 texture = ExtResource("4_oixbl")
 
-[node name="TileMap" type="TileMap" parent="." unique_id=1389386879]
-tile_set = SubResource("TileSet_i6l4o")
-format = 2
-layer_0/tile_data = PackedInt32Array(-8061053, 65537, 1, -8061052, 65537, 1, -8061051, 65537, 1, -8061050, 65537, 1, -8061049, 65537, 1, -8061048, 65537, 1, -8061047, 65537, 1, -8061046, 65537, 1, -8061045, 65537, 1, -8061044, 65537, 1, -8061043, 65537, 1, -7995507, 65537, 1, -7995506, 65537, 1, -7995505, 65537, 1, -7995504, 65537, 1, -7995503, 65537, 1, -8061039, 65537, 1, -8061038, 65537, 1, -8061037, 65537, 1, -8061036, 65537, 1, -8126572, 65537, 1, -8126571, 65537, 1, -8126570, 65537, 1, -8126569, 65537, 1, -8126568, 65537, 1, -8126567, 65537, 1, -8061031, 65537, 1, -8061030, 65537, 1, -8061029, 65537, 1, -7995493, 65537, 1, -7995492, 65537, 1, -7995491, 65537, 1, -7929955, 65537, 1, -7929954, 65537, 1, -7929953, 65537, 1, -7864417, 65537, 1, -7864416, 65537, 1, -7798879, 65537, 1, -7798878, 65537, 1, -7798877, 65537, 1, -7733340, 65537, 1, -7733339, 65537, 1, -7733338, 65537, 1, -7733337, 65537, 1, -7733336, 65537, 1, -7733335, 65537, 1, -7733334, 65537, 1, -7667798, 65537, 1, -7667797, 65537, 1, -7667796, 65537, 1, -7667795, 65537, 1, -7733330, 65537, 1, -7733329, 65537, 1, -7733328, 65537, 1, -7733327, 65537, 1, -7733326, 65537, 1, -7798862, 65537, 1, -7798861, 65537, 1, -7798860, 65537, 1, -7864396, 65537, 1, -7864395, 65537, 1, -7864394, 65537, 1, -7864393, 65537, 1, -7864392, 65537, 1, -7864391, 65537, 1, -7864390, 65537, 1, -7798854, 65537, 1, -7798853, 65537, 1, -7798852, 65537, 1, -7798851, 65537, 1, -7798850, 65537, 1, -7798849, 65537, 1, -7798848, 65537, 1, -7733311, 65537, 1, -7733310, 65537, 1, -7733309, 65537, 1, -7733308, 65537, 1, -7733307, 65537, 1, -7733306, 65537, 1, -7733305, 65537, 1, -7733304, 65537, 1, -7733303, 65537, 1, -7667767, 65537, 1, -7667766, 65537, 1, -7667765, 65537, 1, -7667764, 65537, 1, -7667763, 65537, 1, -7667762, 65537, 1, -7667761, 65537, 1, -7667760, 65537, 1, -7667759, 65537, 1, -7667758, 65537, 1, -7667757, 65537, 1, -7667756, 65537, 1, -7733292, 65537, 1, -7733291, 65537, 1, -7733290, 65537, 1, -7798825, 65537, 1, -7798824, 65537, 1, -7798823, 65537, 1, -7798822, 65537, 1, -7864357, 65537, 1, -7864356, 65537, 1, -7864355, 65537, 1)
+[node name="Ground" type="StaticBody2D" parent="." unique_id=694454752]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground" unique_id=1915647438]
+polygon = PackedVector2Array(-642, -754, -536, -731, -464, -734, -421, -740, -396, -735, -304, -725, -161, -730, -278, -699, -258, -691, -160, -664, -198, -621, -748, -626, -800, -754, -753, -756)
