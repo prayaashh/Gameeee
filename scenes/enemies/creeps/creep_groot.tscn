@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://daldbasqpdx7a"]
+
+[ext_resource type="Script" path="res://scripts/enemies/creeps/creep_groot.gd" id="1_cg"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/creeps/groot_spike.tscn" id="2_spike"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(16, 24)
+
+[sub_resource type="Gradient" id="Gradient_c"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(0.3, 0.4, 0.8, 1, 0.6, 0.7, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c"]
+gradient = SubResource("Gradient_c")
+width = 16
+height = 24
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_detect"]
+radius = 120.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_attack"]
+size = Vector2(80, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lose"]
+radius = 180.0
+
+[node name="CreepGroot" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_cg")
+spike_scene = ExtResource("2_spike")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_c")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_detect")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("RectangleShape2D_attack")
+
+[node name="LoseArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LoseArea"]
+shape = SubResource("CircleShape2D_lose")
+
+[node name="AttackCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="GroundRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 64)
+collision_mask = 5
+
+[node name="LoSRaycast" type="RayCast2D" parent="."]
+collision_mask = 5
+
+[node name="StateMachine" type="Node" parent="."]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="body_entered" from="LoseArea" to="." method="_on_lose_area_body_entered"]
+[connection signal="body_exited" from="LoseArea" to="." method="_on_lose_area_body_exited"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timeout"]

@@ -10,10 +10,10 @@ z_index = 5
 collision_layer = 0
 script = ExtResource("1_pickup")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=292892709]
+shape = SubResource("CircleShape2D_orb")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=792793248]
 position = Vector2(1, 7)
 scale = Vector2(1.25, 1.25)
 texture = ExtResource("2_uovrv")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=292892709]
-shape = SubResource("CircleShape2D_orb")

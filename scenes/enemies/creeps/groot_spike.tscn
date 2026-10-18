@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://b0fj5k80e8v3j"]
+
+[ext_resource type="Script" path="res://scripts/enemies/creeps/groot_spike.gd" id="1_spike"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(16, 8)
+
+[sub_resource type="Gradient" id="Gradient_1"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(0.2, 0.2, 0.3, 1, 0.8, 0.8, 0.9, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1"]
+gradient = SubResource("Gradient_1")
+width = 16
+height = 8
+
+[node name="Spike" type="Area2D" groups=["hazard"]]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_spike")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_1")
+modulate = Color(0.5, 0.5, 0.5, 0.5)
+
+[node name="LifeTimer" type="Timer" parent="."]
+one_shot = true
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

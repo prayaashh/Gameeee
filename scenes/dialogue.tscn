@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://5qgcgt3vrsgt" path="res://scripts/autoload/dialogue.gd" id="1_jwyou"]
 [ext_resource type="Texture2D" uid="uid://clrvtq8casfnq" path="res://assets/GUI/GUI_box_1.png" id="2_3n4vj"]
+[ext_resource type="FontFile" uid="uid://cbfkuu5rlbu5s" path="res://assets/fonts/PixelWarden.ttf" id="3_fyky8"]
+[ext_resource type="FontFile" uid="uid://dvp4vfg18tjwy" path="res://assets/fonts/PixelPurl.ttf" id="4_led2e"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dlg"]
 content_margin_left = 56.0
@@ -36,6 +38,8 @@ layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="Panel/VBoxContainer" unique_id=898113825]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fyky8")
+theme_override_font_sizes/font_size = 22
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -43,6 +47,12 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("4_led2e")
+theme_override_font_sizes/normal_font_size = 19
+theme_override_font_sizes/bold_font_size = 19
+theme_override_font_sizes/bold_italics_font_size = 19
+theme_override_font_sizes/italics_font_size = 19
+theme_override_font_sizes/mono_font_size = 19
 bbcode_enabled = true
 text = "Text here"
 horizontal_alignment = 1
