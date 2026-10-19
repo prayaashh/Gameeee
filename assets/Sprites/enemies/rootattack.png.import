@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b23o5nogar7t8"
-path="res://.godot/imported/castle1bg(Flattened) _0001.png-2fdd8ec214adc4902b64f7fc920f9ce0.ctex"
+uid="uid://d3lve3onp4qyv"
+path="res://.godot/imported/rootattack.png-d88b05c12a9de650befffbad6220a554.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/overworld_castle1/castle1bg(Flattened) _0001.png"
-dest_files=["res://.godot/imported/castle1bg(Flattened) _0001.png-2fdd8ec214adc4902b64f7fc920f9ce0.ctex"]
+source_file="res://assets/Sprites/enemies/rootattack.png"
+dest_files=["res://.godot/imported/rootattack.png-d88b05c12a9de650befffbad6220a554.ctex"]
 
 [params]
 

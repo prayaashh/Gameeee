@@ -9,6 +9,24 @@ signal interaction_finished(outcome: StringName)
 @export var dialogue: Array[String] = ["Hello, traveller."]
 @export_range(0.1, 3.0, 0.05) var blink_speed := 0.5  # 1.0 = original 0.4s per phase; lower = slower
 
+@export_group("Appearance")
+## Drag a SpriteFrames resource here to give this NPC an animated look.
+@export var sprite_frames: SpriteFrames
+## Single-image look for static NPCs. Ignored when Sprite Frames is set.
+@export var texture: Texture2D
+## Which animation to play on spawn. Leave empty for the first one in the resource.
+@export var default_animation := ""
+## Mirror the sprite horizontally.
+@export var flip_h := false
+
+@export_group("Interaction")
+## Size of the zone in which the "talk" prompt appears.
+@export var interact_size := Vector2(160.5, 64.5)
+## Offset of that zone from the NPC's origin.
+@export var interact_offset := Vector2(3, -5)
+## Text shown on the talk prompt.
+@export var prompt_text := "E"
+
 @export_group("Choice (optional)")
 @export var question := ""                       # leave empty for no choice
 @export var options: Array[String] = ["Accept", "Decline"]
@@ -27,6 +45,8 @@ signal interaction_finished(outcome: StringName)
 @export var react_lines: Array[String] = []
 
 @onready var prompt: Label = $Prompt
+@onready var sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
+@onready var zone_shape: CollisionShape2D = $InteractZone/CollisionShape2D
 var player: Player = null
 var blink_tween: Tween
 
@@ -35,6 +55,27 @@ var _accepted := false
 var _declined := false
 
 func _ready() -> void:
+	if sprite:
+		if sprite_frames:
+			sprite.sprite_frames = sprite_frames
+		elif texture:
+			# static NPC: wrap the single texture into a one-frame SpriteFrames
+			var sf := SpriteFrames.new()
+			sf.add_animation("static")
+			sf.set_animation_loop("static", false)
+			sf.set_animation_speed("static", 1.0)
+			sf.add_frame("static", texture)
+			sprite.sprite_frames = sf
+		var names := sprite.sprite_frames.get_animation_names()
+		if names.size() > 0:
+			var anim := default_animation if default_animation != "" and names.has(default_animation) else names[0]
+			sprite.play(anim)
+		sprite.flip_h = flip_h
+	# duplicate so each instance can have its own zone size without affecting others
+	zone_shape.shape = zone_shape.shape.duplicate()
+	zone_shape.shape.size = interact_size
+	zone_shape.position = interact_offset
+	prompt.text = prompt_text
 	prompt.hide()
 	$InteractZone.body_entered.connect(_on_enter)
 	$InteractZone.body_exited.connect(_on_exit)

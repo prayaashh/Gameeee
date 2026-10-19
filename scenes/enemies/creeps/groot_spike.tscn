@@ -1,33 +1,110 @@
 [gd_scene format=3 uid="uid://b0fj5k80e8v3j"]
 
-[ext_resource type="Script" path="res://scripts/enemies/creeps/groot_spike.gd" id="1_spike"]
+[ext_resource type="Script" uid="uid://i8rufphjxedb" path="res://scripts/enemies/creeps/groot_spike.gd" id="1_spike"]
+[ext_resource type="Texture2D" uid="uid://d3lve3onp4qyv" path="res://assets/Sprites/enemies/rootattack.png" id="2_root"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
-size = Vector2(16, 8)
+size = Vector2(16, 36)
 
-[sub_resource type="Gradient" id="Gradient_1"]
-offsets = PackedFloat32Array(0, 1)
-colors = PackedColorArray(0.2, 0.2, 0.3, 1, 0.8, 0.8, 0.9, 1)
+[sub_resource type="AtlasTexture" id="atlas_ra_1"]
+atlas = ExtResource("2_root")
+region = Rect2(35, 0, 35, 40)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1"]
-gradient = SubResource("Gradient_1")
-width = 16
-height = 8
+[sub_resource type="AtlasTexture" id="atlas_ra_2"]
+atlas = ExtResource("2_root")
+region = Rect2(70, 0, 35, 40)
 
-[node name="Spike" type="Area2D" groups=["hazard"]]
+[sub_resource type="AtlasTexture" id="atlas_ra_3"]
+atlas = ExtResource("2_root")
+region = Rect2(105, 0, 35, 40)
+
+[sub_resource type="AtlasTexture" id="atlas_ra_4"]
+atlas = ExtResource("2_root")
+region = Rect2(140, 0, 35, 40)
+
+[sub_resource type="AtlasTexture" id="atlas_ra_5"]
+atlas = ExtResource("2_root")
+region = Rect2(175, 0, 35, 40)
+
+[sub_resource type="AtlasTexture" id="atlas_ra_6"]
+atlas = ExtResource("2_root")
+region = Rect2(210, 0, 35, 40)
+
+[sub_resource type="AtlasTexture" id="atlas_ra_7"]
+atlas = ExtResource("2_root")
+region = Rect2(245, 0, 35, 40)
+
+[sub_resource type="AtlasTexture" id="atlas_ra_8"]
+atlas = ExtResource("2_root")
+region = Rect2(280, 0, 35, 40)
+
+[sub_resource type="AtlasTexture" id="atlas_ra_9"]
+atlas = ExtResource("2_root")
+region = Rect2(315, 0, 35, 40)
+
+[sub_resource type="AtlasTexture" id="atlas_ra_10"]
+atlas = ExtResource("2_root")
+region = Rect2(350, 0, 35, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_root"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("atlas_ra_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_ra_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_ra_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_ra_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_ra_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_ra_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_ra_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_ra_8")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_ra_9")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_ra_10")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 11.0
+}]
+
+[node name="Spike" type="Area2D" unique_id=1444673481 groups=["hazard"]]
+scale = Vector2(2, 2)
 collision_layer = 16
-collision_mask = 2
+collision_mask = 1
 script = ExtResource("1_spike")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=240317027]
+position = Vector2(0, -18)
 shape = SubResource("RectangleShape2D_1")
 disabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_1")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1238307541]
 modulate = Color(0.5, 0.5, 0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_root")
+animation = &"attack"
+autoplay = "attack"
+frame = 3
+offset = Vector2(0, -20)
 
-[node name="LifeTimer" type="Timer" parent="."]
+[node name="LifeTimer" type="Timer" parent="." unique_id=1541774886]
 one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

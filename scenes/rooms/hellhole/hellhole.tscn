@@ -5,6 +5,19 @@
 [ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="3_h1obj"]
 [ext_resource type="Texture2D" uid="uid://c2iftq8lawlap" path="res://assets/backgrounds/hellhole/HEllHOlE_copy_flattened.png" id="4_oixbl"]
 [ext_resource type="Texture2D" uid="uid://sle5ayq7b878" path="res://assets/backgrounds/hellhole/HEllHOlE_foreground_copy_flattened.png" id="5_l7omf"]
+[ext_resource type="PackedScene" uid="uid://buloxfco1r84r" path="res://scenes/npc.tscn" id="6_l7omf"]
+[ext_resource type="Texture2D" uid="uid://c5j31brbb2xos" path="res://assets/Sprites/Plant5_00000.png" id="7_0b65c"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6i2nw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_0b65c")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Room" type="Node2D" unique_id=1826765046]
 script = ExtResource("1_evemh")
@@ -64,3 +77,13 @@ polygon = PackedVector2Array(-707, 80, -600, 74, -540, 74, -511, 94, -458, 136, 
 
 [node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Ground" unique_id=504895185]
 polygon = PackedVector2Array(156, 239, 403, -28, 569, -3, 665, -116, 747, -164, 742, 340, 412, 329, 345, 370, 256, 336)
+
+[node name="NPC" parent="." unique_id=1255174449 instance=ExtResource("6_l7omf")]
+position = Vector2(-31, 886)
+npc_name = "Dionysus"
+dialogue = Array[String](["Oh, so you have come"])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC" unique_id=424751224]
+position = Vector2(12, -42)
+scale = Vector2(0.5097656, 0.31835938)
+sprite_frames = SubResource("SpriteFrames_6i2nw")

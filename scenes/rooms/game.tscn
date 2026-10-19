@@ -22,6 +22,15 @@ layer_0/tile_data = PackedInt32Array(131071, 65537, 1, 65536, 65537, 1, 65537, 6
 
 [node name="NPC" parent="." unique_id=1255174449 instance=ExtResource("4_lbhrr")]
 position = Vector2(421, 80)
+dialogue = Array[String](["Hello, traveller.", "I am jofeoifheifheofheof", "fehfshfuherfoheofh", "nice to meet you"])
+question = "will you find my lantern"
+accept_lines = Array[String](["thank you", "i shall meet you again"])
+decline_lines = Array[String](["sad", ":(((((((((((((("])
+decline_again_lines = Array[String](["test decline_again_lines"])
+flag_name = "found_lantern"
+repeat_lines = Array[String](["have you found it yet"])
+complete_flag = "found_lantern_done"
+complete_lines = Array[String](["thank you traveller!"])
 
 [node name="Entrances" type="Node2D" parent="." unique_id=2054827743]
 

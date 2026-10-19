@@ -1,77 +1,215 @@
 [gd_scene format=3 uid="uid://daldbasqpdx7a"]
 
-[ext_resource type="Script" path="res://scripts/enemies/creeps/creep_groot.gd" id="1_cg"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/creeps/groot_spike.tscn" id="2_spike"]
+[ext_resource type="Script" uid="uid://bydlf1wrk52is" path="res://scripts/enemies/creeps/creep_groot.gd" id="1_cg"]
+[ext_resource type="PackedScene" uid="uid://b0fj5k80e8v3j" path="res://scenes/enemies/creeps/groot_spike.tscn" id="2_spike"]
+[ext_resource type="Texture2D" uid="uid://co05cg1smvef2" path="res://assets/Sprites/enemies/creep_groot.png" id="3_sheet"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(16, 24)
 
-[sub_resource type="Gradient" id="Gradient_c"]
-offsets = PackedFloat32Array(0, 1)
-colors = PackedColorArray(0.3, 0.4, 0.8, 1, 0.6, 0.7, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_c"]
-gradient = SubResource("Gradient_c")
-width = 16
-height = 24
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_touch"]
+size = Vector2(18, 26)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_detect"]
 radius = 120.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_attack"]
-size = Vector2(80, 32)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_lose"]
 radius = 180.0
 
-[node name="CreepGroot" type="CharacterBody2D"]
+[sub_resource type="AtlasTexture" id="atlas_g_idle_1"]
+atlas = ExtResource("3_sheet")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_idle_2"]
+atlas = ExtResource("3_sheet")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_idle_3"]
+atlas = ExtResource("3_sheet")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_idle_4"]
+atlas = ExtResource("3_sheet")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_idle_5"]
+atlas = ExtResource("3_sheet")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_idle_6"]
+atlas = ExtResource("3_sheet")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_attack_1"]
+atlas = ExtResource("3_sheet")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_attack_2"]
+atlas = ExtResource("3_sheet")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_attack_3"]
+atlas = ExtResource("3_sheet")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_attack_4"]
+atlas = ExtResource("3_sheet")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_walk_1"]
+atlas = ExtResource("3_sheet")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_walk_2"]
+atlas = ExtResource("3_sheet")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_walk_3"]
+atlas = ExtResource("3_sheet")
+region = Rect2(144, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_walk_4"]
+atlas = ExtResource("3_sheet")
+region = Rect2(192, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_walk_5"]
+atlas = ExtResource("3_sheet")
+region = Rect2(240, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_walk_6"]
+atlas = ExtResource("3_sheet")
+region = Rect2(288, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_walk_7"]
+atlas = ExtResource("3_sheet")
+region = Rect2(336, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_g_walk_8"]
+atlas = ExtResource("3_sheet")
+region = Rect2(384, 96, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_groot"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("atlas_g_idle_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_idle_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_idle_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_idle_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_idle_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_idle_6")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("atlas_g_attack_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_attack_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_attack_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_attack_4")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("atlas_g_walk_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_walk_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_walk_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_walk_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_walk_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_walk_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_walk_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_g_walk_8")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[node name="CreepGroot" type="CharacterBody2D" unique_id=113503454]
+scale = Vector2(2, 2)
 collision_layer = 4
-collision_mask = 5
+collision_mask = 2
 script = ExtResource("1_cg")
+detection_range = 250.0
+lose_range = 350.0
 spike_scene = ExtResource("2_spike")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=485314682]
+position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_body")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_c")
-
-[node name="DetectionArea" type="Area2D" parent="."]
+[node name="TouchArea" type="Area2D" parent="." unique_id=771029384]
 collision_layer = 0
-collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchArea" unique_id=554819207]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_touch")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1605456677]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=623014288]
 shape = SubResource("CircleShape2D_detect")
 
-[node name="AttackArea" type="Area2D" parent="."]
+[node name="LoseArea" type="Area2D" parent="." unique_id=1480904817]
 collision_layer = 0
-collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-shape = SubResource("RectangleShape2D_attack")
-
-[node name="LoseArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LoseArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LoseArea" unique_id=18543551]
 shape = SubResource("CircleShape2D_lose")
 
-[node name="AttackCooldownTimer" type="Timer" parent="."]
+[node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1872788730]
 one_shot = true
 
-[node name="GroundRayCast" type="RayCast2D" parent="."]
+[node name="GroundRayCast" type="RayCast2D" parent="." unique_id=2021501552]
 target_position = Vector2(0, 64)
-collision_mask = 5
+collision_mask = 7
 
-[node name="LoSRaycast" type="RayCast2D" parent="."]
-collision_mask = 5
+[node name="LoSRaycast" type="RayCast2D" parent="." unique_id=249854398]
+collision_mask = 7
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." unique_id=1329188622]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=934786817]
+sprite_frames = SubResource("SpriteFrames_groot")
+animation = &"attack"
+autoplay = "idle"
+frame_progress = 0.097017884
+
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
-[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
-[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
-[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
-[connection signal="body_entered" from="LoseArea" to="." method="_on_lose_area_body_entered"]
 [connection signal="body_exited" from="LoseArea" to="." method="_on_lose_area_body_exited"]
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timeout"]
