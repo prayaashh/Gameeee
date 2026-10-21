@@ -5,12 +5,21 @@ extends CharacterBody2D
 ## Connect it in the Inspector (or code) to run your own death logic.
 signal died(enemy: Node)
 
+@export_group("Health")
+## Hit points: the sword takes this down; at 0 the enemy dies.
 @export var health := 3
+
+@export_group("Movement")
 @export var gravity := 1500.0
 @export var friction := 1200.0
 @export var patrol_speed := 60.0
 @export var chase_speed := 120.0
+
+@export_group("Sight & attack")
 @export var sight_range := 250.0
+@export var vision_height := 80.0         # max vertical difference it can see
+@export var back_sight_range := 60.0      # notices you behind it only when very close
+@export var eye_offset := Vector2(0, -20) # raise the ray off the floor
 @export var attack_range := 30.0       # horizontal reach, matches the hitbox (25px fwd + player half-width)
 @export var attack_height := 20.0      # max vertical gap the hitbox can still connect at
 @export var attack_cooldown := 0.4
@@ -40,10 +49,6 @@ var player: Node2D
 @onready var ledge_check: RayCast2D = $Visuals/LedgeCheck
 @onready var attack_hitbox: Area2D = $Visuals/AttackHitbox
 @onready var machine: StateMachine = $StateMachine
-
-@export var vision_height := 80.0         # max vertical difference it can see
-@export var back_sight_range := 60.0      # notices you behind it only when very close
-@export var eye_offset := Vector2(0, -20) # raise the ray off the floor
 
 const WORLD_MASK := 2                     # the ground/wall layer
 

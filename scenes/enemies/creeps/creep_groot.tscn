@@ -168,6 +168,7 @@ script = ExtResource("1_cg")
 detection_range = 250.0
 lose_range = 350.0
 spike_scene = ExtResource("2_spike")
+attack_cooldown = 6.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=485314682]
 position = Vector2(0, 10)

@@ -21,12 +21,19 @@ enum State { PATROL, ATTACK, DEAD }
 
 @export var speed := 55.0
 @export var gravity := 1500.0
+
+@export_group("Health")
+## Hit points: the sword takes this down; at 0 the snail dies.
 @export var health := 3
+## Damage dealt to the player when they touch it.
 @export var contact_damage := 1
+## How often contact damage repeats while overlapping.
+@export var contact_interval := 0.5
+
+@export_group("Attack")
 @export var attack_damage := 1
 @export var attack_cooldown := 0.8      # seconds after an attack before it can attack again
 @export_range(0.0, 1.0) var hit_at = 0.4
-@export var contact_interval := 0.5     # how often contact damage repeats while overlapping
 @export var knockback_time := 0.15
 @export var knockback_speed := 120.0
 

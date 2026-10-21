@@ -6,16 +6,168 @@
 [ext_resource type="Texture2D" uid="uid://c2iftq8lawlap" path="res://assets/backgrounds/hellhole/HEllHOlE_copy_flattened.png" id="4_oixbl"]
 [ext_resource type="Texture2D" uid="uid://sle5ayq7b878" path="res://assets/backgrounds/hellhole/HEllHOlE_foreground_copy_flattened.png" id="5_l7omf"]
 [ext_resource type="PackedScene" uid="uid://buloxfco1r84r" path="res://scenes/npc.tscn" id="6_l7omf"]
-[ext_resource type="Texture2D" uid="uid://c5j31brbb2xos" path="res://assets/Sprites/Plant5_00000.png" id="7_0b65c"]
+[ext_resource type="Texture2D" uid="uid://bgk5ynffvutvm" path="res://assets/Sprites/npcs/dionysus.png" id="7_0b65c"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6i2nw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn3e2"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(400, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uu7nv"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(800, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0okjm"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(1200, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lglv1"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(1600, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymixf"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(2000, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32blj"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(2400, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qakh3"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(2800, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsav0"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(3200, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ieib0"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(3600, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbk3w"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(4000, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0hpl"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(400, 900, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnbyq"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(400, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtqrg"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(800, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3obb"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(1200, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7qfh"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(400, 300, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lj7d3"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(800, 300, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psp10"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(1200, 300, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf38d"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(1600, 300, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42ysb"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(2000, 300, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ag38h"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(2400, 300, 400, 300)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7i6ip"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_0b65c")
+"texture": SubResource("AtlasTexture_dn3e2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uu7nv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0okjm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lglv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymixf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32blj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qakh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsav0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ieib0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbk3w")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"crumble",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0hpl")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnbyq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtqrg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3obb")
+}],
+"loop": 1,
+"name": &"shake",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7qfh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lj7d3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psp10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wf38d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42ysb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ag38h")
+}],
+"loop": 1,
+"name": &"talk",
 "speed": 5.0
 }]
 
@@ -70,7 +222,7 @@ polygon = PackedVector2Array(-644, -743, -554, -733, -462, -734, -422, -736, -36
 polygon = PackedVector2Array(149, -731, 339, -722, 409, -739, 523, -729, 750, -717, 793, -979, 750, -592, 743, -159, 632, -97, 480, -136, 284, -375, 182, -471, 183, -578, 218, -564, 150, -659, 226, -659, 253, -681, 224, -712)
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Ground" unique_id=2056739720]
-polygon = PackedVector2Array(-749, 939, -663, 923, -542, 934, -435, 966, -316, 965, -100, 972, 148, 976, 330, 957, 581, 942, 700, 895, 749, 884, 750, 1120, -748, 1119)
+polygon = PackedVector2Array(-749, 939, -663, 923, -542, 934, -435, 966, -316, 965, -100, 972, 148, 976, 330, 957, 581, 942, 700, 895, 749, 884, 786, 707, 750, 1120, -748, 1119, -798, 613)
 
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Ground" unique_id=2048290350]
 polygon = PackedVector2Array(-707, 80, -600, 74, -540, 74, -511, 94, -458, 136, -410, 126, -337, 172, -255, 165, -209, 201, -227, 261, -290, 329, -363, 339, -544, 301, -642, 334, -751, 303, -751, 11)
@@ -82,8 +234,7 @@ polygon = PackedVector2Array(156, 239, 403, -28, 569, -3, 665, -116, 747, -164, 
 position = Vector2(-31, 886)
 npc_name = "Dionysus"
 dialogue = Array[String](["Oh, so you have come"])
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC" unique_id=424751224]
-position = Vector2(12, -42)
-scale = Vector2(0.5097656, 0.31835938)
-sprite_frames = SubResource("SpriteFrames_6i2nw")
+sprite_frames = SubResource("SpriteFrames_7i6ip")
+default_animation = "idle"
+interact_size = Vector2(160.5, 200)
+interact_offset = Vector2(3, 15)

@@ -21,6 +21,7 @@ signal died(enemy: Node)
 @export var cast_distance_below: float = 64.0
 
 @export_group("Health")
+## Hit points: the sword takes this down; at 0 the groot dies.
 @export var health: int = 3
 @export var contact_damage: int = 1
 @export var contact_interval: float = 0.5  # seconds between contact hits while overlapping

@@ -17,6 +17,9 @@ const TRANSITION_TIME := 0.35   # seconds doorways/spawns stay locked after a sc
 
 var flags := {}
 var credits := 0
+## Weapons the player owns (e.g. ["sword"]) - saved with the game.
+## The future HUD inventory will read this list.
+var weapons: Array[String] = []
 ## Current mana (soul). Kept here because the player node is rebuilt on every
 ## room change; like pending_spawn it lives in memory only (not saved to disk).
 var mana := 0
@@ -50,6 +53,16 @@ func set_flag(key: String, value: bool = true) -> void:
 
 func has_flag(key: String) -> bool:
 	return flags.get(key, false)
+
+# --- weapons -----------------------------------------------------------------
+
+## Gives the player a weapon (e.g. "sword"). Repeating the same name is a no-op.
+func grant_weapon(weapon: String) -> void:
+	if weapon != "" and not weapons.has(weapon):
+		weapons.append(weapon)
+
+func has_weapon(weapon: String) -> bool:
+	return weapons.has(weapon)
 
 # --- credits -----------------------------------------------------------------
 
@@ -149,6 +162,7 @@ func save_to_disk() -> bool:
 		"credits": credits,
 		"death_spot": death_spot,
 		"flags": flags,
+		"weapons": weapons,
 	}, "\t"))
 	return true
 
@@ -174,6 +188,11 @@ func load_from_disk() -> bool:
 	var loaded_flags: Variant = parsed.get("flags", {})
 	if typeof(loaded_flags) == TYPE_DICTIONARY:
 		flags = loaded_flags
+	var loaded_weapons: Variant = parsed.get("weapons", [])   # old saves have none
+	weapons = []
+	if typeof(loaded_weapons) == TYPE_ARRAY:
+		for weapon in loaded_weapons:
+			weapons.append(str(weapon))
 	return true
 
 func _current_scene_path() -> String:

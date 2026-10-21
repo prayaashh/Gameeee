@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://tm3hw6mclquf"]
+
+[ext_resource type="Script" uid="uid://dgeaehhf0y2m3" path="res://scripts/enemies/creeps/creepfly.gd" id="1_cf"]
+[ext_resource type="Texture2D" uid="uid://dmc8q4e1gf7qe" path="res://assets/Sprites/enemies/creepfly.png" id="2_sheet"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(24, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_touch"]
+size = Vector2(24, 32)
+
+[sub_resource type="AtlasTexture" id="atlas_cf_1"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_cf_2"]
+atlas = ExtResource("2_sheet")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_cf_3"]
+atlas = ExtResource("2_sheet")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_cf_4"]
+atlas = ExtResource("2_sheet")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="atlas_cf_5"]
+atlas = ExtResource("2_sheet")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("atlas_cf_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_cf_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_cf_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_cf_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_cf_5")
+}],
+"loop": 1,
+"name": &"fly",
+"speed": 8.0
+}]
+
+[node name="Creepfly" type="CharacterBody2D" unique_id=338401225]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_cf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=640117893]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="TouchArea" type="Area2D" parent="." unique_id=250944716]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchArea" unique_id=817602340]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_touch")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=469258107]
+sprite_frames = SubResource("SpriteFrames_cf")
+animation = &"fly"
+autoplay = "fly"

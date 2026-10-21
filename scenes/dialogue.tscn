@@ -1,43 +1,42 @@
 [gd_scene format=3 uid="uid://cesdcdyru10js"]
 
 [ext_resource type="Script" uid="uid://5qgcgt3vrsgt" path="res://scripts/autoload/dialogue.gd" id="1_jwyou"]
-[ext_resource type="Texture2D" uid="uid://clrvtq8casfnq" path="res://assets/GUI/GUI_box_1.png" id="2_3n4vj"]
 [ext_resource type="FontFile" uid="uid://cbfkuu5rlbu5s" path="res://assets/fonts/PixelWarden.ttf" id="3_fyky8"]
 [ext_resource type="FontFile" uid="uid://dvp4vfg18tjwy" path="res://assets/fonts/PixelPurl.ttf" id="4_led2e"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dlg"]
-content_margin_left = 56.0
-content_margin_top = 56.0
-content_margin_right = 56.0
-content_margin_bottom = 56.0
-texture = ExtResource("2_3n4vj")
-texture_margin_left = 132.0
-texture_margin_top = 132.0
-texture_margin_right = 132.0
-texture_margin_bottom = 132.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue"]
+bg_color = Color(0, 0, 0, 0)
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
 
 [node name="Dialogue" type="CanvasLayer" unique_id=1589216622]
 script = ExtResource("1_jwyou")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=1694159951]
 custom_minimum_size = Vector2(0, 140)
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -156.0
-offset_right = -16.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxTexture_dlg")
+anchors_preset = 10
+anchor_left = 0.2
+anchor_top = 0.0
+anchor_right = 0.8
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 92.0
+offset_right = 0.0
+offset_bottom = 232.0
+grow_horizontal = 1
+grow_vertical = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_dialogue")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1103689447]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="NameLabel" type="Label" parent="Panel/VBoxContainer" unique_id=898113825]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("3_fyky8")
 theme_override_font_sizes/font_size = 22
 horizontal_alignment = 1
@@ -47,6 +46,8 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_fonts/normal_font = ExtResource("4_led2e")
 theme_override_font_sizes/normal_font_size = 19
 theme_override_font_sizes/bold_font_size = 19
@@ -56,7 +57,7 @@ theme_override_font_sizes/mono_font_size = 19
 bbcode_enabled = true
 text = "Text here"
 horizontal_alignment = 1
-vertical_alignment = 1
+vertical_alignment = 0
 
 [node name="ChoiceBox" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=1432070654]
 custom_minimum_size = Vector2(0, 30)
