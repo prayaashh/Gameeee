@@ -231,7 +231,8 @@ polygon = PackedVector2Array(-707, 80, -600, 74, -540, 74, -511, 94, -458, 136, 
 polygon = PackedVector2Array(156, 239, 403, -28, 569, -3, 665, -116, 747, -164, 742, 340, 412, 329, 345, 370, 256, 336)
 
 [node name="NPC" parent="." unique_id=1255174449 instance=ExtResource("6_l7omf")]
-position = Vector2(-31, 886)
+z_index = -15
+position = Vector2(-31, 810)
 npc_name = "Dionysus"
 dialogue = Array[String](["Oh, so you have come"])
 sprite_frames = SubResource("SpriteFrames_7i6ip")

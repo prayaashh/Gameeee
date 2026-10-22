@@ -9,6 +9,8 @@ signal _step(value: int)      # -1 = cancelled, 0 = advance, 0+ = chosen option
 @onready var name_label: Label = $Panel/VBoxContainer/NameLabel
 @onready var text_label: RichTextLabel = $Panel/VBoxContainer/TextLabel
 @onready var choice_box: HBoxContainer = $Panel/VBoxContainer/ChoiceBox
+@onready var choice_font: Font = text_label.get_theme_font("normal_font")
+@onready var choice_font_size: float = text_label.get_theme_font_size("normal_font_size")
 
 var active := false
 var choosing := false
@@ -41,6 +43,8 @@ func choose(speaker: String, question: String, options: Array) -> int:
 	for i in options.size():
 		var b := Button.new()
 		b.text = options[i]
+		b.add_theme_font_override("font", choice_font)          # same font as the dialogue text
+		b.add_theme_font_size_override("font_size", int(choice_font_size))
 		b.pressed.connect(func(): _step.emit(i))
 		choice_box.add_child(b)
 	choice_box.show()
