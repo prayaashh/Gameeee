@@ -39,6 +39,8 @@ var dead := false
 var contact_cooldown_left := 0.0
 var wait_left := 0.0   # > 0 while resting at a wait point
 var _stop_offsets := PackedFloat32Array()   # where the fly pauses, resolved at spawn
+var _stops_ready := false
+var _stops_signature := ""                  # wait_mode + wait_points, to notice edits
 
 func _ready() -> void:
 	sprite.play("fly")
@@ -48,6 +50,9 @@ func _ready() -> void:
 		_snap_to_path()
 	_build_stop_offsets()
 	_start_wait_if_on_point()
+	# Editing the Path2D's curve should refresh the stops without a restart.
+	if path != null and path.curve != null and not path.curve.changed.is_connected(_on_curve_changed):
+		path.curve.changed.connect(_on_curve_changed)
 
 func _physics_process(delta: float) -> void:
 	if dead:
@@ -60,8 +65,8 @@ func _physics_process(delta: float) -> void:
 ## ---------------------------------------------------------------
 ## PATH: progress walks along the curve and the fly is placed at that point
 ## in world space every frame. The path is whatever Path2D you assigned in
-## the Inspector - edit its points freely, the fly adapts immediately
-## (the exact stop positions are resolved once, when it spawns).
+## the Inspector - edit its points freely, the fly adapts immediately (stop
+## positions refresh when the curve or the wait settings change).
 func _path_length() -> float:
 	if path == null or path.curve == null:
 		return 0.0
@@ -82,6 +87,11 @@ func _follow_path(delta: float) -> void:
 	var total := _path_length()
 	if total <= 0.0:
 		return  # no path (or an empty one): hover in place
+	# Stops are resolved at spawn, but a script hot-reload (or editing
+	# wait_mode/wait_points/the curve while the game runs) can leave them stale.
+	# Rebuild when that happens so the fly cannot silently glide past its stops.
+	if not _stops_ready or _stop_config_signature() != _stops_signature:
+		_build_stop_offsets()
 	if wait_left > 0.0:
 		wait_left -= delta
 		if wait_left > 0.0:
@@ -99,11 +109,17 @@ func _follow_path(delta: float) -> void:
 	_snap_to_path()
 
 ## Resolves `wait_mode`/`wait_points` into concrete offsets along the path.
-## Called once when the fly spawns (add/adjust stops, then run the scene).
+## Runs at spawn and again whenever the settings or the curve change.
 func _build_stop_offsets() -> void:
 	_stop_offsets.clear()
-	if wait_mode == 2 or path == null or path.curve == null:
-		return                      # "Never stop": empty list -> never waits
+	_stops_signature = _stop_config_signature()
+	_stops_ready = false
+	if path == null or path.curve == null:
+		return                      # retried by _follow_path once the path exists
+	_stops_ready = true
+	if wait_mode == 2:
+		wait_left = 0.0             # "Never stop": empty list -> never waits
+		return
 	var curve := path.curve
 	if wait_mode == 0:
 		for i in curve.get_point_count():
@@ -112,6 +128,18 @@ func _build_stop_offsets() -> void:
 		for idx in wait_points:
 			if idx >= 0 and idx < curve.get_point_count():
 				_stop_offsets.append(curve.get_closest_offset(curve.get_point_position(idx)))
+		if _stop_offsets.is_empty():
+			# "Stop only at listed points" with an empty/bad list would silently
+			# never stop. Fall back to every point and say so in the Output panel.
+			push_warning("Creepfly: 'Stop only at listed points' has no valid entries; using every path point instead.")
+			for i in curve.get_point_count():
+				_stop_offsets.append(curve.get_closest_offset(curve.get_point_position(i)))
+
+func _stop_config_signature() -> String:
+	return "%d|%s" % [wait_mode, str(wait_points)]
+
+func _on_curve_changed() -> void:
+	_build_stop_offsets()
 
 ## Finds the first stop point crossed between two progress values (checking
 ## every repeat of it when looping), snapped exactly onto it. -1 = none.
