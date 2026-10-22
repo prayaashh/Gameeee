@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://buloxfco1r84r"]
 
 [ext_resource type="Script" uid="uid://jg8ip6bkyltr" path="res://scripts/npc_scripts/npc.gd" id="1_nh2m4"]
+[ext_resource type="SpriteFrames" path="res://assets/Sprites/npcs/dionysus_frames.tres" id="2_frames"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rv78h"]
 size = Vector2(160.5, 64.5)
 
 [node name="NPC" type="Node2D" unique_id=1255174449]
 script = ExtResource("1_nh2m4")
+default_animation = "idle"
 
 [node name="InteractZone" type="Area2D" parent="." unique_id=744824699]
 collision_layer = 0
@@ -16,6 +18,9 @@ position = Vector2(3, -5)
 shape = SubResource("RectangleShape2D_rv78h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_frames")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="Prompt" type="Label" parent="." unique_id=764784531]
 z_index = 10

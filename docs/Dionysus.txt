@@ -1,0 +1,7 @@
+name: Dionysus
+
+Stage 0: (default stage)
+	play: idle
+	speak: "Oh, so you have come"
+	ask: "will you find my lantern?"
+	choices: "yes", "no"

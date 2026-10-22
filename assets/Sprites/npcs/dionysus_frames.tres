@@ -1,0 +1,166 @@
+[gd_resource type="SpriteFrames" load_steps=22 format=3]
+
+[ext_resource type="Texture2D" uid="uid://bgk5ynffvutvm" path="res://assets/Sprites/npcs/dionysus.png" id="1_sheet"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle"]
+atlas = ExtResource("1_sheet")
+region = Rect2(400, 900, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_talk0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(400, 300, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_talk1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(800, 300, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_talk2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1200, 300, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_talk3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1600, 300, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_talk4"]
+atlas = ExtResource("1_sheet")
+region = Rect2(2000, 300, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_talk5"]
+atlas = ExtResource("1_sheet")
+region = Rect2(2400, 300, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shake0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(400, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shake1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(800, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shake2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1200, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crumble0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(400, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crumble1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(800, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crumble2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1200, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crumble3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(1600, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crumble4"]
+atlas = ExtResource("1_sheet")
+region = Rect2(2000, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crumble5"]
+atlas = ExtResource("1_sheet")
+region = Rect2(2400, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crumble6"]
+atlas = ExtResource("1_sheet")
+region = Rect2(2800, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crumble7"]
+atlas = ExtResource("1_sheet")
+region = Rect2(3200, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crumble8"]
+atlas = ExtResource("1_sheet")
+region = Rect2(3600, 600, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crumble9"]
+atlas = ExtResource("1_sheet")
+region = Rect2(4000, 600, 400, 300)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_talk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_talk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_talk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_talk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_talk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_talk5")
+}],
+"loop": 1,
+"name": &"talk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shake0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shake1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shake2")
+}],
+"loop": 1,
+"name": &"shake",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crumble0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crumble1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crumble2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crumble3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crumble4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crumble5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crumble6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crumble7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crumble8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crumble9")
+}],
+"loop": 1,
+"name": &"crumble",
+"speed": 5.0
+}]

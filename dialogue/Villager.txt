@@ -1,0 +1,37 @@
+# Lantern quest villager - the NPC placed in game.tscn and npc_dionysus.tscn.
+# The speaker name comes from the NPC's "Name" field in the Inspector, because
+# this file has no "name:" line.
+# Full syntax: docs/NPC_DIALOGUE.md
+
+entry: flag found_lantern_done -> 4
+entry: flag found_lantern -> 3
+entry: flag found_lantern_declined -> 5
+entry: else -> 0
+
+Stage 0: (default stage - first conversation)
+	speak: "Hello, traveller."
+	speak: "I am jofeoifheifheofheof"
+	speak: "fehfshfuherfoheofh"
+	speak: "nice to meet you"
+	ask: "will you find my lantern"
+	choices: "yes" -> 1, "no" -> 2
+
+Stage 1: (player said yes)
+	speak: "thank you"
+	speak: "i shall meet you again"
+	set: found_lantern
+
+Stage 2: (player said no)
+	speak: "sad"
+	speak: ":(((((((((((((("
+	set: found_lantern_declined
+
+Stage 3: (quest accepted, not finished)
+	speak: "have you found it yet"
+
+Stage 4: (quest finished)
+	speak: "thank you traveller!"
+
+Stage 5: (player said no, then came back)
+	speak: "test decline_again_lines"
+	goto: 0

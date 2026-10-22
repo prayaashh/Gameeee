@@ -156,7 +156,9 @@ be spawned inside a wall).
 
 ## 7. NPCs and enemies
 
-- Instance `scenes/npc.tscn` under `NPCs/` — see the NPC section below.
+- Instance `scenes/npc.tscn` under `NPCs/`, then set **Dialogue File** to a text
+  file you wrote in Notepad (see `docs/NPC_DIALOGUE.md`). Give it a
+  **Sprite Frames** resource if it should be animated.
 - Instance `scenes/enemies/enemy.tscn` under `Enemies/`.
 
 ---
@@ -177,47 +179,54 @@ while you don't care about existing saves.
 
 ---
 
-## 9. NPC events — running your own code after a conversation
+## 9. NPC conversations — text files, not the Inspector
 
-Every NPC has an event hook at the bottom of `scripts/npc_scripts/npc.gd`:
+An NPC's lines, questions, stages, flags and animations all live in a plain-text
+file picked in its **Dialogue File** field. Write it in Notepad; full syntax is in
+`docs/NPC_DIALOGUE.md`. Example (`dialogue/Dionysus.txt`):
 
-```gdscript
-func after_interaction(outcome: StringName) -> void:
-	...
-	# --- put your own code below this line, guided by `outcome` ---
+```
+name: Dionysus
+
+entry: flag lantern_done -> 4
+entry: flag lantern_quest -> 3
+entry: else -> 0
+
+Stage 0: (default stage)
+	play: idle
+	speak: "Oh, so you have come"
+	ask: "will you find my lantern?"
+	choices: "yes" -> 1, "no" -> 2
+
+Stage 1:
+	play: talk
+	speak: "Then go. The cave beyond the castle swallows everything."
+	set: lantern_quest
 ```
 
-It runs **every time a conversation with that NPC ends**. The `outcome`
-argument tells you how it ended:
+`Stage 0` is the first-conversation default. `entry:` rules pick a different
+starting stage once flags are set (quest accepted, finished, declined…).
+Flags are stored in the save file, so quest state survives quitting.
 
-| outcome | meaning |
-|---|---|
-| `&"accepted"` | the player just accepted the quest (fires once per accept) |
-| `&"declined"` | the player just declined (can fire again if they refuse again) |
-| `&"completed"` | the quest-complete lines were shown — **fires only once ever** for that NPC, so it is safe for big one-shot events |
-| `&"repeat"` | in-progress chatter (`repeat_lines`) — fires every talk |
-| `&"react"` | reaction lines — fires every talk |
-| `&"ended"` | a plain conversation with no question |
-| `&"cancelled"` | the player pressed Esc mid-conversation |
+### Running your own code after a conversation
 
-Examples:
+Text, choices and flags need no code. For anything else (credits, doors,
+spawning), either override `after_interaction(outcome)` at the bottom of
+`scripts/npc_scripts/npc.gd`, or connect the `interaction_finished` signal in the
+Inspector. `outcome` is the id of the last stage that ran, or `cancelled` if the
+player pressed Esc.
 
 ```gdscript
 func after_interaction(outcome: StringName) -> void:
-	if outcome == &"completed":
-		GameState.add_credits(100)            # reward on turn-in
-		GameState.set_flag("gate_open")       # open something elsewhere
-	if outcome == &"accepted":
-		get_tree().call_group("doors", "open")
+	if outcome == &"4":                        # the "quest done" stage
+		GameState.add_credits(100)
+		GameState.set_flag("gate_open")
 ```
 
 Notes:
 
-- The `completed` once-guard is automatic: the save flag
-  `"<complete_flag>_event"` is written the first time, so re-talking (even
-  after reloading the game) never repeats the event.
-- Don't open a new Dialogue from this function — the conversation has just
-  closed. Change game state instead (credits, flags, spawning, doors…).
-- If you'd rather wire it up in the editor than edit code, the same event is
-  emitted as the signal `interaction_finished(outcome)` at the top of
-  `npc.gd` — select the NPC node and connect it in the Inspector.
+- Typos are reported in the **Output** panel when the NPC spawns: unknown
+  commands, choices/`goto`s pointing at stages that do not exist, and animation
+  names missing from the NPC's SpriteFrames. The game keeps running.
+- Don't open a new Dialogue from `after_interaction()` — the conversation has
+  just closed. Change game state instead.
