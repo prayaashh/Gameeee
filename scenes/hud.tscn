@@ -32,22 +32,9 @@ offset_right = -16.0
 offset_bottom = 52.0
 theme_override_constants/separation = 8
 
-[node name="HeartsFull" type="Label" parent="Row"]
-theme_override_colors/font_color = Color(0.93, 0.16, 0.16, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 24
-text = "♥♥♥♥♥"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HeartsEmpty" type="Label" parent="Row"]
-theme_override_colors/font_color = Color(0.42, 0.42, 0.42, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 24
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Hearts" type="HBoxContainer" parent="Row"]
+texture_filter = 1
+theme_override_constants/separation = 4
 
 [node name="Gap" type="Control" parent="Row"]
 custom_minimum_size = Vector2(16, 0)

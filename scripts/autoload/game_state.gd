@@ -23,6 +23,9 @@ var weapons: Array[String] = []
 ## Current mana (soul). Kept here because the player node is rebuilt on every
 ## room change; like pending_spawn it lives in memory only (not saved to disk).
 var mana := 0
+## Current hearts, same reason as mana: rooms rebuild the player, so the value
+## has to outlive the node. -1 = "not set yet" -> the next player spawns full.
+var health := -1
 var checkpoint := {}            # {id, scene, x, y} — {} means no checkpoint yet
 var death_spot := {}            # {scene, x, y, amount} — where credits were last lost
 
@@ -115,6 +118,7 @@ func has_checkpoint() -> bool:
 func respawn() -> void:
 	var target := MAIN_SCENE
 	pending_spawn = {}
+	health = -1                              # a fresh life starts with full hearts
 	if has_checkpoint():
 		var scene := str(checkpoint.get("scene", ""))
 		if ResourceLoader.exists(scene):

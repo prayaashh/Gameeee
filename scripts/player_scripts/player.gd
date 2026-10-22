@@ -48,8 +48,15 @@ signal mana_changed(current: int, maximum: int)
 
 func _ready() -> void:
 	attack_hitbox.monitoring = false
-	health = max_health
-	mana = clampi(GameState.mana, 0, max_mana)   # mana survives room changes
+	# Hearts and mana survive room changes: rooms hold their own player instance,
+	# so this node is rebuilt on every doorway. -1 means "no value yet" (boot /
+	# respawn) and starts the player at full health.
+	if GameState.health >= 0:
+		health = clampi(GameState.health, 0, max_health)
+	else:
+		health = max_health
+	GameState.health = health
+	mana = clampi(GameState.mana, 0, max_mana)
 	add_to_group("player")      # lets enemies find the player
 	_resolve_spawn()
 
@@ -159,7 +166,7 @@ func can_dash() -> bool:
 func take_damage(amount: int, from_position: Vector2) -> void:
 	if dead or (machine.current != null and machine.current.name == &"Hurt"):
 		return                  # dead, or brief invulnerability while hurt
-	health = max(health - amount, 0)
+	_set_health(health - amount, false)
 	hurt_dir = signf(global_position.x - from_position.x)
 	if health == 0:
 		die()
@@ -172,15 +179,21 @@ func take_damage(amount: int, from_position: Vector2) -> void:
 func heal_full() -> void:
 	if dead:
 		return
-	health = max_health
-	health_changed.emit(health, max_health)
+	_set_health(max_health)
 
 ## Restores a single heart. Used by the Heal state; see heal_full() for a bench.
 func heal(amount: int) -> void:
 	if dead or health >= max_health:
 		return
-	health = mini(health + amount, max_health)
-	health_changed.emit(health, max_health)
+	_set_health(health + amount)
+
+## Single place that writes hearts, so the persistent copy in GameState and the
+## HUD signal always stay in sync.
+func _set_health(value: int, emit := true) -> void:
+	health = clampi(value, 0, max_health)
+	GameState.health = health
+	if emit:
+		health_changed.emit(health, max_health)
 
 # --- mana ---------------------------------------------------------------------
 
@@ -210,8 +223,7 @@ func die() -> void:
 	if dead:
 		return
 	dead = true
-	health = 0
-	health_changed.emit(0, max_health)
+	_set_health(0)
 	if Dialogue.active:
 		Dialogue.close()               # release the Talk state before we freeze
 	machine.set_physics_process(false)
