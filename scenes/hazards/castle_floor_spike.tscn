@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://cxkv5rjnqm8yh"]
+
+[ext_resource type="Script" uid="uid://b7h8k2m4n6p9q" path="res://scripts/hazards/castle_floor_spike.gd" id="1_spike"]
+[ext_resource type="Texture2D" uid="uid://cs1hsxorh4ub" path="res://assets/hazards/castle_spike.png" id="2_sheet"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spike"]
+size = Vector2(32, 16)
+
+[sub_resource type="AtlasTexture" id="atlas_up_1"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="atlas_up_2"]
+atlas = ExtResource("2_sheet")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="atlas_up_3"]
+atlas = ExtResource("2_sheet")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="atlas_up_4"]
+atlas = ExtResource("2_sheet")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="atlas_up_5"]
+atlas = ExtResource("2_sheet")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="atlas_down_1"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="atlas_down_2"]
+atlas = ExtResource("2_sheet")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="atlas_down_3"]
+atlas = ExtResource("2_sheet")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="atlas_down_4"]
+atlas = ExtResource("2_sheet")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="atlas_down_5"]
+atlas = ExtResource("2_sheet")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_spike"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("atlas_down_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_down_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_down_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_down_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_down_5")
+}],
+"loop": 0,
+"name": &"down",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("atlas_up_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_up_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_up_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_up_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("atlas_up_5")
+}],
+"loop": 0,
+"name": &"up",
+"speed": 12.0
+}]
+
+[node name="CastleFloorSpike" type="Area2D" unique_id=123456789]
+collision_layer = 16
+collision_mask = 1
+script = ExtResource("1_spike")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=987654321]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_spike")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=111222333]
+sprite_frames = SubResource("SpriteFrames_spike")
+animation = &"down"
+autoplay = "down"
+
+[node name="CycleTimer" type="Timer" parent="." unique_id=444555666]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="CycleTimer" to="." method="_on_cycle_timer_timeout"]
