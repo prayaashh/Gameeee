@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Gameeee"
-run/main_scene="uid://e3mjp80eiv4e"
+run/main_scene="uid://cy2tmnycn33bk"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

@@ -1,90 +1,110 @@
 extends Area2D
 
-## Castle floor spike. It waits hidden in the floor, rises, stays extended for
-## `up_timer` seconds, then retracts. While extended it takes `damage` hearts
-## from a player standing on or above it, at most once every
-## `damage_cooldown` seconds.
+## Castle floor spike. It hides in the floor and only strikes when the player
+## stands on it: the blades shoot up, take `damage` hearts once, then retract.
+## After `strike_delay` seconds it strikes again, but only if the player is
+## still standing there.
 
 @export_group("Damage")
-## Hearts removed per hit. 1 = one heart.
+## Hearts removed by one strike. 1 = one heart.
 @export var damage: int = 1
-## Seconds before it can hurt the player again while they stay on it.
-@export var damage_cooldown: float = 1.0
 
 @export_group("Cycle")
-## How long the spike stays fully extended before going back down.
+## Seconds the blades stay extended before they go back in.
 @export var up_timer: float = 1.5
-## How long it stays hidden in the floor before rising again.
-@export var down_duration: float = 2.0
+## Seconds to wait after the blades retract before the next strike. The spike
+## only strikes again if the player is still standing on it.
+@export var strike_delay: float = 2.0
+
+enum State { IDLE, RISING, EXTENDED, RETRACTING, WAITING }
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var stay_up_timer: Timer = $StayUpTimer
 
+var _state: int = State.IDLE
 var _dangerous := false
-var _damage_cooldown_left := 0.0
+var _hit_this_strike := false
+var _wait_left := 0.0
 
 func _ready() -> void:
-	_show_idle()
-	_start_down_cycle()
+	# The hitbox stays on at all times. Besides hurting the player it is how the
+	# spike notices that someone is standing on it, so it cannot be disabled
+	# while the blades are down.
+	collision_shape.disabled = false
+	sprite.animation_finished.connect(_on_animation_finished)
+	_go_idle()
 
 func _physics_process(delta: float) -> void:
-	_damage_cooldown_left = maxf(_damage_cooldown_left - delta, 0.0)
-	if _dangerous and _damage_cooldown_left <= 0.0:
-		_damage_overlapping_players()
+	match _state:
+		State.IDLE:
+			# Never rise on its own: the player has to be on the tile.
+			if _player_on_spike() != null:
+				_strike()
+		State.WAITING:
+			_wait_left -= delta
+			if _wait_left > 0.0:
+				return
+			if _player_on_spike() != null:
+				_strike()
+			else:
+				_go_idle()
 
-func _show_idle() -> void:
-	# Fully retracted frame; the hitbox is off in this state.
+func _go_idle() -> void:
+	_state = State.IDLE
 	_dangerous = false
-	collision_shape.disabled = true
+	_hit_this_strike = false
 	sprite.play("idle")
 
-func _start_down_cycle() -> void:
-	await get_tree().create_timer(down_duration).timeout
-	if not is_inside_tree():
-		return
-	_rise()
-
-func _rise() -> void:
+func _strike() -> void:
+	_state = State.RISING
+	_hit_this_strike = false
 	sprite.play("up")
-	await sprite.animation_finished
-	if not is_inside_tree():
-		return
-	sprite.play("extended")
-	_dangerous = true
-	collision_shape.disabled = false
-	_damage_cooldown_left = 0.0
-	_damage_overlapping_players()   # hurt anyone already standing there
-	stay_up_timer.start(up_timer)
 
-func _lower() -> void:
-	_dangerous = false
-	collision_shape.disabled = true
-	sprite.play("down")
-	await sprite.animation_finished
-	if not is_inside_tree():
-		return
-	sprite.play("idle")
-	_start_down_cycle()
+func _on_animation_finished() -> void:
+	match _state:
+		State.RISING:
+			if sprite.animation != &"up":
+				return
+			_state = State.EXTENDED
+			_dangerous = true
+			sprite.play("extended")
+			if _player_on_spike() != null:
+				_damage_once()
+			stay_up_timer.start(up_timer)
+		State.RETRACTING:
+			if sprite.animation != &"down":
+				return
+			_dangerous = false
+			_hit_this_strike = false
+			sprite.play("idle")
+			_state = State.WAITING
+			_wait_left = strike_delay
 
 func _on_stay_up_timer_timeout() -> void:
-	_lower()
+	if _state != State.EXTENDED:
+		return
+	_dangerous = false
+	_state = State.RETRACTING
+	sprite.play("down")
 
 func _on_body_entered(body: Node2D) -> void:
+	# Walking into blades that are already up hurts, but never twice.
 	if body.is_in_group("player"):
-		_damage(body)
+		_damage_once()
 
-func _damage_overlapping_players() -> void:
+func _damage_once() -> void:
+	if not _dangerous or _hit_this_strike:
+		return
+	var player := _player_on_spike()
+	if player == null:
+		return
+	_hit_this_strike = true
+	player.take_damage(damage, global_position)
+
+func _player_on_spike() -> Node2D:
 	for body in get_overlapping_bodies():
-		if body.is_in_group("player"):
-			_damage(body)
-			if _damage_cooldown_left > 0.0:
-				break
-
-func _damage(body: Node) -> void:
-	if not _dangerous or _damage_cooldown_left > 0.0:
-		return
-	if not body.has_method("take_damage"):
-		return
-	body.take_damage(damage, global_position)
-	_damage_cooldown_left = damage_cooldown
+		var node := body as Node2D
+		if node != null and node.is_in_group("player"):
+			return node
+	return null

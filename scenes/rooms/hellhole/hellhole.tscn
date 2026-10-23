@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://c2fdludqyfiw6" path="res://scripts/room.gd" id="1_evemh"]
 [ext_resource type="PackedScene" uid="uid://ce7eb4e2ufp4f" path="res://scenes/player.tscn" id="2_0lsv1"]
-[ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="3_h1obj"]
+[ext_resource type="PackedScene" uid="uid://coxm3txwhggbr" path="res://scenes/hud.tscn" id="3_h1obj"]
 [ext_resource type="Texture2D" uid="uid://c2iftq8lawlap" path="res://assets/backgrounds/hellhole/HEllHOlE_copy_flattened.png" id="4_oixbl"]
 [ext_resource type="Texture2D" uid="uid://sle5ayq7b878" path="res://assets/backgrounds/hellhole/HEllHOlE_foreground_copy_flattened.png" id="5_l7omf"]
+[ext_resource type="PackedScene" uid="uid://dvdrq7hdiemxe" path="res://scenes/doorway.tscn" id="6_dn3e2"]
 [ext_resource type="PackedScene" uid="uid://buloxfco1r84r" path="res://scenes/npc.tscn" id="6_l7omf"]
 [ext_resource type="Texture2D" uid="uid://bgk5ynffvutvm" path="res://assets/Sprites/npcs/dionysus.png" id="7_0b65c"]
 
@@ -222,7 +223,7 @@ polygon = PackedVector2Array(-644, -743, -554, -733, -462, -734, -422, -736, -36
 polygon = PackedVector2Array(149, -731, 339, -722, 409, -739, 523, -729, 750, -717, 793, -979, 750, -592, 743, -159, 632, -97, 480, -136, 284, -375, 182, -471, 183, -578, 218, -564, 150, -659, 226, -659, 253, -681, 224, -712)
 
 [node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Ground" unique_id=2056739720]
-polygon = PackedVector2Array(-749, 939, -663, 923, -542, 934, -435, 966, -316, 965, -100, 972, 148, 976, 330, 957, 581, 942, 700, 895, 749, 884, 786, 707, 750, 1120, -748, 1119, -798, 613)
+polygon = PackedVector2Array(-749, 939, -663, 923, -542, 934, -435, 966, -316, 965, -100, 972, 148, 976, 330, 957, 581, 942, 700, 895, 749, 884, 912, 826, 750, 1120, -748, 1119, -798, 613)
 
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Ground" unique_id=2048290350]
 polygon = PackedVector2Array(-707, 80, -600, 74, -540, 74, -511, 94, -458, 136, -410, 126, -337, 172, -255, 165, -209, 201, -227, 261, -290, 329, -363, 339, -544, 301, -642, 334, -751, 303, -751, 11)
@@ -230,12 +231,15 @@ polygon = PackedVector2Array(-707, 80, -600, 74, -540, 74, -511, 94, -458, 136, 
 [node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Ground" unique_id=504895185]
 polygon = PackedVector2Array(156, 239, 403, -28, 569, -3, 665, -116, 747, -164, 742, 340, 412, 329, 345, 370, 256, 336)
 
+[node name="Doorway" parent="Ground" unique_id=1680576452 instance=ExtResource("6_dn3e2")]
+position = Vector2(780, 873)
+target_scene = "uid://c44omavotwfww"
+
 [node name="NPC" parent="." unique_id=1255174449 instance=ExtResource("6_l7omf")]
 z_index = -15
 position = Vector2(-31, 810)
 npc_name = "Dionysus"
 dialogue_file = "res://dialogue/Dionysus.txt"
 sprite_frames = SubResource("SpriteFrames_7i6ip")
-default_animation = "idle"
-interact_size = Vector2(160.5, 200)
-interact_offset = Vector2(3, 15)
+interact_size = Vector2(160.5, 250)
+interact_offset = Vector2(3, 10)
