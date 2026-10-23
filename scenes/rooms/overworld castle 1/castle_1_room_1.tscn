@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cm6p1ypj88car" path="res://scenes/npc/npc_dionysus.tscn" id="7_appve"]
 [ext_resource type="Texture2D" uid="uid://dr4akw6nokm46" path="res://assets/tiles/castle1_hallway/cavetiles.png" id="7_vcoy8"]
 [ext_resource type="PackedScene" uid="uid://daldbasqpdx7a" path="res://scenes/enemies/creeps/creep_groot.tscn" id="8_appve"]
+[ext_resource type="PackedScene" uid="uid://cxkv5rjnqm8yh" path="res://scenes/hazards/castle_floor_spike.tscn" id="10_yaupk"]
 
 [sub_resource type="Gradient" id="Gradient_xf1n4"]
 offsets = PackedFloat32Array(0, 0.72279793, 0.738342)
@@ -44,7 +45,7 @@ top_limit = 0
 bottom_limit = 640
 
 [node name="player" parent="." index="0" unique_id=45254567]
-position = Vector2(3000, 455)
+position = Vector2(1072, 461)
 scale = Vector2(1.2, 1.2)
 
 [node name="Spawn" parent="Entrances" parent_id_path=PackedInt32Array(1834872771) index="0" unique_id=1573731701]
@@ -262,6 +263,7 @@ collision_layer = 2
 collision_mask = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Backgrounds/Staircase/StaticBody2D" index="0" unique_id=615231680]
+polygon = PackedVector2Array(1820.5, 114, 1821, 124, 1846.5, 124.5, 1847, 137.5, 1867.5, 137.5, 1867, 147.5, 1893, 148, 1893.5, 160.5, 1912.5, 160.5, 1912.5, 170, 1924, 171, 1924, 173, 1938, 173, 1938, 184.5, 1959, 183.5, 1959.5, 194, 1970, 194, 1970, 196, 1984.5, 196, 1985, 205.5, 2006, 205.5, 2005.5, 214.5, 2017, 215, 2017.5, 217.5, 2031, 217, 2031, 229, 2051, 229, 2051, 238, 2062, 238, 2062.5, 240.5, 2075.5, 240.5, 2075.5, 253.5, 2082.5, 253, 2081.5, 358, 1766.5, 233, 1766.5, 100, 1799.5, 103, 1800, 114.5)
 
 [node name="TileMap" type="TileMap" parent="." index="8" unique_id=495764570]
 position = Vector2(0, 40)
@@ -276,3 +278,6 @@ npc_name = "Dionysus"
 
 [node name="CreepGroot" parent="." index="10" unique_id=113503454 instance=ExtResource("8_appve")]
 position = Vector2(-201, 463)
+
+[node name="CastleFloorSpike" parent="." index="11" unique_id=123456789 instance=ExtResource("10_yaupk")]
+position = Vector2(1683, 616)

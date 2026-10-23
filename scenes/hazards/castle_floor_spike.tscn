@@ -1,68 +1,76 @@
 [gd_scene format=3 uid="uid://cxkv5rjnqm8yh"]
 
-[ext_resource type="Script" uid="uid://b7h8k2m4n6p9q" path="res://scripts/hazards/castle_floor_spike.gd" id="1_spike"]
+[ext_resource type="Script" uid="uid://brurcxcdhrogn" path="res://scripts/hazards/castle_floor_spike.gd" id="1_spike"]
 [ext_resource type="Texture2D" uid="uid://cs1hsxorh4ub" path="res://assets/hazards/castle_spike.png" id="2_sheet"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_spike"]
-size = Vector2(32, 16)
+size = Vector2(56, 36)
 
-[sub_resource type="AtlasTexture" id="atlas_up_1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge4o1"]
 atlas = ExtResource("2_sheet")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(0, 100, 64, 100)
 
-[sub_resource type="AtlasTexture" id="atlas_up_2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sucqg"]
 atlas = ExtResource("2_sheet")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(64, 100, 64, 100)
 
-[sub_resource type="AtlasTexture" id="atlas_up_3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_anbdr"]
 atlas = ExtResource("2_sheet")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(128, 100, 64, 100)
 
-[sub_resource type="AtlasTexture" id="atlas_up_4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjmkm"]
 atlas = ExtResource("2_sheet")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(192, 100, 64, 100)
 
-[sub_resource type="AtlasTexture" id="atlas_up_5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_551ni"]
 atlas = ExtResource("2_sheet")
-region = Rect2(128, 0, 32, 32)
+region = Rect2(256, 100, 64, 100)
 
-[sub_resource type="AtlasTexture" id="atlas_down_1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_26ybw"]
 atlas = ExtResource("2_sheet")
-region = Rect2(0, 32, 32, 32)
+region = Rect2(256, 0, 64, 100)
 
-[sub_resource type="AtlasTexture" id="atlas_down_2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y72v"]
 atlas = ExtResource("2_sheet")
-region = Rect2(32, 32, 32, 32)
+region = Rect2(0, 0, 64, 100)
 
-[sub_resource type="AtlasTexture" id="atlas_down_3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_r15vd"]
 atlas = ExtResource("2_sheet")
-region = Rect2(64, 32, 32, 32)
+region = Rect2(0, 0, 64, 100)
 
-[sub_resource type="AtlasTexture" id="atlas_down_4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_72cvm"]
 atlas = ExtResource("2_sheet")
-region = Rect2(96, 32, 32, 32)
+region = Rect2(64, 0, 64, 100)
 
-[sub_resource type="AtlasTexture" id="atlas_down_5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_12qes"]
 atlas = ExtResource("2_sheet")
-region = Rect2(128, 32, 32, 32)
+region = Rect2(128, 0, 64, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05l0s"]
+atlas = ExtResource("2_sheet")
+region = Rect2(192, 0, 64, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qc4b"]
+atlas = ExtResource("2_sheet")
+region = Rect2(256, 0, 64, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_spike"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("atlas_down_1")
+"texture": SubResource("AtlasTexture_ge4o1")
 }, {
 "duration": 1.0,
-"texture": SubResource("atlas_down_2")
+"texture": SubResource("AtlasTexture_sucqg")
 }, {
 "duration": 1.0,
-"texture": SubResource("atlas_down_3")
+"texture": SubResource("AtlasTexture_anbdr")
 }, {
 "duration": 1.0,
-"texture": SubResource("atlas_down_4")
+"texture": SubResource("AtlasTexture_fjmkm")
 }, {
 "duration": 1.0,
-"texture": SubResource("atlas_down_5")
+"texture": SubResource("AtlasTexture_551ni")
 }],
 "loop": 0,
 "name": &"down",
@@ -70,19 +78,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("atlas_up_1")
+"texture": SubResource("AtlasTexture_26ybw")
+}],
+"loop": 1,
+"name": &"extended",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y72v")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r15vd")
 }, {
 "duration": 1.0,
-"texture": SubResource("atlas_up_2")
+"texture": SubResource("AtlasTexture_72cvm")
 }, {
 "duration": 1.0,
-"texture": SubResource("atlas_up_3")
+"texture": SubResource("AtlasTexture_12qes")
 }, {
 "duration": 1.0,
-"texture": SubResource("atlas_up_4")
+"texture": SubResource("AtlasTexture_05l0s")
 }, {
 "duration": 1.0,
-"texture": SubResource("atlas_up_5")
+"texture": SubResource("AtlasTexture_3qc4b")
 }],
 "loop": 0,
 "name": &"up",
@@ -90,22 +114,24 @@ animations = [{
 }]
 
 [node name="CastleFloorSpike" type="Area2D" unique_id=123456789]
+scale = Vector2(1.5, 1.5)
 collision_layer = 16
 collision_mask = 1
 script = ExtResource("1_spike")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=987654321]
-position = Vector2(0, -8)
+position = Vector2(0, -82)
 shape = SubResource("RectangleShape2D_spike")
 disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=111222333]
+position = Vector2(0, -50)
 sprite_frames = SubResource("SpriteFrames_spike")
-animation = &"down"
-autoplay = "down"
+animation = &"idle"
+autoplay = "idle"
 
-[node name="CycleTimer" type="Timer" parent="." unique_id=444555666]
+[node name="StayUpTimer" type="Timer" parent="." unique_id=777888999]
 one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="CycleTimer" to="." method="_on_cycle_timer_timeout"]
+[connection signal="timeout" from="StayUpTimer" to="." method="_on_stay_up_timer_timeout"]
