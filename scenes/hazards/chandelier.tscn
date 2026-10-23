@@ -1,7 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b1e7dwhljvda2"]
 
-[ext_resource type="Script" path="res://scripts/hazards/chandelier.gd" id="1_chandelier"]
-[ext_resource type="SpriteFrames" path="res://assets/hazards/chandelier_frames.tres" id="2_frames"]
+[ext_resource type="Script" uid="uid://dromqtwu7p7gq" path="res://scripts/hazards/chandelier.gd" id="1_chandelier"]
+[ext_resource type="SpriteFrames" uid="uid://2q2t44t2u2k1" path="res://assets/hazards/chandelier_frames.tres" id="2_frames"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_trigger"]
 size = Vector2(96, 500)
@@ -9,27 +9,28 @@ size = Vector2(96, 500)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_impact"]
 size = Vector2(96, 74)
 
-[node name="Chandelier" type="Node2D"]
+[node name="Chandelier" type="Node2D" unique_id=1856499432]
+z_index = -5
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_chandelier")
+fall_speed = 1000.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-offset = Vector2(0, -74)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=908840218]
 sprite_frames = ExtResource("2_frames")
 animation = &"hanging"
 autoplay = "hanging"
+offset = Vector2(0, -74)
 
-[node name="TriggerZone" type="Area2D" parent="."]
+[node name="TriggerZone" type="Area2D" parent="." unique_id=1812369355]
 collision_layer = 0
-collision_mask = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerZone" unique_id=961595423]
 position = Vector2(0, 250)
 shape = SubResource("RectangleShape2D_trigger")
 
-[node name="ImpactZone" type="Area2D" parent="."]
+[node name="ImpactZone" type="Area2D" parent="." unique_id=1607411806]
 collision_layer = 0
-collision_mask = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactZone" unique_id=1668727846]
 position = Vector2(0, -37)
 shape = SubResource("RectangleShape2D_impact")

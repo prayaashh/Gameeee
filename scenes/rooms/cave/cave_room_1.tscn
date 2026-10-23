@@ -7,66 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://cnbsq6v0ud785" path="res://assets/backgrounds/cavebg(Layer 3) _0001.png" id="3_m4vpo"]
 [ext_resource type="Texture2D" uid="uid://b8ibgnywwmm1v" path="res://assets/backgrounds/cavebg(Layer 4) _0001.png" id="4_7w5ou"]
 [ext_resource type="Texture2D" uid="uid://m8y51fvytswt" path="res://assets/backgrounds/cavebg(Layer 4 (copy)) _0001.png" id="5_58r6w"]
-[ext_resource type="Texture2D" uid="uid://cp3oabrd13ix6" path="res://assets/tiles/TILE .png" id="6_58r6w"]
-[ext_resource type="Texture2D" uid="uid://d0v2d3cxmoo2n" path="res://assets/tiles/tiles.png" id="7_k7fkc"]
-[ext_resource type="Texture2D" uid="uid://bia5b0igd3ase" path="res://assets/tiles/underground castel tiles.png" id="8_q0p6a"]
-[ext_resource type="Texture2D" uid="uid://ddosyyv6vmlwc" path="res://assets/tiles/underground soil.png" id="9_cswbh"]
+[ext_resource type="PackedScene" uid="uid://d0e1061bis1fb" path="res://scenes/deathbox.tscn" id="11_cswbh"]
 [ext_resource type="PackedScene" uid="uid://daldbasqpdx7a" path="res://scenes/enemies/creeps/creep_groot.tscn" id="11_q0p6a"]
 [ext_resource type="PackedScene" uid="uid://tm3hw6mclquf" path="res://scenes/enemies/creeps/creepfly.tscn" id="12_cswbh"]
 [ext_resource type="Texture2D" uid="uid://dctvxv30wiao6" path="res://assets/tiles/cave tile.png" id="13_feovi"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_feovi"]
-texture = ExtResource("6_58r6w")
-texture_region_size = Vector2i(48, 48)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(1.6934242, -3.3868446, 24, -1.1289463, 24, 24, 2.2578964, 24)
-1:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8uga1"]
-texture = ExtResource("7_k7fkc")
-texture_region_size = Vector2i(48, 48)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
-0:1/0 = 0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fyvhv"]
-texture = ExtResource("8_q0p6a")
-texture_region_size = Vector2i(48, 48)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-0:3/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ti1ai"]
-texture = ExtResource("9_cswbh")
-texture_region_size = Vector2i(48, 48)
-0:0/0 = 0
-1:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_hb01v"]
-tile_size = Vector2i(48, 48)
-physics_layer_0/collision_layer = 2
-physics_layer_0/collision_mask = 2
-sources/0 = SubResource("TileSetAtlasSource_feovi")
-sources/1 = SubResource("TileSetAtlasSource_8uga1")
-sources/2 = SubResource("TileSetAtlasSource_fyvhv")
-sources/3 = SubResource("TileSetAtlasSource_ti1ai")
 
 [sub_resource type="Curve2D" id="Curve2D_cswbh"]
 _data = {
@@ -148,6 +92,9 @@ physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 7
 sources/2 = SubResource("TileSetAtlasSource_lwclu")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6i2nw"]
+distance = 54.0
+
 [node name="CaveRoom1" unique_id=1967681378 instance=ExtResource("1_attfo")]
 script = ExtResource("2_8uga1")
 top_limit = -320
@@ -202,15 +149,10 @@ repeat_times = 4
 scale = Vector2(2, 2)
 texture = ExtResource("5_58r6w")
 
-[node name="TileMap2" type="TileMap" parent="." index="8" unique_id=1417123147]
-tile_set = SubResource("TileSet_hb01v")
-rendering_quadrant_size = 2
-format = 2
-
-[node name="Creeps" type="Node" parent="." index="9" unique_id=1183657791]
+[node name="Creeps" type="Node" parent="." index="8" unique_id=1183657791]
 
 [node name="CreepGroot" parent="Creeps" index="0" unique_id=113503454 instance=ExtResource("11_q0p6a")]
-position = Vector2(-707, 66)
+position = Vector2(-588, 394)
 
 [node name="Creepfly" parent="Creeps" index="1" unique_id=338401225 node_paths=PackedStringArray("path") instance=ExtResource("12_cswbh")]
 path = NodePath("../../Paths/Path2D")
@@ -218,14 +160,21 @@ wait_time_min = 2.0
 wait_time_max = 4.0
 health = 2
 
-[node name="Paths" type="Node" parent="." index="10" unique_id=385556182]
+[node name="Paths" type="Node" parent="." index="9" unique_id=385556182]
 
 [node name="Path2D" type="Path2D" parent="Paths" index="0" unique_id=338342107]
 position = Vector2(-0.00024414063, 322.33163)
 scale = Vector2(1, 0.9234694)
 curve = SubResource("Curve2D_cswbh")
 
-[node name="TileMap" type="TileMap" parent="." index="11" unique_id=2104765009]
+[node name="TileMap" type="TileMap" parent="." index="10" unique_id=2104765009]
 tile_set = SubResource("TileSet_ruop8")
 format = 2
 layer_0/tile_data = PackedInt32Array(524281, 65538, 0, 524282, 131074, 0, 524283, 65538, 0, 524284, 65538, 0, 524285, 131074, 0, 524286, 131074, 0, 524287, 131074, 0, 458752, 65538, 0, 458753, 196610, 0, 458754, 65538, 0, 458755, 196610, 0, 458756, 196610, 0, 458757, 196610, 0, 458758, 196610, 0, 458759, 65538, 0, 458760, 65538, 0, 458761, 65538, 0, 458762, 131074, 0, 458763, 65538, 0, 458764, 131074, 0, 458765, 131074, 0, 524269, 65538, 0, 524272, 65538, 0, 524275, 196610, 0, 524270, 196610, 0, 524273, 196610, 0, 524274, 131074, 0, 524277, 131074, 0, 524278, 65538, 0, 524279, 196610, 0, 524276, 196610, 0, 524271, 65538, 0, 524280, 131074, 0, 458767, 65538, 0, 458768, 131074, 0, 458766, 196610, 0, 458771, 196610, 0, 458769, 131074, 0, 458770, 131074, 0, 524302, 131074, 2, 524301, 65538, 2, 524300, 65538, 2, 524299, 65538, 2, 524298, 196610, 2, 524297, 196610, 2, 524296, 196610, 2, 524295, 196610, 2, 524294, 196610, 2, 524293, 196610, 2, 524292, 65538, 2, 524291, 65538, 2, 524290, 131074, 2, 524289, 131074, 2, 524303, 196610, 2, 524304, 65538, 2, 524305, 196610, 2, 589805, 196610, 2, 589806, 196610, 2, 589807, 131074, 2, 589808, 65538, 2, 589809, 196610, 2, 589810, 65538, 2, 589811, 131074, 2, 589812, 65538, 2, 589813, 131074, 2, 589814, 65538, 2, 589815, 131074, 2, 589816, 196610, 2, 589818, 65538, 2, 589819, 196610, 2, 589820, 131074, 2, 589821, 131074, 2, 589822, 65538, 2, 589823, 196610, 2, 524288, 131074, 2, 589817, 131074, 2, 589838, 65538, 4, 589837, 65538, 4, 589836, 65538, 4, 589835, 65538, 4, 589834, 65538, 4, 589833, 65538, 4, 589832, 65538, 4, 589831, 65538, 4, 589830, 65538, 4, 655341, 65538, 4, 655342, 65538, 4, 655343, 65538, 4, 655344, 65538, 4, 655345, 65538, 4, 655346, 65538, 4, 655347, 65538, 4, 655348, 65538, 4, 655349, 65538, 4, 655350, 65538, 4, 655351, 65538, 4, 655352, 65538, 4, 655353, 65538, 4, 655354, 65538, 4, 655355, 65538, 4, 655356, 65538, 4, 655357, 65538, 4, 655358, 65538, 4, 655359, 65538, 4, 589824, 65538, 4, 589825, 65538, 4, 589826, 65538, 4, 589827, 65538, 4, 589828, 65538, 4, 589829, 65538, 4, 589839, 65538, 4, 589840, 65538, 4, 589841, 65538, 4, 589842, 65538, 4, 589843, 65538, 4, 720877, 65538, 6, 720878, 65538, 6, 720879, 65538, 6, 720880, 65538, 6, 720881, 65538, 6, 720882, 65538, 6, 720883, 65538, 6, 720884, 65538, 6, 720885, 65538, 6, 720886, 65538, 6, 720887, 65538, 6, 720888, 65538, 6, 720889, 65538, 6, 720890, 65538, 6, 720891, 65538, 6, 720892, 65538, 6, 720893, 65538, 6, 720894, 65538, 6, 720895, 65538, 6, 655360, 65538, 6, 655361, 65538, 6, 655362, 65538, 6, 655363, 65538, 6, 655364, 65538, 6, 655365, 65538, 6, 655366, 65538, 6, 655367, 65538, 6, 655368, 65538, 6, 655369, 65538, 6, 655370, 65538, 6, 655371, 65538, 6, 655372, 65538, 6, 655373, 65538, 6, 655374, 65538, 6, 655375, 65538, 6, 655376, 65538, 6, 655377, 65538, 6, 655378, 65538, 6, 655379, 65538, 6, 786413, 65538, 6, 786414, 65538, 6, 786415, 65538, 6, 786416, 65538, 6, 786417, 65538, 6, 786418, 65538, 6, 786419, 65538, 6, 786420, 65538, 6, 786421, 65538, 6, 786422, 65538, 6, 786423, 65538, 6, 786424, 65538, 6, 786425, 65538, 6, 786426, 65538, 6, 786427, 65538, 6, 786428, 65538, 6, 786429, 65538, 6, 786430, 65538, 6, 786431, 65538, 6, 720896, 65538, 6, 720897, 65538, 6, 720898, 65538, 6, 720899, 65538, 6, 720900, 65538, 6, 720901, 65538, 6, 720902, 65538, 6, 720903, 65538, 6, 720904, 65538, 6, 720905, 65538, 6, 720906, 65538, 6, 720907, 65538, 6, 720908, 65538, 6, 720909, 65538, 6, 720910, 65538, 6, 720911, 65538, 6, 720912, 65538, 6, 720913, 65538, 6, 720914, 65538, 6, 720915, 65538, 6, 524308, 131074, 9, 589844, 262146, 9, 655380, 393218, 9, 720916, 393218, 9, 458772, 131074, 1, 524306, 131074, 2, 524307, 196610, 2, 589850, 65538, 8, 589849, 65538, 7, 589851, 131074, 8, 589852, 327682, 8, 524317, 131074, 7, 524314, 131074, 2, 524315, 131074, 2, 524316, 65538, 3, 524313, 65538, 3, 524312, 131074, 8, 524311, 65538, 7, 458776, 131074, 2, 458777, 196610, 2, 458778, 196610, 2, 458779, 131074, 2, 458780, 65538, 2, 458775, 65538, 9, 393240, 65538, 0, 393241, 131074, 0, 393242, 65538, 0, 393243, 131074, 0, 327708, 65538, 1, 393239, 65538, 1, 393244, 65538, 2, 393246, 65538, 2, 393245, 196610, 2, 458781, 196610, 2, 458782, 196610, 2, 327709, 196610, 0, 327710, 131074, 0, 327711, 196610, 0, 327712, 131074, 1, 393248, 131074, 9, 458784, 131074, 9, 524319, 65538, 8, 524320, 131074, 7, 524318, 65538, 7, 458783, 131074, 3, 393247, 131074, 2)
+
+[node name="deathbox" parent="." index="11" unique_id=2128315171 instance=ExtResource("11_cswbh")]
+position = Vector2(425, 868)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="deathbox" index="0" unique_id=503295335]
+shape = SubResource("WorldBoundaryShape2D_6i2nw")

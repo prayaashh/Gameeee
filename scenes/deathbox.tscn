@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://d0e1061bis1fb"]
+
+[ext_resource type="Script" uid="uid://btw28seqqui1d" path="res://scripts/deathbox.gd" id="1_qrl6l"]
+
+[node name="deathbox" type="Area2D" unique_id=2128315171]
+collision_mask = 7
+script = ExtResource("1_qrl6l")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

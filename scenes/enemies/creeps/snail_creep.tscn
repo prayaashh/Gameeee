@@ -139,6 +139,7 @@ radius = 22.472204
 size = Vector2(36, 25)
 
 [node name="snailCreep" type="CharacterBody2D" unique_id=579882446]
+scale = Vector2(1.2, 1.2)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_snail")
@@ -147,6 +148,7 @@ hit_at = 0.866
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1160313840]
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_snail")
+animation = &"attack"
 autoplay = "move"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=546126505]

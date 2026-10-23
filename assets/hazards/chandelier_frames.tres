@@ -1,14 +1,6 @@
-[gd_resource type="SpriteFrames" format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://2q2t44t2u2k1"]
 
-[ext_resource type="Texture2D" path="res://assets/hazards/chandelier.png" id="1_sheet"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hanging"]
-atlas = ExtResource("1_sheet")
-region = Rect2(0, 0, 100, 150)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fall"]
-atlas = ExtResource("1_sheet")
-region = Rect2(0, 150, 100, 150)
+[ext_resource type="Texture2D" uid="uid://boj1mn17grbyx" path="res://assets/hazards/chandelier.png" id="1_sheet"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_crash0"]
 atlas = ExtResource("1_sheet")
@@ -42,24 +34,16 @@ region = Rect2(600, 300, 100, 150)
 atlas = ExtResource("1_sheet")
 region = Rect2(0, 450, 100, 150)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fall"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 150, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hanging"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 0, 100, 150)
+
 [resource]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hanging")
-}],
-"loop": 1,
-"name": &"hanging",
-"speed": 1.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fall")
-}],
-"loop": 1,
-"name": &"fall",
-"speed": 1.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_crash0")
@@ -92,5 +76,21 @@ animations = [{
 }],
 "loop": 0,
 "name": &"crashed",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fall")
+}],
+"loop": 1,
+"name": &"fall",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hanging")
+}],
+"loop": 1,
+"name": &"hanging",
 "speed": 1.0
 }]

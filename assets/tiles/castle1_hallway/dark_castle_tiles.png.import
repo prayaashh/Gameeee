@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr4akw6nokm46"
-path="res://.godot/imported/cavetiles.png-7cb654c271b725b9b4c9f16fef872c81.ctex"
+uid="uid://vdyl7ayuu0ty"
+path="res://.godot/imported/dark_castle_tiles.png-45b3986a0230e472009082ed91f5ab87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/castle1_hallway/cavetiles.png"
-dest_files=["res://.godot/imported/cavetiles.png-7cb654c271b725b9b4c9f16fef872c81.ctex"]
+source_file="res://assets/tiles/castle1_hallway/dark_castle_tiles.png"
+dest_files=["res://.godot/imported/dark_castle_tiles.png-45b3986a0230e472009082ed91f5ab87.ctex"]
 
 [params]
 
