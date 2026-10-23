@@ -1,0 +1,96 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/hazards/chandelier.png" id="1_sheet"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hanging"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 0, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fall"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 150, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crash0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 300, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crash1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(100, 300, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crash2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(200, 300, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crash3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(300, 300, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crash4"]
+atlas = ExtResource("1_sheet")
+region = Rect2(400, 300, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crash5"]
+atlas = ExtResource("1_sheet")
+region = Rect2(500, 300, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crash6"]
+atlas = ExtResource("1_sheet")
+region = Rect2(600, 300, 100, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crashed"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 450, 100, 150)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hanging")
+}],
+"loop": 1,
+"name": &"hanging",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fall")
+}],
+"loop": 1,
+"name": &"fall",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crash0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crash1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crash2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crash3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crash4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crash5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crash6")
+}],
+"loop": 0,
+"name": &"crash",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crashed")
+}],
+"loop": 0,
+"name": &"crashed",
+"speed": 1.0
+}]

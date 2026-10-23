@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cs1hsxorh4ub" path="res://assets/hazards/castle_spike.png" id="2_sheet"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_spike"]
-size = Vector2(56, 36)
+size = Vector2(64, 36)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ge4o1"]
 atlas = ExtResource("2_sheet")
@@ -122,7 +122,6 @@ script = ExtResource("1_spike")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=987654321]
 position = Vector2(0, -82)
 shape = SubResource("RectangleShape2D_spike")
-disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=111222333]
 position = Vector2(0, -50)

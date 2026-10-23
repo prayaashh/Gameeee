@@ -1,0 +1,141 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/hazards/skullpillar.png" id="1_sheet"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_active1_0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_active1_1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_active1_2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_active1_3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(300, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 300, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_active2_0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_active2_1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(100, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_active2_2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(200, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_active2_3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(300, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 400, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_active3_0"]
+atlas = ExtResource("1_sheet")
+region = Rect2(0, 500, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_active3_1"]
+atlas = ExtResource("1_sheet")
+region = Rect2(100, 500, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_active3_2"]
+atlas = ExtResource("1_sheet")
+region = Rect2(200, 500, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_active3_3"]
+atlas = ExtResource("1_sheet")
+region = Rect2(300, 500, 100, 100)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle1")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_active1_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_active1_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_active1_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_active1_3")
+}],
+"loop": 1,
+"name": &"activated",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle2")
+}],
+"loop": 1,
+"name": &"idle_2",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_active2_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_active2_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_active2_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_active2_3")
+}],
+"loop": 1,
+"name": &"activated_2",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle3")
+}],
+"loop": 1,
+"name": &"idle_3",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_active3_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_active3_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_active3_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_active3_3")
+}],
+"loop": 1,
+"name": &"activated_3",
+"speed": 8.0
+}]
