@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://belh6ronw0ql1"]
 
-[ext_resource type="Texture2D" path="res://assets/hazards/skullpillarprojectile.png" id="1_sheet"]
+[ext_resource type="Texture2D" uid="uid://dd3scafb47tht" path="res://assets/hazards/skullpillarprojectile.png" id="1_sheet"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0"]
 atlas = ExtResource("1_sheet")
@@ -27,14 +27,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0")
-}],
-"loop": 1,
-"name": &"fly",
-"speed": 1.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1")
@@ -51,4 +43,12 @@ animations = [{
 "loop": 0,
 "name": &"burst",
 "speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0")
+}],
+"loop": 1,
+"name": &"fly",
+"speed": 1.0
 }]

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cj4hswq3hicja" path="res://scenes/rooms/room_template.tscn" id="1_gkjcg"]
 [ext_resource type="PackedScene" uid="uid://dvdrq7hdiemxe" path="res://scenes/doorway.tscn" id="2_vtfd8"]
 [ext_resource type="Texture2D" uid="uid://bctrppswfphot" path="res://assets/backgrounds/overworld_castle1/0background_final.png" id="3_546cq"]
+[ext_resource type="PackedScene" uid="uid://8nen7e3bxj2j" path="res://scenes/enemies/creeps/snail_creep.tscn" id="3_jby48"]
 [ext_resource type="Texture2D" uid="uid://lctt7yvlt8x0" path="res://assets/backgrounds/overworld_castle1/castle1bg(Layer 2) _0001.png" id="3_vtfd8"]
 [ext_resource type="Script" uid="uid://d4fq4r343lou5" path="res://scripts/misc/light_layer.gd" id="4_vcoy8"]
 [ext_resource type="Texture2D" uid="uid://xidp4nqrhrwy" path="res://assets/backgrounds/overworld_castle1/transitioncase.png" id="6_yaupk"]
@@ -51,13 +52,12 @@ scale = Vector2(1.2, 1.2)
 [node name="Spawn" parent="Entrances" parent_id_path=PackedInt32Array(1834872771) index="0" unique_id=1573731701]
 position = Vector2(120, 500)
 
-[node name="Doorway" parent="Doorways" parent_id_path=PackedInt32Array(1438724118) index="0" unique_id=1680576452 instance=ExtResource("2_vtfd8")]
-position = Vector2(-1309, 486)
-target_scene = "uid://c44omavotwfww"
-
-[node name="Doorway2" parent="Doorways" parent_id_path=PackedInt32Array(1438724118) index="1" unique_id=1240982995 instance=ExtResource("2_vtfd8")]
+[node name="Doorway" parent="Doorways" parent_id_path=PackedInt32Array(1438724118) index="0" unique_id=1240982995 instance=ExtResource("2_vtfd8")]
 position = Vector2(4132, 755)
 target_scene = "uid://dcqcxd2orgkao"
+
+[node name="snailCreep" parent="Enemies" parent_id_path=PackedInt32Array(252102146) index="0" unique_id=579882446 instance=ExtResource("3_jby48")]
+position = Vector2(3234, 512)
 
 [node name="Backgrounds" type="Node2D" parent="." index="7" unique_id=1573557639]
 position = Vector2(0, 320)
