@@ -7,8 +7,12 @@ extends Area2D
 var speed: float = 320.0
 ## Hearts removed on contact.
 var damage: int = 1
-## Unit vector, set by whoever spawns it.
-var direction: Vector2 = Vector2.RIGHT
+## Unit vector, set by whoever spawns it. The sprite turns to face the way the
+## orb is travelling.
+var direction: Vector2 = Vector2.RIGHT:
+	set(value):
+		direction = value
+		_face_direction()
 ## Seconds before it gives up if it hits nothing.
 var lifetime: float = 6.0
 ## Node it was fired from, so it does not burst on its own pillar.
@@ -21,7 +25,14 @@ var _dead := false
 func _ready() -> void:
 	sprite.animation_finished.connect(_on_animation_finished)
 	_play(&"fly")
+	_face_direction()
 	body_entered.connect(_on_body_entered)
+
+## Points the art along the flight path. The sprite offset already centres the
+## orb on the node, so rotating the sprite keeps the hit circle centred.
+func _face_direction() -> void:
+	if is_node_ready():
+		sprite.rotation = direction.angle()
 
 func _physics_process(delta: float) -> void:
 	if _dead:

@@ -199,7 +199,7 @@ func _contact_damage_check() -> void:
 
 # --- getting hurt / dying -----------------------------------------------------
 
-## Called by the player's sword:  body.take_damage(player.attack_damage, origin)
+## Called by the player's attack: body.take_damage(player.current_damage(), origin)
 func take_damage(amount: int, from_position: Vector2) -> void:
 	if state == State.DEAD:
 		return

@@ -157,6 +157,8 @@ func _run_stage(stage) -> Dictionary:
 		GameState.set_flag(flag)
 	for flag in stage.clears:
 		GameState.set_flag(flag, false)
+	for weapon in stage.gives:
+		GameState.grant_weapon(weapon)
 
 	return {"cancelled": false, "next": next}
 

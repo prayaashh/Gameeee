@@ -6,6 +6,7 @@ name: Dionysus
 
 # Where the conversation starts. Checked top to bottom, first match wins.
 # (Later stages first, so a finished quest is checked before an active one.)
+entry: noflag sword_given -> 7
 entry: flag lantern_done -> 4
 entry: flag lantern_quest -> 3
 entry: flag lantern_declined -> 5
@@ -44,3 +45,11 @@ Stage 5: (player said no, then came back)
 Stage 6:
 	ask: "will you find my lantern?"
 	choices: "yes" -> 1, "no" -> 2
+
+Stage 7: (first time the player reaches the hellhole - he hands over the sword)
+	play: talk
+	speak: "You came down here with your bare hands."
+	speak: "Take this. It was mine, once - the dark has no use for it."
+	set: sword_given
+	give: sword
+	goto: 6

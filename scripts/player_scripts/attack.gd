@@ -4,7 +4,7 @@ var time_left := 0.0
 var already_hit: Array = []   # so one swing hits each enemy only once
 
 func enter(_previous: StringName) -> void:
-	player.play(&"attack")
+	player.play(player.attack_animation())
 	time_left = player.attack_time
 	player.velocity.x = 0.6 * player.velocity.x
 	already_hit.clear()
@@ -36,5 +36,5 @@ func _on_hit(body: Node2D) -> void:
 		return
 	already_hit.append(body)
 	if body.has_method("take_damage"):
-		body.take_damage(player.attack_damage, player.global_position)
+		body.take_damage(player.current_damage(), player.global_position)
 		player.gain_mana(player.mana_per_hit)   # landing a hit builds mana, like soul

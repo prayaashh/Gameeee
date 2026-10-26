@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" uid="uid://clrvtq8casfnq" path="res://assets/GUI/GUI_box_1.png" id="2_gui"]
+[ext_resource type="FontFile" uid="uid://cbfkuu5rlbu5s" path="res://assets/fonts/PixelWarden.ttf" id="3_title"]
+[ext_resource type="FontFile" uid="uid://dvp4vfg18tjwy" path="res://assets/fonts/PixelPurl.ttf" id="4_body"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pn"]
+content_margin_left = 56.0
+content_margin_top = 56.0
+content_margin_right = 56.0
+content_margin_bottom = 56.0
+texture = ExtResource("2_gui")
+texture_margin_left = 56.0
+texture_margin_top = 56.0
+texture_margin_right = 56.0
+texture_margin_bottom = 56.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.04, 0.03, 0.07, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Center"]
+layout_mode = 2
+custom_minimum_size = Vector2(440, 0)
+theme_override_styles/panel = SubResource("StyleBoxTexture_pn")
+
+[node name="VBox" type="VBoxContainer" parent="Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="Center/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.97, 0.92, 0.8, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_title")
+theme_override_font_sizes/font_size = 64
+text = "GAMEEE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Center/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.68, 0.62, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_body")
+theme_override_font_sizes/font_size = 18
+text = "a small dark platformer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="Center/Panel/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="Center/Panel/VBox"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../QuitButton")
+theme_override_fonts/font = ExtResource("4_body")
+theme_override_font_sizes/font_size = 24
+text = "Start"
+
+[node name="QuitButton" type="Button" parent="Center/Panel/VBox"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+focus_neighbor_top = NodePath("../PlayButton")
+theme_override_fonts/font = ExtResource("4_body")
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+
+[connection signal="pressed" from="Center/Panel/VBox/PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Center/Panel/VBox/QuitButton" to="." method="_on_quit_pressed"]

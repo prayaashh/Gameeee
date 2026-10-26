@@ -33,6 +33,7 @@ class Stage:
 	var choices: Array[Dictionary] = []      # [{"label": String, "target": String}]
 	var sets: Array[String] = []
 	var clears: Array[String] = []
+	var gives: Array[String] = []            # weapons granted, e.g. ["sword"]
 	var go_to := ""
 
 
@@ -153,6 +154,9 @@ func _parse_command(stage: Stage, key: String, value: String, number: int) -> vo
 		"unset", "clear":
 			for flag in _clean_list(value):
 				stage.clears.append(flag)
+		"give", "weapon":
+			for weapon in _clean_list(value):
+				stage.gives.append(weapon)
 		"goto", "next":
 			stage.go_to = _clean(value)
 		"end", "stop":

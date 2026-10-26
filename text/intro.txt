@@ -1,0 +1,8 @@
+# Text shown by scenes/rooms/black_room.tscn
+#
+# Edit freely. Blank lines are kept, lines starting with '#' are ignored,
+# and BBCode like [i]italic[/i] or [color=#c8a]tint[/color] works.
+
+The lamp went out a long time ago.
+
+Something below is still awake.

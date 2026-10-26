@@ -9,6 +9,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("esc"):
 		if Dialogue.active:             # the dialogue owns Esc while it is open
 			return
+		if not _player_exists():        # title screen / text rooms have no player
+			return
 		get_viewport().set_input_as_handled()
 		set_paused(not get_tree().paused)
 	elif get_tree().paused and event.is_action_pressed("attack"):
@@ -19,6 +21,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		var focused := get_viewport().gui_get_focus_owner()
 		if focused is Button:
 			focused.pressed.emit()
+
+## Pausing only makes sense inside a room that has a player.
+func _player_exists() -> bool:
+	var scene := get_tree().current_scene
+	return scene != null and scene.get_node_or_null("player") != null
 
 func set_paused(paused: bool) -> void:
 	get_tree().paused = paused

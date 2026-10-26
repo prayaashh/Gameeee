@@ -11,8 +11,22 @@ extends CharacterBody2D
 @export var dash_speed := 700.0
 @export var dash_time := 0.15
 @export var dash_cooldown := 0.4
-@export var attack_damage := 1
 @export var attack_time := 0.25
+
+@export_group("Weapons")
+## Damage of the punch: the attack the player starts with.
+@export var punch_damage := 1
+## Damage of the sword, which Dionysus hands over in the hellhole.
+@export var sword_damage := 2
+## Animation played for each weapon. "punch" is a placeholder in the player's
+## SpriteFrames for now - swap its frames for the real punch art later.
+@export var punch_animation := &"punch"
+@export var sword_animation := &"attack"
+
+## Which attack is equipped. The sword only becomes selectable once
+## GameState.has_weapon("sword") is true (Dionysus gives it).
+enum Weapon { PUNCH, SWORD }
+var weapon: Weapon = Weapon.PUNCH
 
 @export_group("Mana")
 @export var max_mana := 99
@@ -41,6 +55,7 @@ var dead := false
 
 signal health_changed(current: int, maximum: int)
 signal mana_changed(current: int, maximum: int)
+signal weapon_changed(weapon_name: StringName)
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_hitbox: Area2D = $AttackHitbox
@@ -57,6 +72,10 @@ func _ready() -> void:
 		health = max_health
 	GameState.health = health
 	mana = clampi(GameState.mana, 0, max_mana)
+	# The equipped weapon survives room changes too, but never stays on the
+	# sword if the save does not actually own it.
+	weapon = Weapon.SWORD if GameState.weapon == "sword" and has_sword() else Weapon.PUNCH
+	GameState.weapon = weapon_name()
 	add_to_group("player")      # lets enemies find the player
 	_resolve_spawn()
 
@@ -130,8 +149,33 @@ func _physics_process(delta: float) -> void:
 	dash_cooldown_left = max(dash_cooldown_left - delta, 0.0)
 	if Input.is_action_just_pressed("jump"):
 		jump_buffer_left = jump_buffer_time
+	if Input.is_action_just_pressed("switch_weapon") and not dead:
+		toggle_weapon()
 	if is_on_floor():
 		air_dash_used = false
+
+# --- weapons ------------------------------------------------------------------
+
+## The sword exists only after Dionysus gives it (GameState.grant_weapon("sword")).
+func has_sword() -> bool:
+	return GameState.has_weapon("sword")
+
+func weapon_name() -> String:
+	return "sword" if weapon == Weapon.SWORD else "punch"
+
+func current_damage() -> int:
+	return sword_damage if weapon == Weapon.SWORD else punch_damage
+
+func attack_animation() -> StringName:
+	return sword_animation if weapon == Weapon.SWORD else punch_animation
+
+## Swaps punch <-> sword. Does nothing while the sword has not been found yet.
+func toggle_weapon() -> void:
+	if not has_sword():
+		return
+	weapon = Weapon.PUNCH if weapon == Weapon.SWORD else Weapon.SWORD
+	GameState.weapon = weapon_name()
+	weapon_changed.emit(StringName(weapon_name()))
 
 func get_move_input() -> float:
 	return Input.get_axis("move_left", "move_right")

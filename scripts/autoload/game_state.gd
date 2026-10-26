@@ -26,6 +26,10 @@ var mana := 0
 ## Current hearts, same reason as mana: rooms rebuild the player, so the value
 ## has to outlive the node. -1 = "not set yet" -> the next player spawns full.
 var health := -1
+## Equipped attack: "punch" (starting) or "sword" (once Dionysus gives it).
+## Like mana this only lives in memory, so restarting the game goes back to the
+## punch; ownership of the sword itself is saved in `weapons`.
+var weapon := "punch"
 var checkpoint := {}            # {id, scene, x, y} — {} means no checkpoint yet
 var death_spot := {}            # {scene, x, y, amount} — where credits were last lost
 
@@ -140,12 +144,33 @@ func _change_scene(scene_path: String) -> void:
 
 ## Doorways: jump to another room and spawn at one of its entrance markers.
 func go_to_room(scene_path: String, entrance: String) -> void:
-	if not ResourceLoader.exists(scene_path):
+	var path := resolve_scene_path(scene_path)
+	if path == "":
 		push_warning("Doorway leads to a missing scene: " + scene_path)
 		return
-	pending_spawn = {"scene": scene_path, "entrance": entrance}
+	pending_spawn = {"scene": path, "entrance": entrance}
 	start_transition()
-	call_deferred("_change_scene", scene_path)
+	call_deferred("_change_scene", path)
+
+## A doorway's target_scene keeps whatever the file dialog wrote into it, which
+## is usually a "uid://" reference. Rooms compare spawn requests against their
+## own res:// scene_file_path, so resolve the reference to a real path first -
+## otherwise the entrance marker is never used and the player stays wherever the
+## room happens to have its player node.
+func resolve_scene_path(scene_ref: String) -> String:
+	if scene_ref == "":
+		return ""
+	if scene_ref.begins_with("res://"):
+		return scene_ref if ResourceLoader.exists(scene_ref) else ""
+	var id := ResourceUID.text_to_id(scene_ref)
+	if id != ResourceUID.INVALID_ID:
+		var uid_path := ResourceUID.get_id_path(id)
+		if uid_path != "" and ResourceLoader.exists(uid_path):
+			return uid_path
+	var packed := ResourceLoader.load(scene_ref) as PackedScene
+	if packed != null and packed.resource_path != "":
+		return packed.resource_path
+	return ""
 
 func start_transition() -> void:
 	_transition_until_ms = Time.get_ticks_msec() + int(TRANSITION_TIME * 1000.0)

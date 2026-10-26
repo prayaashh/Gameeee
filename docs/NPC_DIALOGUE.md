@@ -58,6 +58,7 @@ starts at `Stage 0`.
 | `set: flag` | Set a save flag (survives quitting; saved with the game). |
 | `set: a, b` | Set several flags at once. |
 | `unset: flag` | Clear a save flag. |
+| `give: sword` | Give the player a weapon (saved with the game). Currently `sword`. |
 | `goto: 3` | Continue in another stage instead of ending. |
 | `end` | Stop here (same as leaving `goto` out). |
 
@@ -69,7 +70,7 @@ restarting the game. Flag names are yours to choose.
 1. `play` (if given)
 2. every `speak` line, in order
 3. `ask` + `choices` (if given) — the chosen stage runs next
-4. `set` / `unset`
+4. `set` / `unset` / `give`
 5. `goto` (if given), otherwise the conversation ends
 
 Stages can chain, so a choice can lead to another question. The NPC's default
