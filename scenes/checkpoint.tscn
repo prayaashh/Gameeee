@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bcf0idj0eh6c1"]
 
 [ext_resource type="Script" uid="uid://cik5osvvmrlwx" path="res://scripts/checkpoint.gd" id="1_cp"]
-[ext_resource type="Texture2D" uid="uid://c5j31brbb2xos" path="res://assets/Sprites/Plant5_00000.png" id="2_plant"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_zone"]
 size = Vector2(110, 64)
@@ -12,7 +11,6 @@ script = ExtResource("1_cp")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=148383943]
 position = Vector2(0, -22)
 scale = Vector2(0.14, 0.1)
-texture = ExtResource("2_plant")
 
 [node name="InteractZone" type="Area2D" parent="." unique_id=1100344554]
 collision_layer = 0
