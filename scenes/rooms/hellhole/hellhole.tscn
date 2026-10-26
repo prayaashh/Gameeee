@@ -186,7 +186,7 @@ position = Vector2(-744, -777)
 [node name="Entrances" type="Node2D" parent="." unique_id=1834872771]
 
 [node name="Spawn" type="Marker2D" parent="Entrances" unique_id=1573731701]
-position = Vector2(120, 13)
+position = Vector2(-714, -788)
 
 [node name="Doorways" type="Node2D" parent="." unique_id=1438724118]
 
