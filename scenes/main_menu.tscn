@@ -1,22 +1,12 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://dudcjdotmbmn4"]
 
-[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_menu"]
-[ext_resource type="Texture2D" uid="uid://clrvtq8casfnq" path="res://assets/GUI/GUI_box_1.png" id="2_gui"]
+[ext_resource type="Script" uid="uid://dtsvgj8bef1h2" path="res://scripts/ui/main_menu.gd" id="1_menu"]
 [ext_resource type="FontFile" uid="uid://cbfkuu5rlbu5s" path="res://assets/fonts/PixelWarden.ttf" id="3_title"]
 [ext_resource type="FontFile" uid="uid://dvp4vfg18tjwy" path="res://assets/fonts/PixelPurl.ttf" id="4_body"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pn"]
-content_margin_left = 56.0
-content_margin_top = 56.0
-content_margin_right = 56.0
-content_margin_bottom = 56.0
-texture = ExtResource("2_gui")
-texture_margin_left = 56.0
-texture_margin_top = 56.0
-texture_margin_right = 56.0
-texture_margin_bottom = 56.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bkpch"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1224408191]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_menu")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=815087581]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,7 +25,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.04, 0.03, 0.07, 1)
 
-[node name="Center" type="CenterContainer" parent="."]
+[node name="Center" type="CenterContainer" parent="." unique_id=1552169725]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,56 +33,74 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="Center"]
-layout_mode = 2
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=1679517272]
 custom_minimum_size = Vector2(440, 0)
-theme_override_styles/panel = SubResource("StyleBoxTexture_pn")
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bkpch")
 
-[node name="VBox" type="VBoxContainer" parent="Center/Panel"]
+[node name="VBox" type="VBoxContainer" parent="Center/Panel" unique_id=254099010]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Title" type="Label" parent="Center/Panel/VBox"]
+[node name="Title" type="Label" parent="Center/Panel/VBox" unique_id=284967236]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.97, 0.92, 0.8, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("3_title")
 theme_override_font_sizes/font_size = 64
-text = "GAMEEE"
+text = "DEMO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Subtitle" type="Label" parent="Center/Panel/VBox"]
+[node name="Subtitle" type="Label" parent="Center/Panel/VBox" unique_id=1951825979]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.68, 0.62, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_body")
 theme_override_font_sizes/font_size = 18
-text = "a small dark platformer"
+text = "A humble Metroidvania"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="Center/Panel/VBox"]
+[node name="Spacer" type="Control" parent="Center/Panel/VBox" unique_id=1700251912]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="PlayButton" type="Button" parent="Center/Panel/VBox"]
+[node name="PlayButton" type="Button" parent="Center/Panel/VBox" unique_id=1372312761]
 custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../NewGameButton")
 theme_override_fonts/font = ExtResource("4_body")
 theme_override_font_sizes/font_size = 24
 text = "Start"
 
-[node name="QuitButton" type="Button" parent="Center/Panel/VBox"]
+[node name="NewGameButton" type="Button" parent="Center/Panel/VBox" unique_id=1440328895]
 custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 focus_neighbor_top = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+theme_override_fonts/font = ExtResource("4_body")
+theme_override_font_sizes/font_size = 24
+text = "New Game"
+
+[node name="QuitButton" type="Button" parent="Center/Panel/VBox" unique_id=387333720]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+focus_neighbor_top = NodePath("../NewGameButton")
 theme_override_fonts/font = ExtResource("4_body")
 theme_override_font_sizes/font_size = 24
 text = "Quit"
 
+[node name="NewGameConfirm" type="ConfirmationDialog" parent="." unique_id=1994852166]
+title = "New Game"
+dialog_text = "Erase all progress and start over?"
+dialog_autowrap = true
+ok_button_text = "Erase"
+cancel_button_text = "Cancel"
+
 [connection signal="pressed" from="Center/Panel/VBox/PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Center/Panel/VBox/NewGameButton" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="Center/Panel/VBox/QuitButton" to="." method="_on_quit_pressed"]
+[connection signal="confirmed" from="NewGameConfirm" to="." method="_on_new_game_confirmed"]

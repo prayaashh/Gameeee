@@ -3,6 +3,6 @@
 # Edit freely. Blank lines are kept, lines starting with '#' are ignored,
 # and BBCode like [i]italic[/i] or [color=#c8a]tint[/color] works.
 
-The lamp went out a long time ago.
+This is a demo
 
-Something below is still awake.
+We hope you enjoy the game

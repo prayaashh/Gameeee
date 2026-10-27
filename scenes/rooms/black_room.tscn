@@ -6,7 +6,7 @@
 [node name="BlackRoom" type="Node2D"]
 script = ExtResource("1_room")
 text_file = "res://text/intro.txt"
-next_scene = "res://scenes/rooms/game.tscn"
+next_scene = "res://scenes/rooms/overworld castle 1/castle_1_room_1.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

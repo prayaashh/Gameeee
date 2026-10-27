@@ -32,7 +32,7 @@ func _ready() -> void:
 ## orb on the node, so rotating the sprite keeps the hit circle centred.
 func _face_direction() -> void:
 	if is_node_ready():
-		sprite.rotation = direction.angle()
+		sprite.rotation = direction.angle()+PI
 
 func _physics_process(delta: float) -> void:
 	if _dead:

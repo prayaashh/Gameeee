@@ -1,4 +1,4 @@
-# Lantern quest villager - the NPC placed in game.tscn and npc_dionysus.tscn.
+# Lantern quest villager - the dialogue used by scenes/npc/npc_dionysus.tscn.
 # The speaker name comes from the NPC's "Name" field in the Inspector, because
 # this file has no "name:" line.
 # Full syntax: docs/NPC_DIALOGUE.md

@@ -60,7 +60,7 @@ position = Vector2(1072, 461)
 scale = Vector2(1.2, 1.2)
 
 [node name="Spawn" parent="Entrances" parent_id_path=PackedInt32Array(1834872771) index="0" unique_id=1573731701]
-position = Vector2(120, 500)
+position = Vector2(120, 488.8)
 
 [node name="Doorway" parent="Doorways" parent_id_path=PackedInt32Array(1438724118) index="0" unique_id=1240982995 instance=ExtResource("2_vtfd8")]
 position = Vector2(4132, 755)

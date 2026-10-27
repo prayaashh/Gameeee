@@ -2,7 +2,8 @@
 
 Every room in the game is one scene. This is the recipe for making new ones,
 based on `scenes/rooms/room_template.tscn` (the starting point) and the two rooms
-that already work: `scenes/rooms/game.tscn` (room 1) and `scenes/rooms/room_02.tscn`.
+that already work: `scenes/rooms/overworld castle 1/castle_1_room_1.tscn` (room 1)
+and `scenes/rooms/room_02.tscn`.
 
 ---
 

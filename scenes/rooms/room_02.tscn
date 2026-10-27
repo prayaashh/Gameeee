@@ -58,8 +58,8 @@ position = Vector2(100, 13)
 
 [node name="ToRoom1" parent="Doorways" instance=ExtResource("5_door")]
 position = Vector2(40, 32)
-target_scene = "res://scenes/rooms/game.tscn"
-target_entrance = "East"
+target_scene = "res://scenes/rooms/overworld castle 1/castle_1_room_1.tscn"
+target_entrance = "Spawn"
 
 [node name="Checkpoints" type="Node2D" parent="."]
 

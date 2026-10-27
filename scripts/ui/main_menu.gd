@@ -4,15 +4,19 @@ extends Control
 ##
 ## "Start" plays the intro scene (First Scene) and then the first room.
 ## When a save with a checkpoint exists the button reads "Continue" and resumes
-## at that bench instead. Nothing here writes to the save file.
+## at that bench instead. "New Game" erases that save after a confirmation and
+## restarts in the black room (the intro).
 
-const FIRST_ROOM := "res://scenes/rooms/game.tscn"
+const FIRST_ROOM := "res://scenes/rooms/overworld castle 1/castle_1_room_1.tscn"
+## "New Game" always replays the intro room, whatever First Scene is set to.
+const NEW_GAME_SCENE := "res://scenes/rooms/black_room.tscn"
 
 ## Optional scene shown before the first room, e.g. the black text room.
 ## Leave empty to go straight into FIRST_ROOM.
 @export_file("*.tscn") var first_scene := "res://scenes/rooms/black_room.tscn"
 
 @onready var play_button: Button = $Center/Panel/VBox/PlayButton
+@onready var new_game_confirm: ConfirmationDialog = $NewGameConfirm
 
 
 func _ready() -> void:
@@ -33,6 +37,21 @@ func _play_target() -> String:
 	if target != "" and ResourceLoader.exists(target):
 		return target
 	return FIRST_ROOM
+
+
+## Erasing progress cannot be undone, so New Game asks first.
+func _on_new_game_pressed() -> void:
+	new_game_confirm.popup_centered()
+
+
+## Wipes the save (on disk too), then opens the black room intro, which walks on
+## to the first room by itself.
+func _on_new_game_confirmed() -> void:
+	GameState.reset_progress()
+	if ResourceLoader.exists(NEW_GAME_SCENE):
+		GameState.go_to_room(NEW_GAME_SCENE, "Spawn")
+	else:
+		_on_play_pressed()          # intro missing: fall back to the normal start
 
 
 func _on_quit_pressed() -> void:

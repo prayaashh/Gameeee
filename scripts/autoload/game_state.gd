@@ -12,7 +12,7 @@ signal credits_changed(new_total: int)
 
 const SAVE_PATH := "user://save.json"
 const SAVE_VERSION := 1
-const MAIN_SCENE := "res://scenes/rooms/game.tscn"
+const MAIN_SCENE := "res://scenes/rooms/overworld castle 1/castle_1_room_1.tscn"
 const TRANSITION_TIME := 0.35   # seconds doorways/spawns stay locked after a scene change
 
 var flags := {}
@@ -113,8 +113,11 @@ func recover_death_spot() -> int:
 func set_checkpoint(id: String, position: Vector2, scene_path: String) -> void:
 	checkpoint = {"id": id, "scene": scene_path, "x": position.x, "y": position.y}
 
+## A checkpoint only counts while its room still exists: deleting or renaming a
+## room must not send Continue into a scene that is no longer there.
 func has_checkpoint() -> bool:
-	return not checkpoint.is_empty() and str(checkpoint.get("scene", "")) != ""
+	var scene := str(checkpoint.get("scene", ""))
+	return scene != "" and ResourceLoader.exists(scene)
 
 # --- scene changes -----------------------------------------------------------
 
@@ -177,6 +180,26 @@ func start_transition() -> void:
 
 func in_transition() -> bool:
 	return Time.get_ticks_msec() < _transition_until_ms
+
+# --- new game ----------------------------------------------------------------
+
+## Start-menu "New Game": forgets everything the save file holds. The file is
+## overwritten with a fresh one (never deleted), so a force-close right after
+## still boots a clean game. The in-memory values are reset too, so the player
+## comes back with full hearts, no mana, no sword and the punch equipped.
+func reset_progress(write_to_disk := true) -> void:
+	flags = {}
+	credits = 0
+	credits_changed.emit(0)
+	weapons = []
+	health = -1
+	mana = 0
+	weapon = "punch"
+	checkpoint = {}
+	death_spot = {}
+	pending_spawn = {}
+	if write_to_disk:
+		save_to_disk()
 
 # --- save file ---------------------------------------------------------------
 
