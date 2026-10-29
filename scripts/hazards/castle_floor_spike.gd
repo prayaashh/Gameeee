@@ -11,10 +11,10 @@ extends Area2D
 
 @export_group("Cycle")
 ## Seconds the blades stay extended before they go back in.
-@export var up_timer: float = 1.5
+@export var up_timer: float = 1.8
 ## Seconds to wait after the blades retract before the next strike. The spike
 ## only strikes again if the player is still standing on it.
-@export var strike_delay: float = 2.0
+@export var strike_delay: float = 1.0
 
 enum State { IDLE, RISING, EXTENDED, RETRACTING, WAITING }
 

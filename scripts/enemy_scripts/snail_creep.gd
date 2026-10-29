@@ -69,6 +69,10 @@ var _death_handled := false
 @onready var touch_area: Area2D = $TouchArea
 
 func _ready() -> void:
+	if wall_check:
+		wall_check.collision_mask = collision_mask | (1 << 3)
+	if floor_check:
+		floor_check.collision_mask = collision_mask | (1 << 3)
 	sprite.animation_finished.connect(_on_animation_finished)
 	_aim_rays()
 	_face_moving_direction()
@@ -121,9 +125,14 @@ func _patrol() -> void:
 		sprite.play(&"move")        # resume after a hold-for-player pause
 
 func _aim_rays() -> void:
-	wall_check.position.x = 23.0 * direction
-	wall_check.target_position.x = 9.0 * direction
-	floor_check.position.x = 16.0 * direction
+	# Both rays are aimed forward, in the direction of travel, so they look
+	# ahead for walls / ledges instead of behind the snail.
+	var front := 23.0 * direction
+	var reach := 14.0 * direction
+	wall_check.position = Vector2(front, -14.0)
+	wall_check.target_position = Vector2(front + reach, -14.0)
+	floor_check.position = Vector2(16.0 * direction, -6.0)
+	floor_check.target_position = Vector2(16.0 * direction + reach, 18.0)
 	wall_check.force_raycast_update()
 	floor_check.force_raycast_update()
 

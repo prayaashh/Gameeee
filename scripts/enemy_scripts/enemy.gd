@@ -50,7 +50,7 @@ var player: Node2D
 @onready var attack_hitbox: Area2D = $Visuals/AttackHitbox
 @onready var machine: StateMachine = $StateMachine
 
-const WORLD_MASK := 2                     # the ground/wall layer
+const WORLD_MASK := 2 | 8                 # the ground/wall layer + enemy-turn tiles (layer 4)
 
 # the slime sheet only ships `chasing` + `idle`, so missing anims fall back
 # to a placeholder instead of spamming "There is no animation with name X"

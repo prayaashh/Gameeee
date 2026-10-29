@@ -1,0 +1,2 @@
+right now, the npc dinysus does not have much of a role in the demo. add dialogue that fits a demo.
+all enemies must drop credits.

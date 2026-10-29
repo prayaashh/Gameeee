@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://bnjjmtq17o7vl"]
+
+[ext_resource type="Script" uid="uid://cu4eq8hvuo36i" path="res://scripts/ui/text_room.gd" id="1_g4wlh"]
+[ext_resource type="FontFile" uid="uid://dvp4vfg18tjwy" path="res://assets/fonts/PixelPurl.ttf" id="2_a17pe"]
+
+[node name="BlackRoom" type="Node2D" unique_id=986209372]
+script = ExtResource("1_g4wlh")
+text_file = "res://text/end_screen.txt"
+next_scene = "uid://dudcjdotmbmn4"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=439322150]
+
+[node name="Backdrop" type="ColorRect" parent="CanvasLayer" unique_id=941236436]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer" unique_id=845280845]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 140.0
+offset_top = 90.0
+offset_right = -140.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("2_a17pe")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+bbcode_enabled = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hint" type="Label" parent="CanvasLayer" unique_id=714627278]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -72.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.55, 0.55, 0.6, 1)
+theme_override_fonts/font = ExtResource("2_a17pe")
+theme_override_font_sizes/font_size = 16
+text = "Press SPACE to continue"
+horizontal_alignment = 1
+vertical_alignment = 1

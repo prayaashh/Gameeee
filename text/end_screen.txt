@@ -1,0 +1,16 @@
+# Text shown by scenes/rooms/black screens/end_screen.tscn
+#
+# Edit freely. Blank lines are kept, lines starting with '#' are ignored,
+# and BBCode like [i]italic[/i] or [color=#c8a]tint[/color] works.
+
+This is the end of the demo
+
+Thank you for playing!
+
+The castle was never the destination - the journey was.
+We hope you enjoyed the demo.
+
+Do not forget to wishlist the full release and
+follow our official channels for the next chapter.
+
+Until then, keep exploring.

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b0vhk5jhl4vo4"]
 
 [ext_resource type="Script" uid="uid://nl0pstq2q7pr" path="res://scripts/hazards/skull_pillar.gd" id="1_pillar"]
-[ext_resource type="SpriteFrames" uid="uid://b4iohs3g5awm4" path="res://assets/hazards/skull_pillar_frames.tres" id="2_frames"]
+[ext_resource type="SpriteFrames" uid="uid://bq5tjcki4s761" path="res://assets/hazards/skull_pillar_frames.tres" id="2_frames"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(21, 73)
@@ -10,7 +10,9 @@ size = Vector2(21, 73)
 z_index = -5
 scale = Vector2(2, 2)
 script = ExtResource("1_pillar")
-fire_interval = 3.0
+detection_radius = 350.0
+fire_interval = 2.0
+projectile_speed = 600.0
 
 [node name="Body" type="StaticBody2D" parent="." unique_id=1106084583]
 collision_layer = 4

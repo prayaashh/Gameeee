@@ -9,11 +9,11 @@ extends Control
 
 const FIRST_ROOM := "res://scenes/rooms/overworld castle 1/castle_1_room_1.tscn"
 ## "New Game" always replays the intro room, whatever First Scene is set to.
-const NEW_GAME_SCENE := "res://scenes/rooms/black_room.tscn"
+const NEW_GAME_SCENE := "res://scenes/rooms/black screens/black_room.tscn"
 
 ## Optional scene shown before the first room, e.g. the black text room.
 ## Leave empty to go straight into FIRST_ROOM.
-@export_file("*.tscn") var first_scene := "res://scenes/rooms/black_room.tscn"
+@export_file("*.tscn") var first_scene := "res://scenes/rooms/black screens/black_room.tscn"
 
 @onready var play_button: Button = $Center/Panel/VBox/PlayButton
 @onready var new_game_confirm: ConfirmationDialog = $NewGameConfirm
@@ -27,6 +27,10 @@ func _ready() -> void:
 func _on_play_pressed() -> void:
 	if GameState.has_checkpoint():
 		GameState.respawn()          # back to the saved bench (or the first room)
+		return
+	# Only play intro if there is no previous save available
+	if FileAccess.file_exists(GameState.SAVE_PATH):
+		GameState.go_to_room(FIRST_ROOM, "Spawn")
 		return
 	GameState.go_to_room(_play_target(), "Spawn")
 

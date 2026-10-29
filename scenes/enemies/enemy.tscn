@@ -80,12 +80,12 @@ frame_progress = 0.77453065
 
 [node name="WallCheck" type="RayCast2D" parent="Visuals" unique_id=951730697]
 target_position = Vector2(20, 0)
-collision_mask = 2
+collision_mask = 10
 
 [node name="LedgeCheck" type="RayCast2D" parent="Visuals" unique_id=714483587]
 position = Vector2(12, 5)
 target_position = Vector2(0, 40)
-collision_mask = 2
+collision_mask = 10
 
 [node name="AttackHitbox" type="Area2D" parent="Visuals" unique_id=1589690494]
 collision_layer = 0

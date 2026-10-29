@@ -14,6 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_menu")
+first_scene = "res://scenes/rooms/black screens/intro_screen.tscn"
 
 [node name="Background" type="ColorRect" parent="." unique_id=815087581]
 layout_mode = 1
@@ -95,10 +96,9 @@ text = "Quit"
 
 [node name="NewGameConfirm" type="ConfirmationDialog" parent="." unique_id=1994852166]
 title = "New Game"
+ok_button_text = "Erase"
 dialog_text = "Erase all progress and start over?"
 dialog_autowrap = true
-ok_button_text = "Erase"
-cancel_button_text = "Cancel"
 
 [connection signal="pressed" from="Center/Panel/VBox/PlayButton" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Center/Panel/VBox/NewGameButton" to="." method="_on_new_game_pressed"]

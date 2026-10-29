@@ -58,13 +58,13 @@ func _ready() -> void:
 		var gr = RayCast2D.new()
 		gr.name = "GroundRayCast"
 		gr.target_position = Vector2(0, cast_distance_below)
-		gr.collision_mask = collision_mask
+		gr.collision_mask = collision_mask | (1 << 3)
 		add_child(gr)
 	if not has_node("LoSRaycast"):
 		var lr = RayCast2D.new()
 		lr.name = "LoSRaycast"
 		lr.target_position = Vector2(0, 0)
-		lr.collision_mask = collision_mask
+		lr.collision_mask = collision_mask | (1 << 3)
 		add_child(lr)
 	raycast = $GroundRayCast
 	los_raycast = $LoSRaycast

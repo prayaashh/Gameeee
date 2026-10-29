@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dn3txpm0a2sxu" path="res://scripts/hud.gd" id="1_hud"]
 [ext_resource type="Texture2D" uid="uid://c5xg6x4qmowxb" path="res://assets/Sprites/items/health_heart.png" id="2_5ysmq"]
 [ext_resource type="Texture2D" uid="uid://cuvyaxyn3poef" path="res://assets/Sprites/items/health_broken_heart.png" id="3_6fi6k"]
+[ext_resource type="FontFile" uid="uid://dvp4vfg18tjwy" path="res://assets/fonts/PixelPurl.ttf" id="4_6fi6k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mana_bg"]
 bg_color = Color(0.04, 0.07, 0.11, 0.85)
@@ -49,32 +50,20 @@ layout_mode = 2
 
 [node name="Credits" type="Label" parent="Row" unique_id=1201491970]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.97, 0.79, 0.25, 1)
+theme_override_colors/font_color = Color(0.34287196, 0.93766874, 0.65046835, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_6fi6k")
 theme_override_font_sizes/font_size = 24
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ManaLabel" type="Label" parent="." unique_id=1923292592]
-offset_left = 16.0
-offset_top = 52.0
-offset_right = 66.0
-offset_bottom = 72.0
-theme_override_colors/font_color = Color(0.45, 0.78, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 12
-text = "MANA"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="ManaBar" type="ProgressBar" parent="." unique_id=1665092811]
-offset_left = 70.0
-offset_top = 56.0
-offset_right = 220.0
-offset_bottom = 72.0
+offset_left = 44.0
+offset_top = 73.0
+offset_right = 194.0
+offset_bottom = 89.0
 theme_override_styles/background = SubResource("StyleBoxFlat_mana_bg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_mana_fill")
 max_value = 99.0

@@ -196,6 +196,15 @@ position = Vector2(-714, -788)
 
 [node name="NPCs" type="Node2D" parent="." unique_id=72953342]
 
+[node name="Dionysus" parent="NPCs" unique_id=1255174449 instance=ExtResource("6_l7omf")]
+z_index = -15
+position = Vector2(-31, 810)
+npc_name = "Dionysus"
+dialogue_file = "res://dialogue/Dionysus.txt"
+sprite_frames = SubResource("SpriteFrames_7i6ip")
+interact_size = Vector2(160.5, 250)
+interact_offset = Vector2(3, 10)
+
 [node name="HUD" parent="." unique_id=692464423 instance=ExtResource("3_h1obj")]
 
 [node name="Background" type="Node2D" parent="." unique_id=70797935]
@@ -234,12 +243,3 @@ polygon = PackedVector2Array(156, 239, 403, -28, 569, -3, 665, -116, 747, -164, 
 [node name="Doorway" parent="Ground" unique_id=1680576452 instance=ExtResource("6_dn3e2")]
 position = Vector2(780, 873)
 target_scene = "uid://c44omavotwfww"
-
-[node name="NPC" parent="." unique_id=1255174449 instance=ExtResource("6_l7omf")]
-z_index = -15
-position = Vector2(-31, 810)
-npc_name = "Dionysus"
-dialogue_file = "res://dialogue/Dionysus.txt"
-sprite_frames = SubResource("SpriteFrames_7i6ip")
-interact_size = Vector2(160.5, 250)
-interact_offset = Vector2(3, 10)

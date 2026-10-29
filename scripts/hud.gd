@@ -83,4 +83,4 @@ func _on_mana_changed(current: int, maximum: int) -> void:
 	_mana_tween.tween_property(mana_bar, "value", float(current), 0.15)
 
 func _on_credits_changed(total: int) -> void:
-	credits_label.text = str(total)
+	credits_label.text = "credits: "+str(total)
