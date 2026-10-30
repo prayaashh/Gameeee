@@ -3,6 +3,6 @@
 # Edit freely. Blank lines are kept, lines starting with '#' are ignored,
 # and BBCode like [i]italic[/i] or [color=#c8a]tint[/color] works.
 
-This is a demo
+This is a demo.
 
-We hope you enjoy the game
+We hope you enjoy!

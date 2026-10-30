@@ -26,10 +26,10 @@ var mana := 0
 ## Current hearts, same reason as mana: rooms rebuild the player, so the value
 ## has to outlive the node. -1 = "not set yet" -> the next player spawns full.
 var health := -1
-## Equipped attack: "punch" (starting) or "sword" (once Dionysus gives it).
+## Equipped attack: "knife" (starting) or "sword" (once Dionysus gives it).
 ## Like mana this only lives in memory, so restarting the game goes back to the
-## punch; ownership of the sword itself is saved in `weapons`.
-var weapon := "punch"
+## knife; ownership of the sword itself is saved in `weapons`.
+var weapon := "knife"
 var checkpoint := {}            # {id, scene, x, y} — {} means no checkpoint yet
 var death_spot := {}            # {scene, x, y, amount} — where credits were last lost
 
@@ -186,7 +186,7 @@ func in_transition() -> bool:
 ## Start-menu "New Game": forgets everything the save file holds. The file is
 ## overwritten with a fresh one (never deleted), so a force-close right after
 ## still boots a clean game. The in-memory values are reset too, so the player
-## comes back with full hearts, no mana, no sword and the punch equipped.
+## comes back with full hearts, no mana, no sword and the knife equipped.
 func reset_progress(write_to_disk := true) -> void:
 	flags = {}
 	credits = 0
@@ -194,7 +194,7 @@ func reset_progress(write_to_disk := true) -> void:
 	weapons = []
 	health = -1
 	mana = 0
-	weapon = "punch"
+	weapon = "knife"
 	checkpoint = {}
 	death_spot = {}
 	pending_spawn = {}

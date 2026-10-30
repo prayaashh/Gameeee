@@ -33,6 +33,20 @@ const NPCDialogue = preload("res://scripts/npc_scripts/npc_dialogue.gd")
 ## Text shown on the talk prompt.
 @export var prompt_text := "E"
 
+@export_group("Crumble")
+## Conversation stage that crumbles this NPC for good, e.g. "6". When the
+## conversation reaches it the NPC plays `crumble_animation` once, settles on
+## `crumbled_animation`, remembers it in the save and can no longer be talked
+## to - in this room and on every later visit. Leave empty to opt out.
+@export var crumble_stage := ""
+## One-shot animation played when the crumble stage is reached.
+@export var crumble_animation := &"crumble"
+## Animation shown after the crumble finishes. When the SpriteFrames has no
+## such animation, the last frame of `crumble_animation` is held instead.
+@export var crumbled_animation := &"crumbled"
+## Save flag remembering the crumbled state. Empty = "npc_<name>_crumbled".
+@export var crumble_flag := ""
+
 @onready var prompt: Label = $Prompt
 @onready var sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
 @onready var zone_shape: CollisionShape2D = $InteractZone/CollisionShape2D
@@ -40,6 +54,7 @@ var player: Player = null
 var blink_tween: Tween
 
 var _dialogue = null
+var _crumbled := false
 
 func _ready() -> void:
 	if sprite:
@@ -67,6 +82,10 @@ func _ready() -> void:
 	blink_tween = create_tween().set_loops()
 	blink_tween.tween_property(prompt, "modulate:a", 0.0, 0.4 / blink_speed).from(1.0)
 	blink_tween.tween_property(prompt, "modulate:a", 1.0, 0.4 / blink_speed)
+	# A room remembers a crumbled NPC through its save flag: skip straight to
+	# the crumbled pose instead of replaying the fall.
+	if _has_crumble_flag():
+		_restore_crumble()
 
 func _load_dialogue() -> void:
 	_dialogue = null
@@ -80,6 +99,8 @@ func _load_dialogue() -> void:
 	_dialogue.validate(npc_name, sprite)
 
 func _on_enter(body: Node2D) -> void:
+	if _crumbled:
+		return
 	if body is Player:
 		player = body
 		prompt.show()
@@ -90,12 +111,14 @@ func _on_exit(body: Node2D) -> void:
 		prompt.hide()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if player == null or player.dead or Dialogue.active or not event.is_action_pressed("interact"):
+	if _crumbled or player == null or player.dead or Dialogue.active or not event.is_action_pressed("interact"):
 		return
 	get_viewport().set_input_as_handled()
 	_talk()
 
 func _talk() -> void:
+	if _crumbled:
+		return
 	if _dialogue == null:
 		return          # no file set (or it failed to load - warned in _ready)
 	prompt.hide()
@@ -117,6 +140,11 @@ func _talk() -> void:
 			break
 		last_stage = StringName(stage.id)
 
+		# The crumble stage ends this NPC's story: start the fall and remember
+		# it, then let the stage's own commands (if any) run.
+		if not crumble_stage.is_empty() and str(stage.id) == crumble_stage:
+			_begin_crumble()
+
 		var result: Dictionary = await _run_stage(stage)
 		if bool(result.get("cancelled", false)):
 			cancelled = true
@@ -124,8 +152,9 @@ func _talk() -> void:
 		stage_id = str(result.get("next", ""))
 
 	Dialogue.close()
-	prompt.visible = player != null
-	_play_default_animation()
+	prompt.visible = player != null and not _crumbled
+	if not _crumbled:
+		_play_default_animation()
 	after_interaction(&"cancelled" if cancelled else last_stage)
 
 ## Runs one stage in the order it is written: animation, lines, question, flags.
@@ -212,9 +241,104 @@ func after_interaction(outcome: StringName) -> void:
 	interaction_finished.emit(outcome)
 	# --- put your own code below this line, guided by `outcome` ---
 
+# --- crumble ------------------------------------------------------------------
+
+## True once this NPC has crumbled, either in this conversation or earlier.
+func is_crumbled() -> bool:
+	return _crumbled
+
+## Save flag that remembers the crumble. Uses `crumble_flag` when set, else
+## derives it from the NPC's name.
+func _crumble_flag_name() -> String:
+	if not crumble_flag.is_empty():
+		return crumble_flag
+	if npc_name.is_empty():
+		return ""
+	return "npc_%s_crumbled" % npc_name.to_lower().replace(" ", "_")
+
+## True when a previous visit already crumbled this NPC (flag in the save).
+func _has_crumble_flag() -> bool:
+	if crumble_stage.is_empty():
+		return false          # crumble behaviour not set up for this NPC
+	var flag := _crumble_flag_name()
+	return not flag.is_empty() and GameState.has_flag(flag)
+
+## Reaching `crumble_stage` in the conversation: remember it, stop listening to
+## the player and play the one-shot fall.
+func _begin_crumble() -> void:
+	if _crumbled:
+		return
+	_crumbled = true
+	var flag := _crumble_flag_name()
+	if not flag.is_empty():
+		GameState.set_flag(flag)
+	_disable_interaction()
+	_play_crumble_sequence()
+
+## Puts the NPC straight into the finished crumbled pose (room loaded after an
+## earlier crumble). The fall is not replayed.
+func _restore_crumble() -> void:
+	_crumbled = true
+	_disable_interaction()
+	_play_crumbled_rest()
+
+## Hides the talk prompt and switches the interaction zone off for good.
+func _disable_interaction() -> void:
+	player = null
+	prompt.hide()
+	if blink_tween:
+		blink_tween.kill()
+	var zone := get_node_or_null("InteractZone") as Area2D
+	if zone:
+		zone.set_deferred("monitoring", false)
+		zone.set_deferred("monitorable", false)
+
+func _play_crumble_sequence() -> void:
+	if not _has_animation(crumble_animation):
+		return
+	sprite.play(crumble_animation)
+	var duration := _animation_length(crumble_animation)
+	if duration <= 0.0:
+		_play_crumbled_rest()
+		return
+	# Wait exactly one playthrough, then settle on the permanent pose. A Tween
+	# dies with the node, so leaving the room mid-fall is safe.
+	var tween := create_tween()
+	tween.tween_interval(duration)
+	tween.tween_callback(_play_crumbled_rest)
+
+func _play_crumbled_rest() -> void:
+	if not _has_animation(crumble_animation) and not _has_animation(crumbled_animation):
+		return
+	var frames := sprite.sprite_frames
+	if frames.has_animation(crumbled_animation) and frames.get_frame_count(crumbled_animation) > 0:
+		sprite.play(crumbled_animation)
+		return
+	# No dedicated crumbled animation: freeze on the fall's last frame.
+	sprite.play(crumble_animation)
+	sprite.frame = frames.get_frame_count(crumble_animation) - 1
+	sprite.pause()
+
+func _has_animation(anim: StringName) -> bool:
+	return sprite != null and sprite.sprite_frames != null and anim != &"" and sprite.sprite_frames.has_animation(anim)
+
+func _animation_length(anim: StringName) -> float:
+	if not _has_animation(anim):
+		return 0.0
+	var frames := sprite.sprite_frames
+	var speed := frames.get_animation_speed(anim)
+	if speed <= 0.0:
+		speed = 1.0
+	var total := 0.0
+	for index in frames.get_frame_count(anim):
+		total += frames.get_frame_duration(anim, index)
+	return total / speed
+
 # --- animations ---------------------------------------------------------------
 
 func _play_if_exists(anim: StringName) -> void:
+	if _crumbled and anim == crumble_animation:
+		return          # the crumble sequence already owns the sprite
 	if sprite == null or sprite.sprite_frames == null or anim == &"":
 		return
 	if sprite.sprite_frames.has_animation(anim):

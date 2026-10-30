@@ -26,6 +26,18 @@ signal died(enemy: Node)
 @export var contact_damage: int = 1
 @export var contact_interval: float = 0.5  # seconds between contact hits while overlapping
 
+@export_group("Death rewards")
+## Credits paid straight to the player when this enemy dies (0 = none).
+@export var credits_on_death := 0
+## Item dropped where the enemy died. Defaults to a credit orb.
+@export var drop_scene: PackedScene = preload("res://scenes/pickups/credit_pickup.tscn")
+## Value written to each drop's `value` property (0 = leave the scene's own value).
+@export var drop_value := 5
+## How many items to drop.
+@export var drop_count := 1
+## Horizontal spread used to scatter several drops.
+@export var drop_scatter := 40.0
+
 @onready var detection_area: Area2D = $DetectionArea
 @onready var detection_shape: CollisionShape2D = $DetectionArea/CollisionShape2D
 @onready var lose_area: Area2D = $LoseArea
@@ -238,6 +250,15 @@ func _die() -> void:
 	detection_shape.set_deferred("disabled", true)
 	lose_shape.set_deferred("disabled", true)
 	cooldown_timer.stop()
+
+	if credits_on_death > 0:
+		GameState.add_credits(credits_on_death)
+	# Loot.spawn queues the drop for the next step: adding nodes during a
+	# physics callback is not allowed. `at` is captured now in world space.
+	var at := global_position
+	var parent: Node = get_parent() if get_parent() else get_tree().current_scene
+	Loot.spawn(drop_scene, parent, at, drop_value, drop_count, drop_scatter)
+
 	died.emit(self)
 	set_physics_process(false)
 	# the sheet has no die animation -> flash out instead:

@@ -16,6 +16,7 @@ extends CanvasLayer
 @onready var hearts: HBoxContainer = $Row/Hearts
 @onready var credits_label: Label = $Row/Credits
 @onready var mana_bar: ProgressBar = $ManaBar
+@onready var weapon_label: Label = $Weapon
 
 var _mana_tween: Tween
 var _mana_synced := false     # first sync snaps, later changes animate
@@ -38,8 +39,11 @@ func _bind_player() -> void:
 		player.health_changed.connect(_on_health_changed)
 	if not player.mana_changed.is_connected(_on_mana_changed):
 		player.mana_changed.connect(_on_mana_changed)
+	if not player.weapon_changed.is_connected(_on_weapon_changed):
+		player.weapon_changed.connect(_on_weapon_changed)
 	_on_health_changed(player.health, player.max_health)
 	_on_mana_changed(player.mana, player.max_mana)
+	_on_weapon_changed(StringName(player.weapon_name()))
 
 func _on_health_changed(current: int, maximum: int) -> void:
 	_sync_heart_count(maxi(maximum, 0))
@@ -84,3 +88,6 @@ func _on_mana_changed(current: int, maximum: int) -> void:
 
 func _on_credits_changed(total: int) -> void:
 	credits_label.text = "credits: "+str(total)
+
+func _on_weapon_changed(weapon_name: StringName) -> void:
+	weapon_label.text = "weapon: " + str(weapon_name)

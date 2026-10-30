@@ -49,6 +49,10 @@ region = Rect2(3600, 600, 400, 300)
 atlas = ExtResource("7_0b65c")
 region = Rect2(4000, 600, 400, 300)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_epc3m"]
+atlas = ExtResource("7_0b65c")
+region = Rect2(4000, 600, 400, 300)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_f0hpl"]
 atlas = ExtResource("7_0b65c")
 region = Rect2(400, 900, 400, 300)
@@ -124,6 +128,14 @@ animations = [{
 }],
 "loop": 1,
 "name": &"crumble",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epc3m")
+}],
+"loop": 1,
+"name": &"crumbled",
 "speed": 5.0
 }, {
 "frames": [{
@@ -204,6 +216,8 @@ dialogue_file = "res://dialogue/Dionysus.txt"
 sprite_frames = SubResource("SpriteFrames_7i6ip")
 interact_size = Vector2(160.5, 250)
 interact_offset = Vector2(3, 10)
+crumble_stage = "6"
+crumble_flag = "dionysus_crumbled"
 
 [node name="HUD" parent="." unique_id=692464423 instance=ExtResource("3_h1obj")]
 

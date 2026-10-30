@@ -1,13 +1,45 @@
-# Dionysus - cave NPC.
-# Write this in Notepad. Lines starting with # are comments.
+# Dionysus - the god in the hellhole.
+# He hands out the demo's one upgrade: the sword.
 # Full syntax: docs/NPC_DIALOGUE.md
 
 name: Dionysus
 
-# Where the conversation starts. Checked top to bottom, first match wins.
-# (Later stages first, so a finished quest is checked before an active one.)
+# Once the sword is his gift
+entry: flag sword_given -> 4
+entry: else -> 0
 
-
-Stage 0: (default stage - first time the player talks to him)
+Stage 0: (first meeting)
 	play: talk
-	speak: "This isan example of NPC dialogue"
+	speak: "Well, well. A living soul"
+	ask: "I have a blade I have no use for. Shall I make you a gift of it?"
+	choices: "Take the sword" -> 1
+
+Stage 1: (the gift)
+	play: talk
+	speak: "Good. It suits you."
+	give: sword
+	set: sword_given
+	goto: 3
+
+Stage 3: (first lesson)
+	play: talk
+	speak: "It bites harder than your knife."
+	speak: "Press Q to switch between the two weapons."
+	goto: 4
+
+
+stage 4: 
+	ask: "You look a little confused, my child."
+	choices: "What is this place? ...and why am I here?" -> 5
+
+stage 5:
+	speak: "You are here for a reason, child. You have a mighty quest to undertake."
+	speak: "The cave is the only way forward."
+	speak: "You need to-"
+	speak: "need to-"
+	speak: "to..."
+	goto: 6
+
+stage 6:
+	play: crumble
+

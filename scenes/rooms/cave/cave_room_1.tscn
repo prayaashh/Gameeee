@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dvdrq7hdiemxe" path="res://scenes/doorway.tscn" id="2_k7fkc"]
 [ext_resource type="Texture2D" uid="uid://cnbsq6v0ud785" path="res://assets/backgrounds/cavebg(Layer 3) _0001.png" id="3_m4vpo"]
 [ext_resource type="Texture2D" uid="uid://b8ibgnywwmm1v" path="res://assets/backgrounds/cavebg(Layer 4) _0001.png" id="4_7w5ou"]
+[ext_resource type="PackedScene" uid="uid://bcf0idj0eh6c1" path="res://scenes/checkpoint.tscn" id="4_feovi"]
 [ext_resource type="Texture2D" uid="uid://m8y51fvytswt" path="res://assets/backgrounds/cavebg(Layer 4 (copy)) _0001.png" id="5_58r6w"]
 [ext_resource type="PackedScene" uid="uid://d0e1061bis1fb" path="res://scenes/deathbox.tscn" id="11_cswbh"]
 [ext_resource type="PackedScene" uid="uid://daldbasqpdx7a" path="res://scenes/enemies/creeps/creep_groot.tscn" id="11_q0p6a"]
@@ -112,6 +113,9 @@ position = Vector2(4341.0005, 705)
 scale = Vector2(15, 1.5)
 target_scene = "uid://bnjjmtq17o7vl"
 
+[node name="Checkpoint" parent="Checkpoints" parent_id_path=PackedInt32Array(1569292157) index="0" unique_id=1387972412 instance=ExtResource("4_feovi")]
+position = Vector2(-163, 435)
+
 [node name="Background" type="Node2D" parent="." index="7" unique_id=390559768]
 z_index = -20
 position = Vector2(0, 320)
@@ -160,6 +164,7 @@ texture = ExtResource("5_58r6w")
 position = Vector2(-588, 394)
 
 [node name="Creepfly" parent="Creeps" index="1" unique_id=338401225 node_paths=PackedStringArray("path") instance=ExtResource("12_cswbh")]
+position = Vector2(-60, 5)
 path = NodePath("../../Paths/Path2D")
 wait_time_min = 2.0
 wait_time_max = 4.0
@@ -194,3 +199,13 @@ position = Vector2(425, 868)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="deathbox" index="0" unique_id=503295335]
 shape = SubResource("WorldBoundaryShape2D_6i2nw")
+
+[node name="Collision" type="Node" parent="." index="12" unique_id=344463631]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Collision" index="0" unique_id=717954754]
+collision_layer = 2
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision/StaticBody2D" index="0" unique_id=1080449697]
+position = Vector2(186, 2)
+polygon = PackedVector2Array(-1136, 460, -1138, 206, -1185, 202, -1191, 460)

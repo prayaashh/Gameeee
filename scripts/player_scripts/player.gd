@@ -14,19 +14,19 @@ extends CharacterBody2D
 @export var attack_time := 0.25
 
 @export_group("Weapons")
-## Damage of the punch: the attack the player starts with.
-@export var punch_damage := 1
+## Damage of the knife: the attack the player starts with.
+@export var knife_damage := 1
 ## Damage of the sword, which Dionysus hands over in the hellhole.
 @export var sword_damage := 2
 ## Animation played for each weapon. "punch" is a placeholder in the player's
-## SpriteFrames for now - swap its frames for the real punch art later.
-@export var punch_animation := &"punch"
+## SpriteFrames for now - swap its frames for the real knife art later.
+@export var knife_animation := &"punch"
 @export var sword_animation := &"attack"
 
 ## Which attack is equipped. The sword only becomes selectable once
 ## GameState.has_weapon("sword") is true (Dionysus gives it).
-enum Weapon { PUNCH, SWORD }
-var weapon: Weapon = Weapon.PUNCH
+enum Weapon { KNIFE, SWORD }
+var weapon: Weapon = Weapon.KNIFE
 
 @export_group("Mana")
 @export var max_mana := 99
@@ -74,7 +74,7 @@ func _ready() -> void:
 	mana = clampi(GameState.mana, 0, max_mana)
 	# The equipped weapon survives room changes too, but never stays on the
 	# sword if the save does not actually own it.
-	weapon = Weapon.SWORD if GameState.weapon == "sword" and has_sword() else Weapon.PUNCH
+	weapon = Weapon.SWORD if GameState.weapon == "sword" and has_sword() else Weapon.KNIFE
 	GameState.weapon = weapon_name()
 	add_to_group("player")      # lets enemies find the player
 	_resolve_spawn()
@@ -161,19 +161,19 @@ func has_sword() -> bool:
 	return GameState.has_weapon("sword")
 
 func weapon_name() -> String:
-	return "sword" if weapon == Weapon.SWORD else "punch"
+	return "sword" if weapon == Weapon.SWORD else "knife"
 
 func current_damage() -> int:
-	return sword_damage if weapon == Weapon.SWORD else punch_damage
+	return sword_damage if weapon == Weapon.SWORD else knife_damage
 
 func attack_animation() -> StringName:
-	return sword_animation if weapon == Weapon.SWORD else punch_animation
+	return sword_animation if weapon == Weapon.SWORD else knife_animation
 
-## Swaps punch <-> sword. Does nothing while the sword has not been found yet.
+## Swaps knife <-> sword. Does nothing while the sword has not been found yet.
 func toggle_weapon() -> void:
 	if not has_sword():
 		return
-	weapon = Weapon.PUNCH if weapon == Weapon.SWORD else Weapon.SWORD
+	weapon = Weapon.KNIFE if weapon == Weapon.SWORD else Weapon.SWORD
 	GameState.weapon = weapon_name()
 	weapon_changed.emit(StringName(weapon_name()))
 
